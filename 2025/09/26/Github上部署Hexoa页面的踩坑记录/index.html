@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> 摘抄 -  六分仪的主页</title>
+		<title> Github上部署Hexoa页面的踩坑记录 -  六分仪的主页</title>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
 		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
 		
@@ -333,29 +333,29 @@
 			<img
 				data-src="https://kira.host/assets/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg"
 				data-sizes="auto"
-				alt="摘抄"
+				alt="Github上部署Hexoa页面的踩坑记录"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>摘抄</h1>
+			<h1>Github上部署Hexoa页面的踩坑记录</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2025年09月15日</a>
-			<a><i class="kirafont icon-edit-fill"></i>154 字</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2025年09月26日</a>
+			<a><i class="kirafont icon-edit-fill"></i>208 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
 		</div>
-		<html><head></head><body><p>读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。</p>
-<p>这句话出自荷尔德林（Friedrich Hölderlin）。</p>
+		<html><head></head><body><p>我在部署Hexo页面到GitHub主页时，发现在创建第一个文档后会导致样式无法加载。<br>我一直以为是主题的问题，采取了删库重新安装的方法进行测试。当然在一切重新开始的时候是没有问题的，<br>但是当我改变主题后又会出现这种情况，期间我尝试了一些网上的方法，但是没有成效。<br>直到我改写了根目录配置文件中的</p>
 <blockquote>
-<p>待到英雄们在铁铸的摇篮中长成，<br>勇敢的心灵像从前一样，<br>去造访万能的神祗。<br>而在这之前，我却常感到，<br>与其孤身独涉，不如安然沉睡。<br>何苦如此等待，沉默无言，茫然失措。<br>在这贫困的时代，诗人何为?<br>可是，你却说，诗人是酒神的神圣祭司，<br>在神圣的黑夜中，他走遍大地。</p>
+<p>url: <a href="https://sextent.github.io/">https://sextent.github.io/</a><br>之后（实际就是把最后的斜杠加上），网页可以正常访问并渲染了。</p>
 </blockquote>
+<p>我推测应该是预设的渲染配置会加上“_/”所以会出问题。但我也不想去翻具体的配置函数了，能跑起来就行。所以仅做记录。</p>
 </body></html>
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>Zehao Jiang<br>
-        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/09/15/article1/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;15&#x2F;article1&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;15&#x2F;article1&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;26&#x2F;Github上部署Hexoa页面的踩坑记录&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;26&#x2F;Github上部署Hexoa页面的踩坑记录&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -371,7 +371,7 @@
 	<div class="kira-post-meta kira-rainbow">
 		
 		
-			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/Web%E6%8A%80%E6%9C%AF/" rel="tag">Web技术</a>
 		
 	</div>
 	
