@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html 
+	lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> pytorch3D安装经验 -  六分仪的主页</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://kira.host/assets/Pictures/Others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 7.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://kira.host/assets/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="六分仪的主页">
+        <img
+			src="https://kira.host/assets/Pictures/Others/20220922230447.jpg"
+			alt="Zehao Jiang"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://kira.host/assets/Pictures/Others/20220922230447.jpg" title="Zehao Jiang">
+			<img
+				src="https://kira.host/assets/Pictures/Others/20220922230447.jpg"
+				alt="Zehao Jiang"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>9</div>
+		<div><span>标签</span>7</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=<去掉尖括号后填上你的QQ号>&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://space.bilibili.com/<改成你的B站uid>"
+				target="_blank"
+				mdui-tooltip="{content: '哔哩哔哩'}"
+				style="color: rgb(231, 106, 141); background-color: rgba(231, 106, 141, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-bilibili
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/<你的github id>/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://gitee.com/<你的gitee id>"
+				target="_blank"
+				mdui-tooltip="{content: 'Gitee'}"
+				style="color: rgb(165, 15, 15); background-color: rgba(165, 15, 15, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-gitee
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/Web%E6%8A%80%E6%9C%AF/" style="font-size: 15px;">Web技术</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 15px;">教程</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 20px;">论文</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			文章归档
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">9</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2025
+		<a href="/">Zehao Jiang</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
+			<img
+				data-src="https://kira.host/assets/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg"
+				data-sizes="auto"
+				alt="pytorch3D安装经验"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>pytorch3D安装经验</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2025年10月07日</a>
+			<a><i class="kirafont icon-edit-fill"></i>1.9k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 8 分钟</a>
+		</div>
+		<html><head></head><body><p><em>我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇到的问题和解决方案。</em></p>
+<h3><span id="%E5%89%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E">前置环境说明</span></h3><p>我使用cu121+pytorch2.1.0+torchvision0.16.0作为基本开发环境</p>
+<h3><span id="%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B">安装过程</span></h3><ol>
+<li><p>我首先尝试使用pip安装pytorch3d，但是安装过程中出现了编译错误。我尝试了多次，但是都没有成功。于是，我决定使用conda来安装pytorch3d。</p>
+</li>
+<li><p>我使用conda安装pytorch3d，但是安装过程中发现conda好像没有提供对应环境的安装包，一直会报错</p>
+</li>
+<li><p>到了这一步，该克隆源码安装了。</p>
+</li>
+</ol>
+<p>按照项目的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md">安装教程</a> ，克隆了源代码仓库然后进入源码目录，运行setup.py文件。<br>但是，在编译过程中，仍然遇到了和直接使用pip一样的错误。<br>首先是跳了一堆错误，包含中文提示，把全屏幕全刷下去了。所以需要保存报错信息，<br>保存错误信息：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test_m2p_core_v2_infer.py &gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></tbody></table></figure>
+<p>这个命令可以把错误日志保存在log文件中翻阅。在记录下log之后，发现主要问题是<br><img src="http://t375qvti3.hd-bkt.clouddn.com/article/20251009-1"></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.CalledProcessError: Command <span class="string">'['</span>ninja<span class="string">', '</span>-v<span class="string">']'</span> returned non-zero <span class="built_in">exit</span> status 1.</span><br></pre></td></tr></tbody></table></figure>
+<p>之前配环境的时候已经遇到过这个问题了。当时以为是<code>ninja</code>的问题，实际上是cuda的位置未指定导致的。<code>ninja</code>实际上是一个构建系统，可以把它理解为一个更现代、更快速的 make 工具。PyTorch 的 C++ 扩展在编译时，如果检测到你环境里安装了ninja，会优先使用它来进行并行编译，因为速度更快。而出问题的函数是PyTorch的构建脚本（<code>cpp_extension.py</code>），所以是调用ninja进行编译时出了问题。根据之前的经验，原理大概是pytorch3d的编译同时深度依赖NVIDIA的CUDA工具链。如果CUDA的路径没有被正确地传递给构建系统，那么在生成编译指令（<code>build.ninja</code>文件）或者执行这些指令时，完全可能出现各种奇怪的底层错误。<br>而我们之前的排查都集中在C++编译器（MSVC）和构建系统（Ninja）上。所以我按照之前的做法先确认终端中的cuda路径是否正确。</p>
+<p>执行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc --version</span><br></pre></td></tr></tbody></table></figure>
+<p>输出：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2023 NVIDIA Corporation</span><br><span class="line">Built on Wed_Feb__8_05:53:42_Coordinated_Universal_Time_2023</span><br><span class="line">Cuda compilation tools, release 12.1, V12.1.66</span><br><span class="line">Build cuda_12.1.r12.1/compiler.32415258_0</span><br></pre></td></tr></tbody></table></figure>
+<p>执行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %CUDA_HOME%</span><br></pre></td></tr></tbody></table></figure>
+<p>到这里没有输出，所以就要重新设置cuda路径。一般是类似<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8</code>.<br>设置完毕之后，报错发生变化，说明ninja找到了合适的cuda来进行编译。<br>新报错为</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注意: 包含文件:  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\memory    </span><br><span class="line">fatal error C1189: <span class="comment">#error:  You need C++17 to compile PyTorch</span></span><br><span class="line">    ninja: build stopped: subcommand failed.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这次问题很简单。</p>
+<ul>
+<li>第一行告诉我们： 你的编译系统正在使用的C++编译器是 Visual Studio 14.0，也就是 Visual Studio 2015。</li>
+<li>第二行告诉我们： PyTorch的源代码明确要求，必须使用支持 C++17 标准的编译器。</li>
+</ul>
+<p>但是我安装的是VS2022的发行版，不应该回到2015的问题。所以我又想到之前为了编译包安装了MCVS的老版本，是不是直接用它来编译了？那么就需要验证<code>where cl.exe</code>了。我先运行了vs2022的终端，我想这里面应该不会使用老版本的工具了，但是运行同样的安装代码时报错：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Alan\anaconda3\envs\Emo-Avatar\lib\site-packages\torch\utils\cpp_extension.py:383: UserWarning: Error checking compiler version <span class="keyword">for</span> cl: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">    warnings.warn(f<span class="string">'Error checking compiler version for {compiler}: {error}'</span>)</span><br><span class="line">      error: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">      [end of output]</span><br></pre></td></tr></tbody></table></figure>
+<p>所以还是找不到编译器。清除了旧版本，重新安装新版本之后再运行，</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvcc fatal   : nvcc cannot find a supported version of Microsoft Visual Studio. Only the versions between 2017 and 2019 (inclusive) are supported! The nvcc flag <span class="string">'-allow-unsupported-compiler'</span> can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run <span class="keyword">time</span> execution. Use at your own risk.</span><br><span class="line">error: <span class="built_in">command</span> <span class="string">'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.1\\bin\\nvcc.exe'</span> failed with <span class="built_in">exit</span> code 1</span><br></pre></td></tr></tbody></table></figure>
+<p>来看看AI怎么说：</p>
+<blockquote>
+<p>NVIDIA的CUDA编译器(nvcc.exe) 在尝试编译代码时，明确地告诉我们：<br>“我只认识 2017 到 2019 版本的 Visual Studio。你现在系统里配置的这个版本（VS 2022），我根本不认识，也无法使用它来编译代码！”<br>nvcc.exe 是编译CUDA代码（.cu 文件）的主帅，但它需要一个C++编译器（cl.exe）来当它的副将，处理代码中标准的C++部分。你的 CUDA Toolkit 12.1 版本在设计时，它的“副将名单”里只写了 VS2017 和 VS2019，没有 VS2022。<br>所以，整个编译流程在 nvcc 这一步就直接罢工了。</p>
+</blockquote>
+<p>AI让我装2019的VS。但我还想自己试试，首先在VS终端中输入<code>cl.exe</code>是有输出的，但在powershell里面就不行。<br>关注powershell里的报错：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include\crt/host_config.h(153): fatal error C1189: <span class="comment">#error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2017 and 2022 (inclusive) are supported!</span></span><br></pre></td></tr></tbody></table></figure>
+<p>我们的C++ 编译器版本太新了，超出了当前 CUDA 12.1 工具包所能识别和兼容的范围。所以，虽然错误信息说支持到 2022，但它指的是 CUDA 12.1 发布时 的 VS 2022 版本。你的 Visual Studio Build Tools 自动安装了最新的版本，这个版本对于 CUDA 12.1 来说过于前卫了。然后我重新安装了一下旧版本的VS。</p>
+<blockquote>
+<p>这里要提一下，目前官网旧版本是要订阅的，自己要找一下资源。我的是在B站找到的网盘链接。<br>重新启动之后：</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: It seems that the VC environment is activated but DISTUTILS_USE_SDK is not <span class="built_in">set</span>.</span><br><span class="line">This may lead to multiple activations of the VC <span class="built_in">env</span>.</span><br><span class="line">Please <span class="built_in">set</span> `DISTUTILS_USE_SDK=1` and try again.</span><br></pre></td></tr></tbody></table></figure>
+<p>为了防止因为重复加载编译环境而产生潜在的冲突，脚本要求我们手动设置一个“确认标志”，来告诉它：“是的，我就是要用这个环境，请继续！”。那么我们按它说的做，先设置<code>set  DISTUTILS_USE_SDK=1</code></p>
+<p>当我以为全部解决时，爆了一堆从未见过的错误。看了就头疼，只能丢给AI分析：</p>
+<blockquote>
+<p>C:/Users/Alan/anaconda3/envs/Emo-Avatar/lib/site-packages/torch/include\c10/core/TensorImpl.h(3187): error: static assertion failed with “Actual and Expected sizes of a field did not match!”<br>  static_assert(<br>  ^<br>      …<br>      Actual=8U, Expected=4U, FiledName=c10::C10_TensorImpl_Size_Check_Dummy_Class…</p>
+</blockquote>
+<ul>
+<li><code>static_assert</code>是一个在编译代码时进行的强制检查。<code>Actual=8U, Expected=4U:</code> 检查发现，某个数据结构字段的实际大小是 8个字节，但代码期望的大小是 4个字节。<br>所以是我误用了84位的终端，实际应该打开64位的。这个小tip确实没注意。<br>打开<code>x64 Native Tools Command Prompt for VS 2019</code>重新运行安装代码：</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: The environment variable `CUB_HOME` was not found. NVIDIA CUB is required <span class="keyword">for</span> compilation...</span><br><span class="line">error: [WinError 2] 系统找不到指定的文件。</span><br></pre></td></tr></tbody></table></figure>
+<p>经典忘记设置CUDA_HOME，照常设置之后，就一直没有报错，等待编译了许久也是大功告成啦╰(<em>°▽°</em>)╯</p>
+<p><img src="http://t375qvti3.hd-bkt.clouddn.com/article/93D749E36B060AD6162FEA2A442B0F02.gif"></p>
+</body></html>
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Zehao Jiang<br>
+        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;07&#x2F;pytorch3D安装经验&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;07&#x2F;pytorch3D安装经验&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="-your github username-/-your giscus repo-"
+      data-repo-id="-your giscus repo ID-"
+      data-category="Announcements"
+      data-category-id="-giscus category id-"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
