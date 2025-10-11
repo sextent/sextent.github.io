@@ -356,7 +356,7 @@
 </ol>
 <p>按照项目的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md">安装教程</a> ，克隆了源代码仓库然后进入源码目录，运行setup.py文件。<br>但是，在编译过程中，仍然遇到了和直接使用pip一样的错误。<br>首先是跳了一堆错误，包含中文提示，把全屏幕全刷下去了。所以需要保存报错信息，<br>保存错误信息：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test_m2p_core_v2_infer.py &gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></tbody></table></figure>
-<p>这个命令可以把错误日志保存在log文件中翻阅。在记录下log之后，发现主要问题是<br><img src="http://t375qvti3.hd-bkt.clouddn.com/article/20251009-1"></p>
+<p>这个命令可以把错误日志保存在log文件中翻阅。在记录下log之后，发现主要问题是<br><img src="/images/20251009-1.png"></p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.CalledProcessError: Command <span class="string">'['</span>ninja<span class="string">', '</span>-v<span class="string">']'</span> returned non-zero <span class="built_in">exit</span> status 1.</span><br></pre></td></tr></tbody></table></figure>
 <p>之前配环境的时候已经遇到过这个问题了。当时以为是<code>ninja</code>的问题，实际上是cuda的位置未指定导致的。<code>ninja</code>实际上是一个构建系统，可以把它理解为一个更现代、更快速的 make 工具。PyTorch 的 C++ 扩展在编译时，如果检测到你环境里安装了ninja，会优先使用它来进行并行编译，因为速度更快。而出问题的函数是PyTorch的构建脚本（<code>cpp_extension.py</code>），所以是调用ninja进行编译时出了问题。根据之前的经验，原理大概是pytorch3d的编译同时深度依赖NVIDIA的CUDA工具链。如果CUDA的路径没有被正确地传递给构建系统，那么在生成编译指令（<code>build.ninja</code>文件）或者执行这些指令时，完全可能出现各种奇怪的底层错误。<br>而我们之前的排查都集中在C++编译器（MSVC）和构建系统（Ninja）上。所以我按照之前的做法先确认终端中的cuda路径是否正确。</p>
 <p>执行：</p>
@@ -398,7 +398,37 @@
 </ul>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: The environment variable `CUB_HOME` was not found. NVIDIA CUB is required <span class="keyword">for</span> compilation...</span><br><span class="line">error: [WinError 2] 系统找不到指定的文件。</span><br></pre></td></tr></tbody></table></figure>
 <p>经典忘记设置CUDA_HOME，照常设置之后，就一直没有报错，等待编译了许久也是大功告成啦╰(<em>°▽°</em>)╯</p>
-<p><img src="http://t375qvti3.hd-bkt.clouddn.com/article/93D749E36B060AD6162FEA2A442B0F02.gif"></p>
+<p><img src="/images/93D749E36B060AD6162FEA2A442B0F02.gif"></p>
+<h3><span id="%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</span></h3><ul>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/goodgoodstudy___/article/details/121577651">https://blog.csdn.net/goodgoodstudy___/article/details/121577651</a></li>
+</ol>
+</li>
+<li><ol start="2">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/371279126">https://zhuanlan.zhihu.com/p/371279126</a></li>
+</ol>
+</li>
+<li><ol start="3">
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanmx219/article/details/100829920">https://blog.csdn.net/tanmx219/article/details/100829920</a></li>
+</ol>
+</li>
+<li><ol start="4">
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmengmeng99/article/details/118719322">https://blog.csdn.net/wangmengmeng99/article/details/118719322</a></li>
+</ol>
+</li>
+<li><ol start="5">
+<li><a target="_blank" rel="noopener" href="https://github.com/nerfstudio-project/nerfstudio/issues/3171">https://github.com/nerfstudio-project/nerfstudio/issues/3171</a></li>
+</ol>
+</li>
+<li><ol start="6">
+<li><a target="_blank" rel="noopener" href="https://github.com/hukaixuan19970627/yolov5_obb/issues/440">https://github.com/hukaixuan19970627/yolov5_obb/issues/440</a></li>
+</ol>
+</li>
+<li><ol start="7">
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/1970">https://github.com/facebookresearch/pytorch3d/issues/1970</a></li>
+</ol>
+</li>
+</ul>
 </body></html>
 	</article>
 
