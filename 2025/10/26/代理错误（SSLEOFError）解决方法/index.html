@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> Hello World -  六分仪的主页</title>
+		<title> 代理错误（SSLEOFError)解决方法 -  六分仪的主页</title>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
 		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
 		
@@ -326,44 +326,32 @@
 <div class="kira-post">
 	<article>
 		
-		<div
-			class="kira-post-cover"
-			style="padding-bottom: '56.25%'"
-		>
+		<div class="kira-post-cover">
 			<img
-				data-src="/images/wallhaven-mlq3vy_2560x1440.png"
+				data-src="/images/cover1.png"
 				data-sizes="auto"
-				alt="Hello World"
+				alt="代理错误（SSLEOFError)解决方法"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>Hello World</h1>
+			<h1>代理错误（SSLEOFError)解决方法</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2025年09月14日</a>
-			<a><i class="kirafont icon-edit-fill"></i>73 字</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2025年10月26日</a>
+			<a><i class="kirafont icon-edit-fill"></i>359 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
 		</div>
-		<html><head></head><body><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+		<html><head></head><body><p>最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。<br><img src="/images/2025-10-26162152.jpg"><br>之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的<a target="_blank" rel="noopener" href="https://blog.csdn.net/Zhou_Yulong/article/details/126600453">帖子</a>，解决了这个问题（虽然CSDN还是史）。</p>
+<h4><span id="%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</span></h4><p>具体实现方法参照这篇帖子，主要是关了系统代理之后就好了，但是关了之后我看浏览器又不行，所以不断地切换。<br><img src="/images/2025-10-26162802.jpg"></p>
+<h4><span id="%E6%80%9D%E8%80%83">思考</span></h4><p>然后就去搜了一下背后的原理，道理大概是如果打开系统代理的话pip将请求打包，发往代理端口，但是操作系统接收这个请求并准备发送的时候，检查了一下自己的规则，并重新发送代理端口。也就是说操作系统试图将一个已经目的地是代理服务器的请求，再次发送给同一个代理服务器。这就造成了一个逻辑上的“环路”或冲突。请求在离开您的电脑前就被自己绊倒了，导致了我们之前看到的SSLError。</p>
+<p>更新： 使用了SwitchyOmega插件，针对Google使用代理端口，然后关闭系统代理，这样可以使得终端的SSL不会报错。</p>
 </body></html>
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>Zehao Jiang<br>
-        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/09/14/hello-world/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;14&#x2F;hello-world&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;09&#x2F;14&#x2F;hello-world&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;26&#x2F;代理错误（SSLEOFError）解决方法&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;26&#x2F;代理错误（SSLEOFError）解决方法&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -378,6 +366,8 @@
 	
 	<div class="kira-post-meta kira-rainbow">
 		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/Debug/" rel="tag">Debug</a>
 		
 	</div>
 	

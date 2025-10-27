@@ -84,8 +84,8 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>10</div>
-		<div><span>标签</span>8</div>
+		<div><span>文章</span>11</div>
+		<div><span>标签</span>9</div>
 		<div><span>分类</span>0</div>
 	</div>
 	<div class="kira-list">
@@ -229,7 +229,7 @@
 			
 	<div class="kira-widget-wrap">
 		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
-			<a href="/tags/JGN/" style="font-size: 10px;">JGN</a> <a href="/tags/Web%E6%8A%80%E6%9C%AF/" style="font-size: 15px;">Web技术</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 15px;">教程</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 20px;">论文</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+			<a href="/tags/Debug/" style="font-size: 15px;">Debug</a> <a href="/tags/JGN/" style="font-size: 10px;">JGN</a> <a href="/tags/Web%E6%8A%80%E6%9C%AF/" style="font-size: 15px;">Web技术</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 15px;">教程</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 20px;">论文</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
 		</div>
 		
 	</div>
@@ -242,7 +242,7 @@
 			文章归档
 		</h3>
 		<div class="kira-widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">10</span></li></ul>
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">11</span></li></ul>
 		</div>
 	</div>
 
@@ -341,8 +341,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年09月14日</a>
-			<a><i class="kirafont icon-edit-fill"></i>358 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>652 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 2 分钟</a>
 		</div>
 		<html><head></head><body><p>我的这个博客起源于大三的时候做算法基础的算法作业，寻找教程的时候偶然发现了一个好看的个人主页(<a target="_blank" rel="noopener" href="https://argvchs.netlify.app/">https://argvchs.netlify.app/</a>) 。于是我就开始了我的个人主页搭建之旅。但是由于新手小白所以中间折腾了好久，遇到困难也放弃过一段时间没做，做好基本网页框架之后也很少更新内容，一直等到我大四做完毕业设计，暑假两个月一直呆在组内干些杂活的时候才重新拾起。上手之后发现其实跟着教程一步步做还是很容易的，也可能是我的经验和计算机素养上来一点起到了帮助（QAQ）,所以在这里更新文章的同时也学着其他大佬们写个教程，希望能帮助到和我一样的对自己动手搭建一个主页感兴趣的同学们。</p>
 <h2><span id="%E5%BB%BA%E7%AB%99%E5%87%86%E5%A4%87">建站准备</span></h2><ul>
@@ -368,7 +368,27 @@
 <blockquote>
 <p>Hexo主题站：(<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a>)</p>
 </blockquote>
-<h2><span id="%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD">其他功能</span></h2><p>TODO</p>
+<h2><span id="%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD">其他功能</span></h2><h3><span id="%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E6%8F%92%E5%85%A5">背景图片的插入</span></h3><p>一般教程会告诉你引用图片的话最好使用图床工具，也就是类似云储存的一个外链工具。常见的图床有七牛和腾讯。我实际使用之后发现，最后我的页面还是托管在GitHub上，所以本身作为要梯子上的主页，可以把GitHub仓库作为图床来使用，不会导致图片加载不出的情况（反而是使用国内的图床，会出现加载不出）。</p>
+<p>所以我的建议是直接建立一个repo或者就放在这个根目录下，新建一个图片文件夹，每次都放到这里，然后相对引用路径即可。</p>
+<p>对不同主题来说，配置文章图片的方式可能有所不同，但Hexo本身提供背景图片的接口，即在生成模板中，head使用<code>cover</code>参数，后面跟图片链接即可。</p>
+<p>另外介绍一些背景图片素材来源网站：</p>
+<ul>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://wallhaven.cc/latest?page=2">Wallpaper Abyss</a></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Awesome Wallpapers</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>WallpapersWide.com<blockquote>
+<p>如果图片过大会占用过多内存，这时就要压缩来减少空间使用<br><a target="_blank" rel="noopener" href="https://tinypng.com/">压缩图片网站TinyPNG</a></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
 <h2><span id="%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献：</span></h2><ul>
 <li><ol>
 <li><a target="_blank" rel="noopener" href="https://argvchs.netlify.app/2022/04/17/hexo-blog-1/">https://argvchs.netlify.app/2022/04/17/hexo-blog-1/</a></li>
