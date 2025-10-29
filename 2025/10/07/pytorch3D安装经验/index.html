@@ -1,352 +1,298 @@
+<!--
+	作者：Sariay
+	时间：2018-08-26
+	描述：There may be a bug, but don't worry, Qiling(器灵) says that it can work normally! aha!
+-->
 <!DOCTYPE html>
-<html 
-	lang="zh">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html class="html-loading">
 		
-<link rel="stylesheet" href="/css/layout.css">
 
-		
-		<title> pytorch3D安装经验 -  六分仪的主页</title>
-		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
-		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
-		
-<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      pytorch3D安装经验 | 六分仪的主页
+    
+  </title>
+  <meta name="author" content="Zehao Jiang">
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
 
-		
-<script src="/lib/mdui/mdui.min.js"></script>
+  <!-- css -->
+  
+<link rel="stylesheet" href="/css/Annie.css">
 
-		<!-- lazyload -->
-		
-<script src="/lib/lazysizes.js"></script>
+  
+  <!-- jquery -->
+	
+<script src="/plugin/jquery/jquery.min.js"></script>
 
-		<!-- smooth-scrolling -->
-		
-<script src="/lib/smooth-scrolling.js"></script>
 
-		<!-- highlight -->
-		
-<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
-
-		
-<script src="/lib/highlight/highlight.min.js"></script>
-
-		<!-- 预置 kiraicon -->
-		
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
-
-		
-		<link
-			rel="shortcut icon"
-			href="https://kira.host/assets/Pictures/Others/116359b4ccf19917.jpg"
-			type="image/png"
-		/>
-		
-<link rel="stylesheet" href="/deps/css/APlayer.min.css">
-
-		
-		
-<script src="/deps/js/APlayer.min.js"></script>
-<script src="/deps/js/Meting.min.js"></script>
-
-	<meta name="generator" content="Hexo 7.3.0"></head>
-
+<script>
+    const CONFIG_BGIMAGE = {
+      mode: 'normal',
+      normalSrc: '/img/header-bg.jpg',
+      randomYouMax: 110,
+      randomYouSrc: 'https://sariay.github.io/Random-img/',
+	  randomOtherSrc: 'https://api.berryapi.net/?service=App.Bing.Images&day=-0',
+	  preloaderEnable: true
+    }
+	
+    const CONFIG_LEACLOUD_COUNT = {
+      enable: false,
+	  appId: 'AU8...',
+	  appKey: '4cU...',
+	  serverURLs: 'http' || ' '
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
 	<body>
-		<div
-			class="kira-background"
-			style="background-image: url('/images/wallhaven-mlq3vy_2560x1440.png')"
-		></div>
-		<div class="kira-header">
-    <a
-        class="kira-drawer-button mdui-ripple"
-        title="导航栏"
-        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
-    >
-        <i class="kirafont icon-menu"></i>
-    </a>
-    <a href="/" title="六分仪的主页">
-        <img
-			src="/images/logo.jpg"
-			alt="Zehao Jiang"
-		/>
-    </a>
-</div>
-		<div class="kira-body">
-			<div class="kira-sidebar" id="sidebar">
-	<div class="kira-avatar mdui-ripple">
-		<a href="/images/logo.jpg" title="Zehao Jiang">
-			<img
-				src="/images/logo.jpg"
-				alt="Zehao Jiang"
-			/>
-		</a>
-	</div>
-	<div class="kira-count">
-		<div><span>文章</span>11</div>
-		<div><span>标签</span>9</div>
-		<div><span>分类</span>0</div>
-	</div>
-	<div class="kira-list">
-		
-		<a
-			class="kira-list-item mdui-ripple false"
-			href="/"
-			title="回到首页"
-		>
-			<i
-				class="kirafont
-					
-						icon-home
-					"
-			></i>
-			<div class="kira-list-item-content">
-				回到首页
-			</div>
-		</a>
-		
-		<a
-			class="kira-list-item mdui-ripple false"
-			href="/archive.html"
-			title="文章归档"
-		>
-			<i
-				class="kirafont
-					
-						icon-container
-					"
-			></i>
-			<div class="kira-list-item-content">
-				文章归档
-			</div>
-		</a>
-		
-		<a
-			class="kira-list-item mdui-ripple false"
-			href="/about.html"
-			title="关于本人"
-		>
-			<i
-				class="kirafont
-					
-						icon-user
-					"
-			></i>
-			<div class="kira-list-item-content">
-				关于本人
-			</div>
-		</a>
-		
-		<a
-			class="kira-list-item mdui-ripple false"
-			href="/friends.html"
-			title="我的朋友"
-		>
-			<i
-				class="kirafont
-					
-						icon-team
-					"
-			></i>
-			<div class="kira-list-item-content">
-				我的朋友
-			</div>
-		</a>
-		
-	</div>
-	<aside id="kira-sidebar">
-		
-			<div class="kira-widget-wrap">
-	<div class="kira-widget kira-social">
-		
-			<a
-				class="mdui-ripple"
-				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=<去掉尖括号后填上你的QQ号>&website=www.oicqzone.com"
-				target="_blank"
-				mdui-tooltip="{content: 'QQ'}"
-				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
-			>
-				<i
-					class="kirafont
-					
-						icon-QQ
-					"
-				></i>
-			</a>
-		
-			<a
-				class="mdui-ripple"
-				href="https://space.bilibili.com/<改成你的B站uid>"
-				target="_blank"
-				mdui-tooltip="{content: '哔哩哔哩'}"
-				style="color: rgb(231, 106, 141); background-color: rgba(231, 106, 141, .15);"
-			>
-				<i
-					class="kirafont
-					
-						icon-bilibili
-					"
-				></i>
-			</a>
-		
-			<a
-				class="mdui-ripple"
-				href="https://github.com/sextent/"
-				target="_blank"
-				mdui-tooltip="{content: 'GitHub'}"
-				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
-			>
-				<i
-					class="kirafont
-					
-						icon-github
-					"
-				></i>
-			</a>
-		
-			<a
-				class="mdui-ripple"
-				href="https://gitee.com/<你的gitee id>"
-				target="_blank"
-				mdui-tooltip="{content: 'Gitee'}"
-				style="color: rgb(165, 15, 15); background-color: rgba(165, 15, 15, .15);"
-			>
-				<i
-					class="kirafont
-					
-						icon-gitee
-					"
-				></i>
-			</a>
-		
-	</div>
-</div>
+		<!-- Preloader -->
 
-		
+	<div id="preloader">
+		<div class="pre-container">
 			
-		
-			
-	<div class="kira-widget-wrap">
-		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
-			<a href="/tags/Debug/" style="font-size: 15px;">Debug</a> <a href="/tags/JGN/" style="font-size: 10px;">JGN</a> <a href="/tags/Web%E6%8A%80%E6%9C%AF/" style="font-size: 15px;">Web技术</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 15px;">教程</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 20px;">论文</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
-		</div>
-		
-	</div>
-
-
-		
-			
-	<div class="kira-widget-wrap">
-		<h3 class="kira-widget-title">
-			文章归档
-		</h3>
-		<div class="kira-widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">11</span></li></ul>
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
 		</div>
 	</div>
 
 
+<!-- header -->
+<header class="fixbackground bg-pan-br">
+	<div class="mask">
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<div class="motto text-shadow-pop-left">
+					<p class="content" id="motto-content">获取中...</p>
+					<p>-<p>
+					<p class="author" id="motto-author">Just a minute...</p>
+				</div>
+			
+		</div>
 		
-	</aside>
-	<div class="kira-copyright">
-		&copy; 2025
-		<a href="/">Zehao Jiang</a>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
-		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
-		<br />
-		
-		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more" class="scroll-down">
+				<span class="icon-anchor1 animation-scroll-down"></span>
+			</a>
+		</div>
 	</div>
-</div>
-<div
-	class="kira-sidebar-modal"
-	id="sidebar-modal"
-	onclick="(function(self) {
-		self.classList.remove('show');
-		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
-	})(this)"
-></div>
-			<div class="kira-content">
-				<div id="kira-top-header"></div>
-				<div class="kira-main-content">
-					
-<link rel="stylesheet" href="/css/kira-image.css">
+</header>
 
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
 
-<script src="/js/kira-image.js"></script>
+	<!-- Progress percent -->
+	<div id="progress-percentage"><span>0.0%</span></div>
 
-<div class="kira-image">
-    <div class="kira-image-modal">
-        <div class="kira-image-header">
-            <div class="kira-image-counter"></div>
-            <div class="kira-image-title"></div>
-            <div class="kira-image-operation">
-                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
-                    <i class="kirafont icon-zoom-in"></i>
-                </div>
-                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
-                    <i class="kirafont icon-close"></i>
-                </div>
-            </div>
-        </div>
-        <div class="kira-image-container">
-            <div class="kira-image-prev-button-panel">
-                <div class="kira-image-exchange-button">
-                    <i class="kirafont icon-left"></i>
-                </div>
-            </div>
-            <div class="kira-image-list">
-                <div class="kira-image-prev">
-                    <img />
-                </div>
-                <div class="kira-image-now">
-                    <img />
-                </div>
-                <div class="kira-image-next">
-                    <img />
-                </div>
-            </div>
-            <div class="kira-image-next-button-panel">
-                <div class="kira-image-exchange-button">
-                    <i class="kirafont icon-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			「pytorch3D安装经验」
+		
+	</p>
 
 	
-<link rel="stylesheet" href="/css/kira-code-copy.css">
+	
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<span class="logo"> 
+			<img src="/img/logo.png">
+		</span>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	
+	<div class="nav-body">
+		<ul id="global-nav">
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home" target="_blank">主页</a>
+		</li>
+		
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
+		</li>
+		
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
+		</li>
+		
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
+		</li>
+		
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about" target="_blank">关于</a>
+		</li>
+		
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
+		</li>
+		
+	
 
 	
-<script src="/js/kira-code-copy.js"></script>
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+	</div>
+	
+	<div class="nav-footer">
+		<ul id="global-social">
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-one"><span class="path1"></span><span class="path2"></span></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-zhihu"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-github"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-sina-weibo "></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-pinterest2"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-instagram"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-twitter"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<span class="icon-rss"></span>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+<script src="/plugin/toc/katelog.min.js"></script>
 
 
-<div class="kira-post">
-	<article>
 		
-		<div
-			class="kira-post-cover"
-			style="padding-bottom: '56.25%'"
-		>
-			<img
-				data-src="/images/wallhaven-mlq3vy_2560x1440.png"
-				data-sizes="auto"
-				alt="pytorch3D安装经验"
-				class="lazyload kira-post-cover-image disabled-kira-image"
-			/>
-			<h1>pytorch3D安装经验</h1>
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+		<div class="article-title">
+			
+	<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" itemprop="url">
+		pytorch3D安装经验
+	</a>
+
 		</div>
+
+		<div class="article-meta">
+			<span>
+				<i class="icon-calendar1"></i>
+				
+				
+
+
+
+
+	更新于
+
+	<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" itemprop="url">
+		<time datetime="2025-10-07T02:30:56.000Z" itemprop="dateUpdated">
+	  		2025-10-28
+	  </time>
+	</a> 
+
+
+
+			</span>
+			<span>
+				
+	<i class="icon-price-tags"></i>
+	
+		<a href="/tags/%E6%95%99%E7%A8%8B/" class=" ">
+			教程
+		</a>
+	
 		
-		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2025年10月07日</a>
-			<a><i class="kirafont icon-edit-fill"></i>1.9k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 8 分钟</a>
+			</span>
+			
+			
+
+
+
 		</div>
-		<html><head></head><body><p><em>我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇到的问题和解决方案。</em></p>
-<h3><span id="%E5%89%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E">前置环境说明</span></h3><p>我使用cu121+pytorch2.1.0+torchvision0.16.0作为基本开发环境</p>
-<h3><span id="%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B">安装过程</span></h3><ol>
+
+		<div class="article-content" id="article-content">
+			<p><em>我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇到的问题和解决方案。</em></p>
+<h3 id="前置环境说明"><a href="#前置环境说明" class="headerlink" title="前置环境说明"></a>前置环境说明</h3><p>我使用cu121+pytorch2.1.0+torchvision0.16.0作为基本开发环境</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><ol>
 <li><p>我首先尝试使用pip安装pytorch3d，但是安装过程中出现了编译错误。我尝试了多次，但是都没有成功。于是，我决定使用conda来安装pytorch3d。</p>
 </li>
 <li><p>我使用conda安装pytorch3d，但是安装过程中发现conda好像没有提供对应环境的安装包，一直会报错</p>
@@ -355,18 +301,18 @@
 </li>
 </ol>
 <p>按照项目的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md">安装教程</a> ，克隆了源代码仓库然后进入源码目录，运行setup.py文件。<br>但是，在编译过程中，仍然遇到了和直接使用pip一样的错误。<br>首先是跳了一堆错误，包含中文提示，把全屏幕全刷下去了。所以需要保存报错信息，<br>保存错误信息：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test_m2p_core_v2_infer.py &gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test_m2p_core_v2_infer.py &gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 <p>这个命令可以把错误日志保存在log文件中翻阅。在记录下log之后，发现主要问题是<br><img src="/images/20251009-1.png"></p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.CalledProcessError: Command <span class="string">'['</span>ninja<span class="string">', '</span>-v<span class="string">']'</span> returned non-zero <span class="built_in">exit</span> status 1.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.CalledProcessError: Command <span class="string">&#x27;[&#x27;</span>ninja<span class="string">&#x27;, &#x27;</span>-v<span class="string">&#x27;]&#x27;</span> returned non-zero <span class="built_in">exit</span> status 1.</span><br></pre></td></tr></table></figure>
 <p>之前配环境的时候已经遇到过这个问题了。当时以为是<code>ninja</code>的问题，实际上是cuda的位置未指定导致的。<code>ninja</code>实际上是一个构建系统，可以把它理解为一个更现代、更快速的 make 工具。PyTorch 的 C++ 扩展在编译时，如果检测到你环境里安装了ninja，会优先使用它来进行并行编译，因为速度更快。而出问题的函数是PyTorch的构建脚本（<code>cpp_extension.py</code>），所以是调用ninja进行编译时出了问题。根据之前的经验，原理大概是pytorch3d的编译同时深度依赖NVIDIA的CUDA工具链。如果CUDA的路径没有被正确地传递给构建系统，那么在生成编译指令（<code>build.ninja</code>文件）或者执行这些指令时，完全可能出现各种奇怪的底层错误。<br>而我们之前的排查都集中在C++编译器（MSVC）和构建系统（Ninja）上。所以我按照之前的做法先确认终端中的cuda路径是否正确。</p>
 <p>执行：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc --version</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
 <p>输出：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2023 NVIDIA Corporation</span><br><span class="line">Built on Wed_Feb__8_05:53:42_Coordinated_Universal_Time_2023</span><br><span class="line">Cuda compilation tools, release 12.1, V12.1.66</span><br><span class="line">Build cuda_12.1.r12.1/compiler.32415258_0</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2023 NVIDIA Corporation</span><br><span class="line">Built on Wed_Feb__8_05:53:42_Coordinated_Universal_Time_2023</span><br><span class="line">Cuda compilation tools, release 12.1, V12.1.66</span><br><span class="line">Build cuda_12.1.r12.1/compiler.32415258_0</span><br></pre></td></tr></table></figure>
 <p>执行：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %CUDA_HOME%</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %CUDA_HOME%</span><br></pre></td></tr></table></figure>
 <p>到这里没有输出，所以就要重新设置cuda路径。一般是类似<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8</code>.<br>设置完毕之后，报错发生变化，说明ninja找到了合适的cuda来进行编译。<br>新报错为</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注意: 包含文件:  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\memory    </span><br><span class="line">fatal error C1189: <span class="comment">#error:  You need C++17 to compile PyTorch</span></span><br><span class="line">    ninja: build stopped: subcommand failed.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注意: 包含文件:  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\memory    </span><br><span class="line">fatal error C1189: <span class="comment">#error:  You need C++17 to compile PyTorch</span></span><br><span class="line">    ninja: build stopped: subcommand failed.</span><br></pre></td></tr></table></figure>
 
 <p>这次问题很简单。</p>
 <ul>
@@ -374,32 +320,32 @@
 <li>第二行告诉我们： PyTorch的源代码明确要求，必须使用支持 C++17 标准的编译器。</li>
 </ul>
 <p>但是我安装的是VS2022的发行版，不应该回到2015的问题。所以我又想到之前为了编译包安装了MCVS的老版本，是不是直接用它来编译了？那么就需要验证<code>where cl.exe</code>了。我先运行了vs2022的终端，我想这里面应该不会使用老版本的工具了，但是运行同样的安装代码时报错：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Alan\anaconda3\envs\Emo-Avatar\lib\site-packages\torch\utils\cpp_extension.py:383: UserWarning: Error checking compiler version <span class="keyword">for</span> cl: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">    warnings.warn(f<span class="string">'Error checking compiler version for {compiler}: {error}'</span>)</span><br><span class="line">      error: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">      [end of output]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Alan\anaconda3\envs\Emo-Avatar\lib\site-packages\torch\utils\cpp_extension.py:383: UserWarning: Error checking compiler version <span class="keyword">for</span> cl: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">    warnings.warn(f<span class="string">&#x27;Error checking compiler version for &#123;compiler&#125;: &#123;error&#125;&#x27;</span>)</span><br><span class="line">      error: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">      [end of output]</span><br></pre></td></tr></table></figure>
 <p>所以还是找不到编译器。清除了旧版本，重新安装新版本之后再运行，</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvcc fatal   : nvcc cannot find a supported version of Microsoft Visual Studio. Only the versions between 2017 and 2019 (inclusive) are supported! The nvcc flag <span class="string">'-allow-unsupported-compiler'</span> can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run <span class="keyword">time</span> execution. Use at your own risk.</span><br><span class="line">error: <span class="built_in">command</span> <span class="string">'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.1\\bin\\nvcc.exe'</span> failed with <span class="built_in">exit</span> code 1</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvcc fatal   : nvcc cannot find a supported version of Microsoft Visual Studio. Only the versions between 2017 and 2019 (inclusive) are supported! The nvcc flag <span class="string">&#x27;-allow-unsupported-compiler&#x27;</span> can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run <span class="keyword">time</span> execution. Use at your own risk.</span><br><span class="line">error: <span class="built_in">command</span> <span class="string">&#x27;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.1\\bin\\nvcc.exe&#x27;</span> failed with <span class="built_in">exit</span> code 1</span><br></pre></td></tr></table></figure>
 <p>来看看AI怎么说：</p>
 <blockquote>
 <p>NVIDIA的CUDA编译器(nvcc.exe) 在尝试编译代码时，明确地告诉我们：<br>“我只认识 2017 到 2019 版本的 Visual Studio。你现在系统里配置的这个版本（VS 2022），我根本不认识，也无法使用它来编译代码！”<br>nvcc.exe 是编译CUDA代码（.cu 文件）的主帅，但它需要一个C++编译器（cl.exe）来当它的副将，处理代码中标准的C++部分。你的 CUDA Toolkit 12.1 版本在设计时，它的“副将名单”里只写了 VS2017 和 VS2019，没有 VS2022。<br>所以，整个编译流程在 nvcc 这一步就直接罢工了。</p>
 </blockquote>
 <p>AI让我装2019的VS。但我还想自己试试，首先在VS终端中输入<code>cl.exe</code>是有输出的，但在powershell里面就不行。<br>关注powershell里的报错：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include\crt/host_config.h(153): fatal error C1189: <span class="comment">#error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2017 and 2022 (inclusive) are supported!</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include\crt/host_config.h(153): fatal error C1189: <span class="comment">#error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2017 and 2022 (inclusive) are supported!</span></span><br></pre></td></tr></table></figure>
 <p>我们的C++ 编译器版本太新了，超出了当前 CUDA 12.1 工具包所能识别和兼容的范围。所以，虽然错误信息说支持到 2022，但它指的是 CUDA 12.1 发布时 的 VS 2022 版本。你的 Visual Studio Build Tools 自动安装了最新的版本，这个版本对于 CUDA 12.1 来说过于前卫了。然后我重新安装了一下旧版本的VS。</p>
 <blockquote>
 <p>这里要提一下，目前官网旧版本是要订阅的，自己要找一下资源。我的是在B站找到的网盘链接。<br>重新启动之后：</p>
 </blockquote>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: It seems that the VC environment is activated but DISTUTILS_USE_SDK is not <span class="built_in">set</span>.</span><br><span class="line">This may lead to multiple activations of the VC <span class="built_in">env</span>.</span><br><span class="line">Please <span class="built_in">set</span> `DISTUTILS_USE_SDK=1` and try again.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: It seems that the VC environment is activated but DISTUTILS_USE_SDK is not <span class="built_in">set</span>.</span><br><span class="line">This may lead to multiple activations of the VC <span class="built_in">env</span>.</span><br><span class="line">Please <span class="built_in">set</span> `DISTUTILS_USE_SDK=1` and try again.</span><br></pre></td></tr></table></figure>
 <p>为了防止因为重复加载编译环境而产生潜在的冲突，脚本要求我们手动设置一个“确认标志”，来告诉它：“是的，我就是要用这个环境，请继续！”。那么我们按它说的做，先设置<code>set  DISTUTILS_USE_SDK=1</code></p>
 <p>当我以为全部解决时，爆了一堆从未见过的错误。看了就头疼，只能丢给AI分析：</p>
 <blockquote>
-<p>C:/Users/Alan/anaconda3/envs/Emo-Avatar/lib/site-packages/torch/include\c10/core/TensorImpl.h(3187): error: static assertion failed with “Actual and Expected sizes of a field did not match!”<br>  static_assert(<br>  ^<br>      …<br>      Actual=8U, Expected=4U, FiledName=c10::C10_TensorImpl_Size_Check_Dummy_Class…</p>
+<p>C:&#x2F;Users&#x2F;Alan&#x2F;anaconda3&#x2F;envs&#x2F;Emo-Avatar&#x2F;lib&#x2F;site-packages&#x2F;torch&#x2F;include\c10&#x2F;core&#x2F;TensorImpl.h(3187): error: static assertion failed with “Actual and Expected sizes of a field did not match!”<br>  static_assert(<br>  ^<br>      …<br>      Actual&#x3D;8U, Expected&#x3D;4U, FiledName&#x3D;c10::C10_TensorImpl_Size_Check_Dummy_Class…</p>
 </blockquote>
 <ul>
 <li><code>static_assert</code>是一个在编译代码时进行的强制检查。<code>Actual=8U, Expected=4U:</code> 检查发现，某个数据结构字段的实际大小是 8个字节，但代码期望的大小是 4个字节。<br>所以是我误用了84位的终端，实际应该打开64位的。这个小tip确实没注意。<br>打开<code>x64 Native Tools Command Prompt for VS 2019</code>重新运行安装代码：</li>
 </ul>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: The environment variable `CUB_HOME` was not found. NVIDIA CUB is required <span class="keyword">for</span> compilation...</span><br><span class="line">error: [WinError 2] 系统找不到指定的文件。</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: The environment variable `CUB_HOME` was not found. NVIDIA CUB is required <span class="keyword">for</span> compilation...</span><br><span class="line">error: [WinError 2] 系统找不到指定的文件。</span><br></pre></td></tr></table></figure>
 <p>经典忘记设置CUDA_HOME，照常设置之后，就一直没有报错，等待编译了许久也是大功告成啦╰(<em>°▽°</em>)╯</p>
 <p><img src="/images/93D749E36B060AD6162FEA2A442B0F02.gif"></p>
-<h3><span id="%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</span></h3><ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
 <li><ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/goodgoodstudy___/article/details/121577651">https://blog.csdn.net/goodgoodstudy___/article/details/121577651</a></li>
 </ol>
@@ -429,70 +375,631 @@
 </ol>
 </li>
 </ul>
-</body></html>
-	</article>
+	
+		</div>
+		
+		<div id="current-post-cover" data-scr="/images/cover5.png"></div>
 
-	 
-    <div class="kira-post-copyright">
-        <strong>本文作者：</strong>Zehao Jiang<br>
-        <strong>本文链接：</strong><a href="https://sextent.github.io/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;07&#x2F;pytorch3D安装经验&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sextent.github.io&#x2F;2025&#x2F;10&#x2F;07&#x2F;pytorch3D安装经验&#x2F;</a><br>
-        
-            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-        
-    </div>
-
-  
-	<div class="kira-post-nav">
-		<nav class="post-nav">
+		<!-- relate post, comment...-->
+		<div class="investment-container">
+			<div class="investment-header">
+				<div class="investment-title-1">
+					<div class="on">相关文章</div>
+					<div>评论</div>
+					<div>分享</div>
+				</div>
+				<div class="investment-title-2">	            
+					
+	<span>
+		<a id="totop-post-page">返回顶部</a>
+		
+			<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录" rel="next">
+				下一篇&raquo;
+			</a>
 			
-		</nav>
-	</div>
+	</span>
+
+
+      		
+				</div>	
+			</div>
+			
+			<div class="investment-content">
+				<div class="investment-content-list">
+					
+
+<div class="relate-post">
 	
-	<div class="kira-post-meta kira-rainbow">
-		
-		
-			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a>
-		
-	</div>
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">
+								使用Hexo的个人主页搭建教程			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我的这个博客起源于大三的时候做算法基础的算法作业，寻找教程的时候偶然发现了一个好看的个人主页(https://argvchs.netlify.app/) 。于是我就开始了我的个人主页搭建之旅。但是由于新手小白所以中间折腾了好久，遇到困...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover2.png" alt="使用Hexo的个人主页搭建教程"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
+								代理错误（SSLEOFError)解决方法			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 26日, 2025				
+							</p>
+							<p class="relate-post-content">
+								最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的帖子，解决了...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover1.png" alt="代理错误（SSLEOFError)解决方法"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">
+								日剧推荐：《0.5的男人》			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="日剧推荐：《0.5的男人》"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">
+								Github上部署Hexoa页面的踩坑记录			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 26日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我在部署Hexo页面到GitHub主页时，发现在创建第一个文档后会导致样式无法加载。我一直以为是主题的问题，采取了删库重新安装的方法进行测试。当然在一切重新开始的时候是没有问题的，但是当我改变主题后又会出现这种情况，期间我尝试了一些网...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover4.png" alt="Github上部署Hexoa页面的踩坑记录"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">
+								论文阅读：混元Avatar			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								混元Avatar摘要混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：
+
+多模态理解：能够理解用户的自然语言指令，并将其转换为可执行的动作。...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：混元Avatar"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">
+								论文阅读：Hallo2			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								参考文献：
+
+https://zhuanlan.zhihu.com/p/3410949248
+
+
+
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：Hallo2"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/article1/" title="摘抄">
+								摘抄			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。
+这句话出自荷尔德林（Friedrich Hölderlin）。
+
+待到英雄们在铁铸的摇篮中长成，勇敢的心灵像从前一样，去造访万能的神祗。而在这之前，我却...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/article1/" title="摘抄">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/14/Moda/" title="论文阅读：MoDA">
+								论文阅读：MoDA			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我在8月末帮助师兄的项目时，需要做近期的一些工作汇总，期间阅读了相关的一些论文。把笔记发在这。
+TO DO 
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/14/Moda/" title="论文阅读：MoDA">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover6.jpg" alt="论文阅读：MoDA"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/14/test/" title="我的第一篇博客文章">
+								我的第一篇博客文章			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								欢迎来到我的博客这是我的第一篇博客文章。我用hexo搭建了这个博客，希望在这里分享我的生活。
+
+原先的博客由于兼容问题无法访问，于是我重新搭建了这个仓库。以前的文章随缘慢慢补上吧。
+
+关于这个博客这个博客使用 Hexo 搭建,主要用来...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/14/test/" title="我的第一篇博客文章">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="我的第一篇博客文章"/>
+							</a>
+						</div>
+					</li>												
+			
+		</ul>
 	
-	<div class="kira-post-footer">
-		
+</div>	
+				</div>
+				<div class="investment-content-list">
+					<div class="layout-comment">
+
+	
+		<div class="config-info">
+			Please check the parameter of <b>comment</b> in config.yml of hexo-theme-Annie!
+		</div>	
+	
+
+</div>
+				</div>
+				<div class="investment-content-list">
+					<div class="layout-share">
+	
+	
 
 		
-	<div class="giscus"></div>
-  
-    <script src="https://giscus.app/client.js"
-      data-repo="-your github username-/-your giscus repo-"
-      data-repo-id="-your giscus repo ID-"
-      data-category="Announcements"
-      data-category-id="-giscus category id-"
-      data-mapping="pathname"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme="light"
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async  
-    ></script>
-  
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
 
-	</div>
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
 	
 </div>
+
 
 				</div>
-			</div>
-			<div class="kira-right-column">
-	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
-		<button class="mdui-fab mdui-ripple">
-			<i class="kirafont icon-caret-up"></i>
-		</button>
-	</a>
+			</div>	
+		</div>
+	</div>
 </div>
 
+<!-- show math formula -->
+
+
+
+	 
+	
+<script src="/plugin/clipboard/clipboard.js"></script>
+
+	<script>
+		// Copy code !
+	    function preprocessing() {
+	        $("#article-content .highlight").each(function() {
+	            $(this).wrap('<div id="post-code"></div>');
+	        })
+
+	        $("#article-content #post-code").each(function() {
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            let languageClass = $(this).next().attr('class'),
+	                language = ((languageClass.length > 9) && (languageClass != null)) ? languageClass.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+	            $(this).append('<span class="copy-btn icon-paste"></span>');
+	        });
+	    }
+
+		function copy() {
+		    $('#article-content #post-code').each(function(i) {
+		        let codeCopyId = 'codeCopy-' + i;
+
+		        let codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+   
+			let clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn icon-clipboard1');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn icon-paste');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');   
+			});
+			
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		}
+		
+		(function copyCode(){
+			if ($('.layout-post').length) {
+			    preprocessing();
+			    copy();
+			} 
+		})();
+	</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+
+<script type="text/javascript">
+	(function gallerySet(){
+		let titleID = $('.article-title a'),
+			imageID = $('.article-content img'),
+			videoID = $('.article-content video');
+		
+		let postTitle = titleID.text() ? titleID.text() : "No post title!";
+		
+		imageID.each(function() {
+			let imgPath = $(this).attr('src'),
+				imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		
+			//给每个匹配的<img>元素打包, 即添加父元素<a>
+			$(this).wrap('<a data-fancybox="gallery" data-caption="《 ' + postTitle + ' 》' + imgTitle + '"href="' + imgPath + '"> </a>');
+		});
+		
+		videoID.each(function() {
+			let videoPath = $(this).attr('src');
+		
+			//给每个匹配的<img>元素打包, 即添加父元素<a>
+			$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+		});
+		
+		//TODO：支持html5 video
+
+		if($('#layout-post').length) {
+			$('[data-fancybox="gallery"]').fancybox({
+				loop: true,
+				buttons: [
+					"zoom",
+					"share",
+					"slideShow",
+					"fullScreen",
+					//"download",
+					"thumbs",
+					"close"
+				],
+				protect: true
+			});
+		}
+	})();
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div id="navigation-show">
+		<ul id="global-nav">
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home" target="_blank">主页</a>
+		</li>
+		
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
+		</li>
+		
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
+		</li>
+		
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
+		</li>
+		
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about" target="_blank">关于</a>
+		</li>
+		
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
+		</li>
+		
+	
+
+	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+	</div>
+
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2025, content by Sariay. All Rights Reserved.
+			
+			
+				<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			
+		</p>
+		<p>
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+
+
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- Local or hitokoto! -->
+
+	
+<script src="/plugin/motto/motto.js"></script>
+
+	
+	<script type="text/javascript">
+		(function motto(){
+			let mottoText = getMingYanContent().split('</br> - </br>'),
+			
+			mottoTextContent = mottoText[0]?mottoText[0]:'请刷新...',
+			
+			mottoTextFrom = mottoText[1]?mottoText[1]:'one/一个';
+			
+			mottoTextContent = mottoTextContent.trim().substring(0, 100);
+		
+			$("#motto-content").html( mottoTextContent);
+			$("#motto-author").html( mottoTextFrom  );
+		})();	
+	</script>	
+
+
+
+<!-- love effect -->
+
+
+<!-- back to top -->
+
+	<div id="totop">
+	<span class="icon-circle-up"></span>
+</div>
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<!-- leancloud -->
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+  
+
+	<!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup scrollbar" >
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      		ESC
+   		</span>
+		<div class="local-search-header">
+			<div class="input-prompt">				
+			</div>
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
 		</div>
-	</body>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			<div class="topN-post">				
+				
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="/plugin/search/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imagelazyloader/yall.min.js"></script>
+<script src="/plugin/imageloaded/imagesloaded.pkgd.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/plugin/resizediv/resizediv.js"></script>
+<script src="/js/main.js"></script>
+
+	</body>	
 </html>
