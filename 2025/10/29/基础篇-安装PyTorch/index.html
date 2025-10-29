@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      论文阅读：混元Avatar | 六分仪的主页
+      基础篇-安装PyTorch | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -100,7 +100,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「论文阅读：混元Avatar」
+			「基础篇-安装PyTorch」
 		
 	</p>
 
@@ -246,8 +246,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" itemprop="url">
-		论文阅读：混元Avatar
+	<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" itemprop="url">
+		基础篇-安装PyTorch
 	</a>
 
 		</div>
@@ -263,9 +263,9 @@
 
 	更新于
 
-	<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" itemprop="url">
-		<time datetime="2025-09-15T08:24:38.000Z" itemprop="dateUpdated">
-	  		2025-09-15
+	<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" itemprop="url">
+		<time datetime="2025-10-29T13:05:12.000Z" itemprop="dateUpdated">
+	  		2025-10-29
 	  </time>
 	</a> 
 
@@ -280,8 +280,8 @@
 			笔记
 		</a>
 	
-		<a href="/tags/%E8%AE%BA%E6%96%87/" class=" ">
-			论文
+		<a href="/tags/%E6%95%99%E7%A8%8B/" class=" ">
+			教程
 		</a>
 	
 		
@@ -294,17 +294,26 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<h1 id="混元Avatar"><a href="#混元Avatar" class="headerlink" title="混元Avatar"></a>混元Avatar</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：</p>
-<ol>
-<li><strong>多模态理解</strong>：能够理解用户的自然语言指令，并将其转换为可执行的动作。</li>
-<li><strong>多轮对话</strong>：能够与用户进行多轮对话，理解用户的意图，并提供相应的反馈。</li>
-<li><strong>动作执行</strong>：能够执行用户的指令，并提供相应的反馈。</li>
-</ol>
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：</p>
-<ol>
-<li><strong>多模态理解</strong>：能够理解用户的自然语言指令，并将其转换为可执行的动作。</li>
-<li><strong>多轮对话</strong>：能够与用户进行多轮对话，理解用户的意图，并提供相应的反馈。</li>
-</ol>
+			<p>今晚情绪较低，稍微看了会论文就不想工作了。由于安装Cuda和PyTorch是不得不品的一环，于是整理了一下之前的资料，写个笔记。</p>
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><ul>
+<li>包管理器：miniconda</li>
+<li>python&#x3D;3.10</li>
+</ul>
+<h4 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h4><p>理论上来说只要买了N卡装机的时候就会自己装上cuda。这里主要讲一下不同版本cuda的配置问题。<br>首先上官网安装下载对应的CUDA驱动程序。然后安装，配置环境变量（这里不会的就直接重启）。<br>使用命令<code>nvidia-smi</code>或是<code>nvcc --version</code>来查看当前使用的cuda环境。</p>
+<h4 id="创建新环境并安装PyTorch"><a href="#创建新环境并安装PyTorch" class="headerlink" title="创建新环境并安装PyTorch"></a>创建新环境并安装PyTorch</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n &lt;your <span class="built_in">env</span> name&gt;</span><br></pre></td></tr></table></figure>
+<p>然后不断yes，安装好你的环境之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate &lt;your <span class="built_in">env</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>之后一般使用官方源下载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch torchvision torchaudio cudatoolkit -c pytorch -c conda-forge</span><br></pre></td></tr></table></figure>
+<p>或者你可以使用<code>-i https://pypi.tuna.tsinghua.edu.cn/simple</code>参数来链接清华源，这样可以不用挂梯子，走国内流量。<br>可以通过以下代码来检验是否成功安装了GPU版本的PyTorch:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;success&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fail&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h4><p>一些手动下载whl文件的地址，适合下载匹配不同版本cuda环境使用：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/cu121/torch_stable.html">https://download.pytorch.org/whl/cu121/torch_stable.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/cpu/torch_stable.html">https://download.pytorch.org/whl/cpu/torch_stable.html</a></li>
+</ul>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>之所以写下这个一部分原因也是在使用部分老仓库（我是wav2lip）时会发现它的torch版本实在太低，许多东西是不适配的，所以要降级自己的cuda来匹配它的torch版本。<br>而我在配环境过程中的一个启发是多看issue，有时候其他人会有不同的version，依然能跑通结果，就<br>比如<a target="_blank" rel="noopener" href="https://github.com/Rudrabha/Wav2Lip/issues/131#issuecomment-725478562">这一个问题</a>,题主有了版本的提示，然后也告诉我们如何去安装剩下的依赖。当然我在安装途中有了依赖无法安装（SSLError）的问题，解决方法写在另一个帖子上了。</p>
+<p>顺便感谢<a target="_blank" rel="noopener" href="https://github.com/Rudrabha/Wav2Lip/issues/743%E5%B8%AE%E6%88%91%E8%A7%A3%E5%86%B3wav2lip%E8%B7%91%E4%B8%8D%E8%B5%B7%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82">https://github.com/Rudrabha/Wav2Lip/issues/743帮我解决wav2lip跑不起来的问题。</a></p>
 	
 		</div>
 		
@@ -323,12 +332,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2" rel="next">
+			<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -349,27 +354,24 @@
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">
-								基础篇-安装PyTorch			
+							<a class="relate-post-title" href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">
+								论文阅读：混元Avatar			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								十月 29日, 2025				
+								九月 15日, 2025				
 							</p>
 							<p class="relate-post-content">
-								今晚情绪较低，稍微看了会论文就不想工作了。由于安装Cuda和PyTorch是不得不品的一环，于是整理了一下之前的资料，写个笔记。
-环境配置
-包管理器：miniconda
-python&#x3D;3.10
+								混元Avatar摘要混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：
 
-安装cuda理论上来说只要买...
+多模态理解：能够理解用户的自然语言指令，并将其转换为可执行的动作。...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">				
+							<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="基础篇-安装PyTorch"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：混元Avatar"/>
 							</a>
 						</div>
 					</li>												
@@ -428,6 +430,50 @@ TO DO
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
+								pytorch3D安装经验			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 7日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">
+								使用Hexo的个人主页搭建教程			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我的这个博客起源于大三的时候做算法基础的算法作业，寻找教程的时候偶然发现了一个好看的个人主页(https://argvchs.netlify.app/) 。于是我就开始了我的个人主页搭建之旅。但是由于新手小白所以中间折腾了好久，遇到困...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover2.png" alt="使用Hexo的个人主页搭建教程"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
 								代理错误（SSLEOFError)解决方法			
 							</a>
@@ -466,28 +512,6 @@ TO DO
 							<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="日剧推荐：《0.5的男人》"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
-								pytorch3D安装经验			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 7日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
 							</a>
 						</div>
 					</li>												
@@ -535,28 +559,6 @@ TO DO
 							<a href="/2025/09/15/article1/" title="摘抄">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">
-								使用Hexo的个人主页搭建教程			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 14日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我的这个博客起源于大三的时候做算法基础的算法作业，寻找教程的时候偶然发现了一个好看的个人主页(https://argvchs.netlify.app/) 。于是我就开始了我的个人主页搭建之旅。但是由于新手小白所以中间折腾了好久，遇到困...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover2.png" alt="使用Hexo的个人主页搭建教程"/>
 							</a>
 						</div>
 					</li>												
