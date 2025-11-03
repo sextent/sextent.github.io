@@ -265,7 +265,7 @@
 
 	<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" itemprop="url">
 		<time datetime="2025-10-29T13:05:12.000Z" itemprop="dateUpdated">
-	  		2025-10-29
+	  		2025-11-01
 	  </time>
 	</a> 
 
@@ -299,7 +299,13 @@
 <li>包管理器：miniconda</li>
 <li>python&#x3D;3.10</li>
 </ul>
-<h4 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h4><p>理论上来说只要买了N卡装机的时候就会自己装上cuda。这里主要讲一下不同版本cuda的配置问题。<br>首先上官网安装下载对应的CUDA驱动程序。然后安装，配置环境变量（这里不会的就直接重启）。<br>使用命令<code>nvidia-smi</code>或是<code>nvcc --version</code>来查看当前使用的cuda环境。</p>
+<h4 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h4><p>理论上来说只要买了N卡装机的时候就会自己装上cuda。这里主要讲一下不同版本cuda的配置问题。<br>点击<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">官网下载链接</a>,安装下载对应的CUDA驱动程序。然后安装，配置环境变量（这里不会的就直接重启）。<br>使用命令<code>nvidia-smi</code>或是<code>nvcc --version</code>来查看当前使用的cuda环境。</p>
+<blockquote>
+<p><code>nvidia-smi</code>输出的CUDA Version是电脑最高支持的CUDA版本， 只要低于该CUDA Version都可以安装<br>安装完成后输入<code>set cuda</code> 检查系统中的cuda路径，同时也可以查看自己安装了几个版本的cuda。</p>
+</blockquote>
+<ul>
+<li>cuDNN的安装需要注册NVIDIA账号，用邮箱注册，登录即可。</li>
+</ul>
 <h4 id="创建新环境并安装PyTorch"><a href="#创建新环境并安装PyTorch" class="headerlink" title="创建新环境并安装PyTorch"></a>创建新环境并安装PyTorch</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n &lt;your <span class="built_in">env</span> name&gt;</span><br></pre></td></tr></table></figure>
 <p>然后不断yes，安装好你的环境之后</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate &lt;your <span class="built_in">env</span>&gt;</span><br></pre></td></tr></table></figure>
@@ -333,6 +339,10 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
+			<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="Human Motion Video Generation : A Survey" rel="prev">
+				&laquo;上一篇
+			</a>
+		
 		
 			<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法" rel="next">
 				下一篇&raquo;
@@ -352,6 +362,30 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="Human Motion Video Generation : A Survey">
+								Human Motion Video Generation : A Survey			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 2日, 2025				
+							</p>
+							<p class="relate-post-content">
+								本文主要解读发表在IEEE TPAMI（模式识别与机器智能汇刊）上的综述：《Human Motion Video Generation: A Survey》。
+背景
+论文标题  Human Motion Video Generatio...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="Human Motion Video Generation : A Survey">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover8.jpg" alt="Human Motion Video Generation : A Survey"/>
+							</a>
+						</div>
+					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -415,9 +449,8 @@ https://zhuanlan.zhihu.com/p/3410949248
 								九月 14日, 2025				
 							</p>
 							<p class="relate-post-content">
-								我在8月末帮助师兄的项目时，需要做近期的一些工作汇总，期间阅读了相关的一些论文。把笔记发在这。
-TO DO 
-
+								我在8月末帮助师兄的项目时，需要做近期的一些工作汇总，期间阅读了相关的一些论文，作笔记记录。
+背景介绍最新一波的人工智能生成内容（AIGC）在计算机视觉领域取得了显著的成功，扩散模型在这一成就中扮演了关键角色。由于其印象深刻的生成能力...
 							</p>
 						</div>
 
@@ -560,32 +593,6 @@ TO DO
 							<a href="/2025/09/15/article1/" title="摘抄">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/14/test/" title="我的第一篇博客文章">
-								我的第一篇博客文章			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 14日, 2025				
-							</p>
-							<p class="relate-post-content">
-								欢迎来到我的博客这是我的第一篇博客文章。我用hexo搭建了这个博客，希望在这里分享我的生活。
-
-原先的博客由于兼容问题无法访问，于是我重新搭建了这个仓库。以前的文章随缘慢慢补上吧。
-
-关于这个博客这个博客使用 Hexo 搭建,主要用来...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/14/test/" title="我的第一篇博客文章">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="我的第一篇博客文章"/>
 							</a>
 						</div>
 					</li>												
