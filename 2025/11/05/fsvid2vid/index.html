@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      我的第一篇博客文章 | 六分仪的主页
+      论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -100,7 +100,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「我的第一篇博客文章」
+			「论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing」
 		
 	</p>
 
@@ -246,8 +246,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/09/14/test/" itemprop="url">
-		我的第一篇博客文章
+	<a href="/2025/11/05/fsvid2vid/" itemprop="url">
+		论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
 	</a>
 
 		</div>
@@ -263,9 +263,9 @@
 
 	更新于
 
-	<a href="/2025/09/14/test/" itemprop="url">
-		<time datetime="2025-09-14T03:54:37.399Z" itemprop="dateUpdated">
-	  		2025-09-14
+	<a href="/2025/11/05/fsvid2vid/" itemprop="url">
+		<time datetime="2025-11-05T03:18:53.000Z" itemprop="dateUpdated">
+	  		2025-11-06
 	  </time>
 	</a> 
 
@@ -273,18 +273,7 @@
 
 			</span>
 			<span>
-				
-	<i class="icon-price-tags"></i>
-	
-		<a href="/tags/%E9%9A%8F%E7%AC%94/" class=" ">
-			随笔
-		</a>
-	
-		<a href="/tags/%E5%8D%9A%E5%AE%A2/" class=" ">
-			博客
-		</a>
-	
-		
+						
 			</span>
 			
 			
@@ -294,31 +283,76 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<h1 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h1><p>这是我的第一篇博客文章。我用hexo搭建了这个博客，希望在这里分享我的生活。</p>
-<blockquote>
-<p>原先的博客由于兼容问题无法访问，于是我重新搭建了这个仓库。以前的文章随缘慢慢补上吧。</p>
-</blockquote>
-<h2 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h2><p>这个博客使用 Hexo 搭建,主要用来:</p>
-<ul>
-<li>记录学习笔记</li>
-<li>分享技术心得</li>
-<li>记录生活随想</li>
+			<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li><strong>论文标题</strong>  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing</li>
+<li><strong>期刊</strong> CVPR，2021</li>
+<li><strong>论文地址</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2509.03883">https://arxiv.org/pdf/2509.03883</a></li>
+<li><strong>项目地址</strong> <a target="_blank" rel="noopener" href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation</a></li>
 </ul>
-<h2 id="未来计划"><a href="#未来计划" class="headerlink" title="未来计划"></a>未来计划</h2><p>我会定期更新博客内容,包括但不限于:</p>
+<h2 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h2><h3 id="GANs"><a href="#GANs" class="headerlink" title="GANs"></a>GANs</h3><p>自 Goodfellow 等人 [21] 提出 GANs（生成对抗网络）以来，GANs 在多个领域展现了令人瞩目的成果 [44]，例如：  </p>
+<ul>
+<li><strong>无条件图像生成</strong> [21, 23, 31, 32, 33, 45, 55]  </li>
+<li><strong>图像翻译</strong> [8, 12, 26, 28, 42, 43, 52, 61, 67, 77, 96, 97]  </li>
+<li><strong>文本到图像翻译</strong> [56, 84, 89]  </li>
+<li><strong>图像处理</strong> [17, 18, 27, 35, 36, 37, 38, 40, 66, 72, 83, 88]  </li>
+<li><strong>视频合成</strong> [2, 10, 34, 41, 46, 54, 57, 63, 75, 76, 95]</li>
+</ul>
+<p>在本研究中，我们专注于使用 GANs 合成说话人头视频。</p>
+<hr>
+<h3 id="基于-3D-模型的说话人头合成"><a href="#基于-3D-模型的说话人头合成" class="headerlink" title="基于 3D 模型的说话人头合成"></a>基于 3D 模型的说话人头合成</h3><p>关于将一个人的面部动作转移到另一个人身上的研究（即面部重演）可以分为<strong>特定主体模型</strong>和<strong>与主体无关的模型</strong>。</p>
+<h4 id="传统的基于-3D-的方法"><a href="#传统的基于-3D-的方法" class="headerlink" title="传统的基于 3D 的方法"></a>传统的基于 3D 的方法</h4><p>这些方法通常构建特定主体模型，只能合成单一主体。此外，这些方法通常仅关注表情的迁移，而不包括头部动作 [65, 69, 70, 71, 73]。<br>这类方法的流程通常如下：</p>
 <ol>
-<li>技术文章</li>
-<li>读书笔记</li>
-<li>生活随笔</li>
-<li>兴趣爱好</li>
+<li>使用 RGB 或 RGBD 传感器采集目标人物的影像 [70, 71]。</li>
+<li>为目标人物的面部区域构建 3D 模型 [6]。</li>
+<li>在测试阶段，使用新的表情驱动 3D 模型生成所需的动作。</li>
 </ol>
-<p>另外感谢这个主题Annie的制作者，这是<a target="_blank" rel="noopener" href="https://github.com/Sariay/hexo-theme-Annie.git">ta的项目地址</a></p>
-<blockquote>
-<p>现在尝试使用了新主题：<a target="_blank" rel="noopener" href="https://kira.host/hexo/article/archive.html">kira</a></p>
-</blockquote>
+<h4 id="更现代的-3D-模型方法"><a href="#更现代的-3D-模型方法" class="headerlink" title="更现代的 3D 模型方法"></a>更现代的 3D 模型方法</h4><p>更近期的基于 3D 模型的方法能够进行与主体无关的面部合成 [19, 20, 49, 51]。尽管它们在合成面部内部区域方面表现出色，但在生成真实感的头发、牙齿、配饰等方面仍存在困难。<br>由于这些限制，大多数现代面部重演框架采用了基于 2D 的方法。</p>
+<h4 id="另一类研究"><a href="#另一类研究" class="headerlink" title="另一类研究"></a>另一类研究</h4><p>另一类研究 [15, 68] 专注于<strong>可控面部生成</strong>，通过一个预训练的StyleGAN[32，33]显式控制生成的面部特征。但如何将其适配于修改真实图像仍然不明确，因为从图像到潜在代码的逆映射并非易事。</p>
+<h3 id="基于-2D-的说话人头合成"><a href="#基于-2D-的说话人头合成" class="headerlink" title="基于 2D 的说话人头合成"></a>基于 2D 的说话人头合成</h3><p>同样，基于 2D 的方法也可以分为<strong>特定主体模型</strong>和<strong>与主体无关的模型</strong>。</p>
+<h4 id="特定主体模型"><a href="#特定主体模型" class="headerlink" title="特定主体模型"></a>特定主体模型</h4><p>特定主体模型 [5, 82] 只能用于特定的人物，因为模型仅在目标人物上进行训练。</p>
+<h4 id="与主体无关的模型"><a href="#与主体无关的模型" class="headerlink" title="与主体无关的模型"></a>与主体无关的模型</h4><p>与主体无关的模型 [4, 9, 11, 20, 22, 24, 29, 50, 54, 62, 64, 74, 75, 80, 86, 87, 94] 仅需要目标人物的一张图像（该人物在训练过程中未被见过），即可合成任意动作。  </p>
+<ul>
+<li><strong>Siarohin 等人 [62]</strong>：通过稀疏关键点估计运动场，利用运动场对输入图像的提取特征进行变形。  </li>
+<li><strong>Zakharov 等人 [87]</strong>：展示了无需任何变形即可通过直接合成方法实现令人满意的结果。  </li>
+<li><strong>Few-shot vid2vid [75]</strong>：通过动态确定 SPADE [52] 模块中的参数，将信息注入生成器中。  </li>
+<li><strong>Zakharov 等人 [86]</strong>：将图像分解为低频和高频分量，从而极大地加速了网络的推理速度。</li>
+</ul>
+<p>尽管这些方法在结果质量上表现出色，但它们只能合成固定视角的视频，从而导致沉浸感较差的体验。</p>
+<h3 id="视频压缩"><a href="#视频压缩" class="headerlink" title="视频压缩"></a>视频压缩</h3><p>近年来，一些研究 [3, 16, 25, 39, 47, 59, 81] 提出了使用深度网络压缩任意视频的方案。其核心思想是将视频压缩问题视为在相邻关键帧之间插值的问题。通过深度网络替代传统流水线的各个部分，以及分层插值和残差与光流的联合编码等技术，这些研究显著减少了所需的比特率。<br>其他研究 [48, 79, 85, 91] 则专注于使用深度网络恢复低比特率视频的质量。与我们的工作最相关的是 DAVD-Net [91]，它通过音频流中的信息恢复说话人头视频。</p>
+<h3 id="我们的方法"><a href="#我们的方法" class="headerlink" title="我们的方法"></a>我们的方法</h3><p>我们的方法在目标和实现压缩的方式上，与上述工作存在显著差异。我们专注于说话人脸视频。人脸具有固有的结构特性——从形状到相对排列的位置——这些特性为我们的方法提供了独特的机会。</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>设 (s) 为某个人的一张图像，称为源图像（source image）。设 ({d_1, d_2, …, d_N}) 为一个说话头像视频，称为驱动视频（driving video），其中 (d_i) 表示每一帧图像，(N) 表示总帧数。我们的目标是生成一个输出视频 ({y_1, y_2, …, y_N})，其中每帧 (y_i) 的身份信息继承自 (s)，而运动信息来源于 (d_i)。  </p>
+<p>上述设置包含了多种说话头像合成任务：</p>
+<ul>
+<li>当 (s) 是驱动视频中的某一帧（例如第一帧：(s &#x3D; d_1)）时，这是一项视频重建任务。</li>
+<li>当 (s) 不属于驱动视频时，这是一项运动迁移任务。</li>
+</ul>
+<p>我们提出了一种纯神经合成方法，该方法不使用任何3D图形模型（例如著名的3D可变形模型（3DMM）[6]）。我们的方法包括三个主要步骤：</p>
+<ol>
+<li>源图像特征提取；</li>
+<li>驱动视频特征提取；</li>
+<li>视频生成。<br>在图3中，我们展示了步骤1和步骤2，而图5展示了步骤3。我们的核心技术是一种无监督方法，用于学习一组3D关键点及其分解。我们将关键点分解为两部分：一部分用于建模面部表情，另一部分用于建模人物的几何特征。这两部分与目标头部姿态结合后生成图像特定的关键点。在关键点估计完成后，它们被用于学习两张图像之间的映射函数。我们通过一组网络实现了这些步骤，并对它们进行联合训练。接下来，我们将详细讨论这三个步骤。<br>人脸由眼睛、鼻子、嘴巴等不同部位组成的结构特性使我们能够利用关键点及其相关的元数据实现高效压缩，其效率比传统编解码器高出一个数量级。尽管我们的方法无法保证像素对齐的输出视频，但它能够真实地模拟面部动作和情感表达。此外，由于不使用双向帧或B帧（B-frames），我们的方法更适合用于视频流传输。<br><strong>3.1 源图像特征提取</strong><br>合成一个说话头像需要了解人物的外观特征，例如肤色和眼睛颜色。如图3(a)所示，我们首先应用一个3D外观特征提取网络 (F)，将源图像 (s) 映射到一个3D外观特征体积 (f_s)。与2D特征图不同，(f_s) 具有三个空间维度：宽度、高度和深度。将源图像映射到3D特征体积是我们方法中的一个关键步骤。这使得我们能够在3D空间中操作关键点，从而在合成过程中对说话头像进行旋转和平移操作。<br>我们从源图像 (s) 中提取了一组 (K) 个3D关键点 (\mathbf{x}_{c,k} \in \mathbb{R}^3)，该过程通过一个标准的3D关键点检测网络 (L) 完成。在本文中，除非另有说明，我们将 (K) 设置为20。需要注意的是，这些关键点是通过无监督方式学习的，与常见的人脸关键点（facial landmarks）不同。我们强调，提取的关键点旨在与人脸的姿态和表情无关，它们仅编码人物在中性姿态和表情下的几何特征。</li>
+</ol>
+<p>接下来，我们从图像中提取姿态和表情信息。我们使用一个头部姿态估计网络 (H) 来估计人物在 (s) 中的头部姿态，该姿态由一个旋转矩阵 (\mathbf{R}_s \in \mathbb{R}^{3 \times 3}) 和一个平移向量 (\mathbf{t}<em>s \in \mathbb{R}^3) 参数化。此外，我们使用一个表情变形估计网络 (\Delta) 来估计一组 (K) 个3D变形 (\delta</em>{s,k})，即关键点从中性表情的变形量。(H) 和 (\Delta) 都从图像中提取与运动相关的几何信息。</p>
+<p>我们将由 (L) 提取的身份特定信息与由 (H) 和 (\Delta) 提取的运动相关信息结合起来，通过一个变换 (T) 得到源图像的3D关键点 (\mathbf{x}_{s,k})：</p>
+<p>[<br>x_{s,k} &#x3D; T(x_{c,k}, R_s, t_s, \delta_{s,k}) &#x3D; R_s x_{c,k} + t_s + \delta_{s,k}<br>]</p>
+<ol>
+<li><p><strong>[x_{s,k}]</strong><br>输出点的坐标。</p>
+</li>
+<li><p><strong>[T(x_{c,k}, R_s, t_s, \delta_{s,k})]</strong><br>表示一个变换函数，它将输入点 [x_{c,k}] 通过一系列参数 [R_s]（旋转矩阵）、[t_s]（平移向量）和 [\delta_{s,k}]（残差或偏移量）进行变换。</p>
+</li>
+<li><p><strong>[R_s x_{c,k}]</strong><br>这是一个线性变换，表示通过旋转矩阵 [R_s] 对输入点 [x_{c,k}] 进行旋转。</p>
+</li>
+<li><p><strong>[t_s]</strong><br>平移向量，表示在旋转之后对点进行的平移操作。</p>
+</li>
+<li><p><strong>[\delta_{s,k}]</strong><br>偏移量或残差，表示在旋转和平移之后的额外调整。</p>
+</li>
+</ol>
+<p>最终的关键点是图像特定的，包含人物特征、姿态和表情信息。图4展示了关键点计算流程。<br><img src="/images/2025-11-5-4.png"><br>公式 (1) 中的 3D 关键点分解对我们的方法至关重要。它预先将关键点分解为几何特征、头部姿态和表情。这种分解有助于学习可操控的表示，并使我们的方法区别于之前基于 2D 关键点的神经说话人头合成方法 [62, 75, 86]。需要注意的是，与 FOMM[62]不同，我们的模型不估计雅可比矩阵。雅可比矩阵表示如何通过仿射变换将关键点周围的局部区域转换为另一图像中的对应区域。我们的模型没有显式地估计雅可比矩阵，而是假设头部大部分是刚性的，局部区域的变换可以直接通过头部旋转从 [J_s &#x3D; R_s] 推导得出。避免估计雅可比矩阵使我们能够进一步减少视频会议应用中的传输带宽，具体细节见第 5 节。</p>
+<h3 id="3-2-驱动视频特征提取"><a href="#3-2-驱动视频特征提取" class="headerlink" title="3.2 驱动视频特征提取"></a><strong>3.2 驱动视频特征提取</strong></h3><p>我们用 (d) 表示 (d_1, d_2, …, d_N) 中的某一帧，因为每一帧都以相同的方式进行处理。为了提取与运动相关的信息，我们使用头部姿态估计器 (H) 来获得 (R_d) 和 (t_d)，并使用表情变形估计器 (\Delta) 来获取 (\delta_{d,k})，如图 3(b) 所示。</p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+		<div id="current-post-cover" data-scr="/images/cover10.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -333,10 +367,14 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/09/14/Moda/" title="论文阅读：MoDA" rel="prev">
+			<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait" rel="prev">
 				&laquo;上一篇
 			</a>
 		
+		
+			<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="论文阅读："Human Motion Video Generation:A Survey"" rel="next">
+				下一篇&raquo;
+			</a>
 			
 	</span>
 
@@ -352,31 +390,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/15/article1/" title="摘抄">
-								摘抄			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 15日, 2025				
-							</p>
-							<p class="relate-post-content">
-								读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。
-这句话出自荷尔德林（Friedrich Hölderlin）。
-
-待到英雄们在铁铸的摇篮中长成，勇敢的心灵像从前一样，去造访万能的神祗。而在这之前，我却...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/15/article1/" title="摘抄">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
-							</a>
-						</div>
-					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -400,31 +413,6 @@
 							<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：LivePortrait"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
-								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 5日, 2025				
-							</p>
-							<p class="relate-post-content">
-								背景
-论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
-期刊 CVPR，2021
-论文地址 https://arxiv.org/...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
 							</a>
 						</div>
 					</li>												
@@ -588,6 +576,59 @@ python&#x3D;3.10
 							<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：混元Avatar"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">
+								论文阅读：Hallo2			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								参考文献：
+
+https://zhuanlan.zhihu.com/p/3410949248
+
+
+
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：Hallo2"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/article1/" title="摘抄">
+								摘抄			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。
+这句话出自荷尔德林（Friedrich Hölderlin）。
+
+待到英雄们在铁铸的摇篮中长成，勇敢的心灵像从前一样，去造访万能的神祗。而在这之前，我却...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/article1/" title="摘抄">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
 							</a>
 						</div>
 					</li>												

@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      Human Motion Video Generation : A Survey | 六分仪的主页
+      论文阅读：&#34;Human Motion Video Generation:A Survey&#34; | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -100,7 +100,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「Human Motion Video Generation : A Survey」
+			「论文阅读：&#34;Human Motion Video Generation:A Survey&#34;」
 		
 	</p>
 
@@ -247,7 +247,7 @@
 		<div class="article-title">
 			
 	<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" itemprop="url">
-		Human Motion Video Generation : A Survey
+		论文阅读：&#34;Human Motion Video Generation:A Survey&#34;
 	</a>
 
 		</div>
@@ -265,7 +265,7 @@
 
 	<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" itemprop="url">
 		<time datetime="2025-11-02T06:50:47.000Z" itemprop="dateUpdated">
-	  		2025-11-04
+	  		2025-11-06
 	  </time>
 	</a> 
 
@@ -320,7 +320,7 @@
 <p><strong>法线（Normal）</strong>。法线条件关键性地强调了人体的方向，确保在生成逼真人体姿态时的精确对齐，以增强视觉保真度[74]。这种对齐对于维持动画中空间关系的完整性至关重要，从而显著提高渲染场景的可信度和沉浸感质量。</p>
 <p><strong>关键点（Keypoint）</strong>。现有的姿态关键点估计方法通常采用OpenPose [75]或DWPose [76]等模型。最近的研究[33]、[77]使用DWPose [76]作为基础的基于关键点的人体骨架表示。</p>
 <p><strong>语义（Semantics）</strong>。语义条件优先考虑不同身体部位的信息形成，促进不同特征的解耦。这种方法能够对每个身体部位进行有针对性的增强和独立操作，从而改进以人为中心的模型中的表示和交互动态[78]。</p>
-<p><strong>光流（Optical Flow）</strong>。直接在噪声数据集上优化模型往往会导致背景不稳定。Follow Your Pose2 [34]通过添加额外的光流条件来减少噪声数据的影响，使模型能够适应背景中的不稳定变化。<br><img src="/images/2025-11-5.png"></p>
+<p><strong>光流（Optical Flow）</strong>。直接在噪声数据集上优化模型往往会导致背景不稳定。Follow Your Pose2 [34]通过添加额外的光流条件来减少噪声数据的影响，使模型能够适应背景中的不稳定变化。<br><img src="/images/2025-11-3-5.png"></p>
 <h2 id="人体运动规划"><a href="#人体运动规划" class="headerlink" title="人体运动规划"></a>人体运动规划</h2><p>人体运动规划阶段对于确定虚拟数字人执行的具体动作至关重要。从输入信号生成的运动序列使虚拟角色能够展现高度自然的动作，符合人类习惯，并与周围物体平滑交互，有效地模拟人类行为。</p>
 <p>目前，人体运动规划主要由两种方法驱动：一种是利用大语言模型（LLMs）的力量进行运动规划，另一种是依赖不同特征的映射来生成运动。本节强调了大语言模型在人体运动视频生成中日益增长的重要性。通过利用大语言模型中嵌入的固有先验知识，这些模型能够更好地理解语义细节并推理情感。</p>
 <h3 id="A-使用大语言模型的运动规划"><a href="#A-使用大语言模型的运动规划" class="headerlink" title="A. 使用大语言模型的运动规划"></a>A. 使用大语言模型的运动规划</h3><p>在人体运动视频生成领域，Geng等人[17]、AgentAvatar [18]和InstructAvatar [19]的研究代表了将大语言模型应用于运动规划的当前进展。值得注意的是，Geng等人[17]开创性地使用大语言模型分析两个人在对话中的对话特征，从而推断出听者的适当表情。另外两项研究专注于单人人体运动视频的生成。<br>作为该领域的开创性工作之一，Geng等人[17]展示了大语言模型在人体运动视频生成中的创新应用。他们的方法首先将说话者的台词和对话意图输入大语言模型，然后生成听者的合理反应，如微妙的微笑。这些生成的运动描述随后用于训练CLIP模块[79]，有效地将大语言模型与运动生成相结合。</p>
@@ -355,13 +355,9 @@
 <h4 id="3-视频特征评估"><a href="#3-视频特征评估" class="headerlink" title="3.视频特征评估"></a>3.视频特征评估</h4><p>帧一致性CLIP分数[197]、IS [198]、多样性[199]、BCS [200]和姿态准确性[201]–[203]。</p>
 <h4 id="4-视频评估器和基准测试"><a href="#4-视频评估器和基准测试" class="headerlink" title="4.视频评估器和基准测试"></a>4.视频评估器和基准测试</h4><p>用于评估生成视频质量的综合工具，包括DOVER [204]、VBench [205]和EvalCrafter [206]。尽管综合视频评估器和基准测试提供了系统化框架，但由于复杂评估框架的实现复杂性和计算成本，研究人员主要依赖传统指标（如SSIM [188]和FID-VID [186]、[187]）。</p>
 <h2 id="挑战与展望"><a href="#挑战与展望" class="headerlink" title="挑战与展望"></a>挑战与展望</h2><p>人体运动视频生成面临多项挑战，包括数据可用性、信号理解、运动规划以及生成视频的质量，如图13所示。<br><strong>数据不足</strong>。 人体运动视频生成领域受到数据可用性有限的阻碍，这主要由于隐私担忧、质量差和收集成本高等问题。这种稀缺性削弱了模型的鲁棒性，并影响了现实世界的可靠性。扩展数据集对于训练模型更好地识别、理解和复制人类行为至关重要，最终提高生成视频的质量和多样性。<br><strong>运动规划器</strong>。 当前的运动规划严重依赖于预先存在的数据分布，这限制了其掌握人类动作更深层语义层面的能力。这种方法约束了适应性和复杂性。为了推进运动规划，我们必须从纯统计方法转向那些融入意义、上下文和意图的方法。利用LLM可以通过分析复杂的人体运动模式来增强这一过程，使视频中生成更真实和上下文适当的人体运动成为可能，这被视为一个有前景的方向[17]–[19]。<br><strong>缺乏真实感</strong>。 在人体运动视频生成中，如图13所示的众多挑战需要复杂的解决方案。生成的人体形态的保真度，特别是在面部和手部方面，对于真实感和表现力至关重要。<br>在整个视频中保持视觉一致性是另一个挑战，不仅需要稳定的视觉特征，还需要主体与环境的无缝融合。动作的合理性同样关键。无论形态和背景看起来多么真实，如果所描绘的动作在物理或逻辑上不合理，整体效果就会受到影响。<br><strong>扩展时长和精细控制</strong>。 当前大多数人体运动视频生成方法只能产生短片段，通常持续几秒钟。将其扩展到更长的视频，持续数分钟甚至数小时，仍然是一个重大挑战。未来的研究应该致力于开发能够在延长时间内保持连贯性和质量的技术。此外，当前的多模态方法，即使使用网格和深度图等信号，在特定身体部位的详细控制方面仍然困难重重。提高视频的真实感和表现力需要改进对手部和面部等复杂区域的控制。<br><strong>实时平台和成本</strong>。 虚拟人的实时流媒体需要低延迟来确保流畅自然的交互，而高延迟会破坏沟通并降低逼真的响应性。高质量的图形也需要大量带宽，带宽有限会导致视频质量降低和缓冲问题。此外，用户界面必须高度响应，提供即时反馈以保持用户参与度。虽然扩散模型[116]在人体运动视频生成中起着关键作用，但如附录G所示，它们的高计算需求使得开发更高效的模型来降低成本和提高可访问性变得必要。<br><strong>伦理问题</strong>。 创建数字人形引入了重大的伦理关切，特别是在个人数据使用和隐私方面。需要一个强有力的伦理框架来指导其开发和整合，确保生物识别数据的知情同意，并为其行为建立问责制。保护隐私和解决负面影响至关重要。</p>
-<p>动作视频的生成可以由三大模态驱动：</p>
-<ul>
-<li>视觉驱动视觉驱动 (Vision-driven): 使用参考图像（如一张静态照片）或参考视频（如一段舞蹈视频、一个姿态序列）来驱动生成。<br>文本驱动 (Text-driven): 使用自然语言指令（如“一个女孩在微笑”）来生成相应的面部表情或身体动作。<br>音频驱动 (Audio-driven): 使用音频信号（如语音、音乐）来生成同步的口型、表情或舞蹈动作。</li>
-</ul>
-<p>为了让模型能够理解和处理人体，这些输入通常需要被转换为特定的数据表征，如2D&#x2F;3D骨架关键点、SMPL&#x2F;FLAME等参数化模型、深度图、法线图等。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>1.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1947261732583089760">https://zhuanlan.zhihu.com/p/1947261732583089760</a></li>
+<li>1.<img src="https://zhuanlan.zhihu.com/p/1947261732583089760" alt="同样是解读的精简版"></li>
+<li>2.<img src="https://www.zhihu.com/people/zhi-zhe-zai-cao-mang/posts" alt="关于扩散的一部分内容介绍"></li>
 </ul>
 	
 		</div>
@@ -380,6 +376,10 @@
 					
 	<span>
 		<a id="totop-post-page">返回顶部</a>
+		
+			<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing" rel="prev">
+				&laquo;上一篇
+			</a>
 		
 		
 			<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch" rel="next">
@@ -400,6 +400,32 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">
+								论文阅读：LivePortrait			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 6日, 2025				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  Human Motion Video Generation: A Survey
+期刊 Arxiv 2024
+论文地址 https://arxiv.org/pdf/2407.03168
+项目地址 https://git...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：LivePortrait"/>
+							</a>
+						</div>
+					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -505,6 +531,31 @@ https://zhuanlan.zhihu.com/p/3410949248
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
+								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 5日, 2025				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
+期刊 CVPR，2021
+论文地址 https://arxiv.org/...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
 								代理错误（SSLEOFError)解决方法			
 							</a>
@@ -535,7 +586,7 @@ https://zhuanlan.zhihu.com/p/3410949248
 								十月 14日, 2025				
 							</p>
 							<p class="relate-post-content">
-								
+								说回这部剧剧情很简单，努力工作的男主突然有一天就做了家里蹲，不社交、不出门，只在晚上采购饮料零食，原因给的模糊。父母是宽容的，父亲晨跑会例行问他要不要去（自然是从没去过），母亲更是温柔，会贴心的在冰箱上贴上各种纸条，关于食物、安排之类...
 							</p>
 						</div>
 
@@ -587,53 +638,6 @@ https://zhuanlan.zhihu.com/p/3410949248
 							<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover4.png" alt="Github上部署Hexoa页面的踩坑记录"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/15/article1/" title="摘抄">
-								摘抄			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 15日, 2025				
-							</p>
-							<p class="relate-post-content">
-								读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。
-这句话出自荷尔德林（Friedrich Hölderlin）。
-
-待到英雄们在铁铸的摇篮中长成，勇敢的心灵像从前一样，去造访万能的神祗。而在这之前，我却...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/15/article1/" title="摘抄">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">
-								使用Hexo的个人主页搭建教程			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 14日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我的这个博客起源于大三的时候做算法基础的算法作业，寻找教程的时候偶然发现了一个好看的个人主页(https://argvchs.netlify.app/) 。于是我就开始了我的个人主页搭建之旅。但是由于新手小白所以中间折腾了好久，遇到困...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/14/%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="使用Hexo的个人主页搭建教程">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover2.png" alt="使用Hexo的个人主页搭建教程"/>
 							</a>
 						</div>
 					</li>												
