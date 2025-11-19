@@ -265,7 +265,7 @@
 
 	<a href="/2025/11/06/liveportrait/" itemprop="url">
 		<time datetime="2025-11-06T02:04:42.000Z" itemprop="dateUpdated">
-	  		2025-11-06
+	  		2025-11-19
 	  </time>
 	</a> 
 
@@ -296,10 +296,21 @@
 <li><strong>论文地址</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.03168">https://arxiv.org/pdf/2407.03168</a></li>
 <li><strong>项目地址</strong> <a target="_blank" rel="noopener" href="https://github.com/KwaiVGI/LivePortrait?tab=readme-ov-file">https://github.com/KwaiVGI/LivePortrait?tab=readme-ov-file</a></li>
 </ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>如今，人们经常使用智能手机或其他录制设备来拍摄静态肖像，记录他们的珍贵时刻。iPhone上的Live Photos¹功能可以通过记录拍照前后1.5秒的瞬间来让静态肖像变得生动，这很可能是通过某种形式的视频录制实现的。然而，基于GANs [1]和扩散模型[2-4]等最新进展，各种肖像动画方法[5-13]已经使得在不依赖特定录制设备的情况下，将静态肖像动画化为动态肖像成为可能。</p>
+<p>在本文中，我们旨在对静态肖像图像进行动画化，使其逼真且富有表现力，同时追求高推理效率和精确可控性。尽管基于扩散模型的肖像动画方法[12-14]在质量方面取得了令人印象深刻的结果，但它们通常计算成本昂贵，并且缺乏精确的可控性，例如缝合控制²。相反，我们广泛探索基于隐式关键点的视频驱动框架[5, 11]，并扩展其潜力以有效平衡泛化能力、计算效率和可控性。</p>
+<p>具体而言，我们首先通过以下方式增强一个强大的基于隐式关键点的方法[5]：将训练数据扩展到约6900万张高质量肖像图像，引入混合图像-视频训练策略，升级网络架构，使用可扩展的运动变换，设计地标引导的隐式关键点优化和几个级联损失项。此外，我们发现紧凑的隐式关键点可以有效地表示一种隐式混合形状，并精心设计了一个缝合模块和两个重定向模块，它们利用小型MLP并增加可忽略的计算开销，以增强可控性，如缝合控制。</p>
+<p>我们的核心贡献可以总结如下：(i) 开发了一个稳固的基于隐式关键点的视频驱动肖像动画框架，显著提升了生成质量和泛化能力；(ii) 设计了先进的缝合模块和两个重定向模块以实现更好的可控性，且计算开销可忽略不计。广泛的实验结果证明了我们框架的有效性，甚至与重型扩散模型方法相比也是如此。此外，我们的模型在使用PyTorch进行推理时，可以在RTX 4090 GPU上在12.8ms内生成肖像动画。</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="2-1-非扩散模型的肖像动画"><a href="#2-1-非扩散模型的肖像动画" class="headerlink" title="2.1. 非扩散模型的肖像动画"></a>2.1. 非扩散模型的肖像动画</h3><p>对于非扩散模型，基于隐式关键点的方法采用隐式关键点作为中间运动表示，并通过光流将源肖像与驱动图像进行变形。FOMM [11]在每个关键点附近执行一阶泰勒展开，并使用局部仿射变换来近似每个关键点邻域内的运动。MRAA [15]使用基于PCA的运动估计来表示关节运动。Face vid2vid [5]通过引入3D隐式关键点表示扩展了FOMM，实现了自由视角的肖像动画。IWA [10]基于跨模态注意力改进了变形机制，可以扩展到使用多个源图像。为了更灵活地估计光流并更好地处理大尺度运动，TPSM [7]使用非线性薄板样条变换来表示更复杂的运动。与此同时，DaGAN [6]利用密集深度图来估计隐式关键点，以捕获关键的驱动运动。MCNet [8]设计了一个身份表示条件记忆补偿网络，以解决复杂驱动运动引起的模糊生成问题。</p>
+<p>一些工作[18-20]采用了预定义的运动表示，如3DMM混合形状[21]。另一类工作[22, 23]提出从头学习潜在表情表示。MegaPortrait [22]使用超出中等分辨率训练图像的高分辨率图像，将动画分辨率提升到百万像素级别。EMO-Portraits [23]采用了表情丰富的训练视频数据集和表情增强损失来表达强烈的运动。</p>
+<h3 id="2-2-基于扩散模型的肖像动画"><a href="#2-2-基于扩散模型的肖像动画" class="headerlink" title="2.2. 基于扩散模型的肖像动画"></a>2.2. 基于扩散模型的肖像动画</h3><p>扩散模型[2-4]通过迭代去除噪声从高斯噪声中合成所需的数据样本。[2]提出了潜在扩散模型(LDMs)，并将训练和推理过程转移到压缩的潜在空间中以实现高效计算。LDMs已被广泛应用于许多并行工作中，包括全身舞蹈生成[24-28]、音频驱动的肖像动画[12, 29-34]和视频驱动的肖像动画[9, 12, 13, 16]。</p>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>本节详细介绍我们的方法。我们首先简要回顾基于视频的肖像动画框架face vid2vid [5]，并介绍我们旨在增强动画泛化能力和表现力的重大改进。然后，我们展示精心设计的缝合和重定向模块，这些模块以可忽略的计算开销提供所需的可控性。最后，我们详细说明推理流程。</p>
+<h3 id="3-1-Face-Vid2vid的基础知识"><a href="#3-1-Face-Vid2vid的基础知识" class="headerlink" title="3.1. Face Vid2vid的基础知识"></a>3.1. Face Vid2vid的基础知识</h3><p>Face vid2vid [5]是一个开创性的框架，用于使用从驱动视频序列中提取的运动特征来动画化静态肖像。原始框架由外观特征提取器F、规范隐式关键点检测器$L$、头部姿态估计网络$H$、表情变形估计网络$∆$、变形场估计器$W$和生成器$G$组成。$F$将源图像$s$映射到3D外观特征体积$fs$。源3D关键点$x_s$和驱动3D关键点$x_d$按如下方式变换：</p>
+<p>其中$x_s$和$x_d$分别是源和驱动的3D隐式关键点，$xc,s ∈ RK×3表示源图像的规范关键点。源和驱动姿态分别是Rs和Rd ∈ R3×3，表情变形分别是δs和δd ∈ RK×3，平移分别是ts和td ∈ R3。接下来，W使用隐式关键点表示xs和xd生成变形场，并使用该流场来变形源特征体积fs。随后，变形后的特征通过解码器生成器G，将其转换到图像空间并产生目标图像。</p>
+<h3 id="3-2-第一阶段：基础模型训练"><a href="#3-2-第一阶段：基础模型训练" class="headerlink" title="3.2. 第一阶段：基础模型训练"></a>3.2. 第一阶段：基础模型训练</h3><p>我们选择face vid2vid [5]作为基础模型，并引入一系列重大改进。这些改进包括高质量数据整理、混合图像和视频训练策略、升级的网络架构、可扩展的运动变换、地标引导的隐式关键点优化和级联损失项。这些改进显著增强了动画的表现力和模型的泛化能力。第一训练阶段的流程如图2所示。</p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+		<div id="current-post-cover" data-scr="/images/cover11.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -313,6 +324,10 @@
 					
 	<span>
 		<a id="totop-post-page">返回顶部</a>
+		
+			<a href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题" rel="prev">
+				&laquo;上一篇
+			</a>
 		
 		
 			<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing" rel="next">
@@ -333,6 +348,103 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">
+								几个深度学习计算库介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								einopseinops主要功能是张量维度的重排，功能介绍。
+MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="几个深度学习计算库介绍"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍">
+								FID指标介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								FID是衡量视频生成的一个重要指标
+参考文献
+1.https://zhouyifan.net/2024/04/04/20240221-TorchEval-FID/
+
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover13.png" alt="FID指标介绍"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题">
+								注册（registration）问题			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								注册（registration）又称作配准，通常指的是在计算机视觉和图形处理中，将不同的数据集合配准（对齐）到同一坐标系或模板的过程，以便进行分析、比较或重建。非刚体配准（Non-Rigid Registration）指的是在处理形状...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover12.png" alt="注册（registration）问题"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
+								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 5日, 2025				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
+期刊 CVPR，2021
+论文地址 https://arxiv.org/...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
+							</a>
+						</div>
+					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -462,31 +574,6 @@ https://zhuanlan.zhihu.com/p/3410949248
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
-								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 5日, 2025				
-							</p>
-							<p class="relate-post-content">
-								背景
-论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
-期刊 CVPR，2021
-论文地址 https://arxiv.org/...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
 								代理错误（SSLEOFError)解决方法			
 							</a>
@@ -503,72 +590,6 @@ https://zhuanlan.zhihu.com/p/3410949248
 							<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover1.png" alt="代理错误（SSLEOFError)解决方法"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">
-								日剧推荐：《0.5的男人》			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 14日, 2025				
-							</p>
-							<p class="relate-post-content">
-								说回这部剧剧情很简单，努力工作的男主突然有一天就做了家里蹲，不社交、不出门，只在晚上采购饮料零食，原因给的模糊。父母是宽容的，父亲晨跑会例行问他要不要去（自然是从没去过），母亲更是温柔，会贴心的在冰箱上贴上各种纸条，关于食物、安排之类...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="日剧推荐：《0.5的男人》"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
-								pytorch3D安装经验			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 7日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">
-								Github上部署Hexoa页面的踩坑记录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 26日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在部署Hexo页面到GitHub主页时，发现在创建第一个文档后会导致样式无法加载。我一直以为是主题的问题，采取了删库重新安装的方法进行测试。当然在一切重新开始的时候是没有问题的，但是当我改变主题后又会出现这种情况，期间我尝试了一些网...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover4.png" alt="Github上部署Hexoa页面的踩坑记录"/>
 							</a>
 						</div>
 					</li>												

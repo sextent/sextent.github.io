@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      代理错误（SSLEOFError)解决方法 | 六分仪的主页
+      几个深度学习计算库介绍 | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -100,7 +100,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「代理错误（SSLEOFError)解决方法」
+			「几个深度学习计算库介绍」
 		
 	</p>
 
@@ -246,8 +246,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="url">
-		代理错误（SSLEOFError)解决方法
+	<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" itemprop="url">
+		几个深度学习计算库介绍
 	</a>
 
 		</div>
@@ -263,9 +263,9 @@
 
 	更新于
 
-	<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="url">
-		<time datetime="2025-10-26T08:16:49.000Z" itemprop="dateUpdated">
-	  		2025-11-06
+	<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" itemprop="url">
+		<time datetime="2025-11-10T09:08:48.000Z" itemprop="dateUpdated">
+	  		2025-11-10
 	  </time>
 	</a> 
 
@@ -276,8 +276,8 @@
 				
 	<i class="icon-price-tags"></i>
 	
-		<a href="/tags/Debug/" class=" ">
-			Debug
+		<a href="/tags/%E7%AC%94%E8%AE%B0/" class=" ">
+			笔记
 		</a>
 	
 		
@@ -290,15 +290,12 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<p>最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。<br><img src="/images/2025-10-26162152.jpg"><br>之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的<a target="_blank" rel="noopener" href="https://blog.csdn.net/Zhou_Yulong/article/details/126600453">帖子</a>，解决了这个问题（虽然CSDN还是史）。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>具体实现方法参照这篇帖子，主要是关了系统代理之后就好了，但是关了之后我看浏览器又不行，所以不断地切换。<br><img src="/images/2025-10-26162802.jpg"></p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>然后就去搜了一下背后的原理，道理大概是如果打开系统代理的话pip将请求打包，发往代理端口，但是操作系统接收这个请求并准备发送的时候，检查了一下自己的规则，并重新发送代理端口。也就是说操作系统试图将一个已经目的地是代理服务器的请求，再次发送给同一个代理服务器。这就造成了一个逻辑上的“环路”或冲突。请求在离开电脑前就被自己绊倒了，导致了之前看到的SSLError。</p>
-<blockquote class="colorquote info"><p>更新： 使用了SwitchyOmega插件，针对Google使用代理端口，然后关闭系统代理，这样可以使得终端的SSL不会报错。</p></blockquote>
-
+			<h3 id="einops"><a href="#einops" class="headerlink" title="einops"></a>einops</h3><p>einops主要功能是张量维度的重排，<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37586991/article/details/148335798">功能介绍</a>。</p>
+<h3 id="MXNet"><a href="#MXNet" class="headerlink" title="MXNet"></a>MXNet</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanmx219/article/details/106790686">https://blog.csdn.net/tanmx219/article/details/106790686</a></p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/images/cover1.png"></div>
+		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -313,12 +310,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》" rel="next">
+			<a href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -336,52 +329,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">
-								Github上部署Hexoa页面的踩坑记录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 26日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在部署Hexo页面到GitHub主页时，发现在创建第一个文档后会导致样式无法加载。我一直以为是主题的问题，采取了删库重新安装的方法进行测试。当然在一切重新开始的时候是没有问题的，但是当我改变主题后又会出现这种情况，期间我尝试了一些网...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover4.png" alt="Github上部署Hexoa页面的踩坑记录"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">
-								几个深度学习计算库介绍			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 10日, 2025				
-							</p>
-							<p class="relate-post-content">
-								einopseinops主要功能是张量维度的重排，功能介绍。
-MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
-
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="几个深度学习计算库介绍"/>
-							</a>
-						</div>
-					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -535,44 +482,97 @@ python&#x3D;3.10
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">
-								日剧推荐：《0.5的男人》			
+							<a class="relate-post-title" href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">
+								论文阅读：混元Avatar			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								十月 14日, 2025				
+								九月 15日, 2025				
 							</p>
 							<p class="relate-post-content">
-								说回这部剧剧情很简单，努力工作的男主突然有一天就做了家里蹲，不社交、不出门，只在晚上采购饮料零食，原因给的模糊。父母是宽容的，父亲晨跑会例行问他要不要去（自然是从没去过），母亲更是温柔，会贴心的在冰箱上贴上各种纸条，关于食物、安排之类...
+								混元Avatar摘要混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：
+
+多模态理解：能够理解用户的自然语言指令，并将其转换为可执行的动作。...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">				
+							<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="日剧推荐：《0.5的男人》"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：混元Avatar"/>
 							</a>
 						</div>
 					</li>												
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
-								pytorch3D安装经验			
+							<a class="relate-post-title" href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">
+								论文阅读：Hallo2			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								十月 7日, 2025				
+								九月 15日, 2025				
 							</p>
 							<p class="relate-post-content">
-								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
+								参考文献：
+
+https://zhuanlan.zhihu.com/p/3410949248
+
+
+
+
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
+							<a href="/2025/09/15/Hallo2/" title="论文阅读：Hallo2">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：Hallo2"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/14/Moda/" title="论文阅读：MoDA">
+								论文阅读：MoDA			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 14日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我在8月末帮助师兄的项目时，需要做近期的一些工作汇总，期间阅读了相关的一些论文，作笔记记录。
+背景介绍最新一波的人工智能生成内容（AIGC）在计算机视觉领域取得了显著的成功，扩散模型在这一成就中扮演了关键角色。由于其印象深刻的生成能力...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/14/Moda/" title="论文阅读：MoDA">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover6.jpg" alt="论文阅读：MoDA"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
+								代理错误（SSLEOFError)解决方法			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 26日, 2025				
+							</p>
+							<p class="relate-post-content">
+								最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的帖子，解决了...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover1.png" alt="代理错误（SSLEOFError)解决方法"/>
 							</a>
 						</div>
 					</li>												
@@ -619,6 +619,17 @@ python&#x3D;3.10
 </div>
 
 <!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
 
 
 

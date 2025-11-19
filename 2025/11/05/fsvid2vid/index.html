@@ -265,7 +265,7 @@
 
 	<a href="/2025/11/05/fsvid2vid/" itemprop="url">
 		<time datetime="2025-11-05T03:18:53.000Z" itemprop="dateUpdated">
-	  		2025-11-06
+	  		2025-11-18
 	  </time>
 	</a> 
 
@@ -273,7 +273,14 @@
 
 			</span>
 			<span>
-						
+				
+	<i class="icon-price-tags"></i>
+	
+		<a href="/tags/%E7%AC%94%E8%AE%B0/" class=" ">
+			笔记
+		</a>
+	
+		
 			</span>
 			
 			
@@ -286,8 +293,22 @@
 			<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
 <li><strong>论文标题</strong>  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing</li>
 <li><strong>期刊</strong> CVPR，2021</li>
-<li><strong>论文地址</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2509.03883">https://arxiv.org/pdf/2509.03883</a></li>
-<li><strong>项目地址</strong> <a target="_blank" rel="noopener" href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation</a></li>
+<li><strong>论文地址</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2011.15126">https://arxiv.org/pdf/2011.15126</a></li>
+<li><strong>项目地址</strong> <a target="_blank" rel="noopener" href="https://nvlabs.github.io/face-vid2vid/">https://nvlabs.github.io/face-vid2vid/</a></li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们提出了一种神经网络说话人头视频合成模型，并展示了其在视频会议中的应用。我们的模型能够通过一张包含目标人物外观的源图像和一个决定输出运动的驱动视频，学习合成说话人头视频。我们的方法基于一种新颖的关键点表示方式对运动进行编码，其中关于身份和运动的信息通过无监督方式进行分解。大量实验验证表明，我们的模型在基准数据集上优于现有方法。此外，我们紧凑的关键点表示使视频会议系统能够在仅使用 H.264 商业标准十分之一带宽的情况下，达到相同的视觉质量。除此之外，我们还展示了关键点表示允许用户在合成过程中旋转头部，这对于模拟面对面视频会议体验非常有用。<br><img src="/images/2025-11-5-1.png"></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>我们研究了使用一个人的单张源图像和一个驱动视频（可能来自另一人）生成逼真说话人头视频的任务。源图像编码了目标人物的外观，而驱动视频决定了输出视频中的动作。我们提出了一种纯神经渲染的方法，其中我们在 one-shot 设置下，使用深度网络渲染说话人头视频，而无需使用 3D 人头的图形模型。与基于 3D 图形的模型相比，基于 2D 的方法具有多项优势。首先，它避免了 3D 模型的获取，这通常既繁琐又昂贵。其次，2D 方法在合成头发、胡须等方面表现更好，而这些区域的详细 3D 几何信息很难获得。最后，2D 方法可以直接合成源图像中的配饰，包括眼镜、帽子和围巾，而无需这些物品的 3D 模型。<br>然而，现有基于2D的one-shot说话人头方法[62, 75, 86]也存在自身的局限性。由于缺乏3D图形模型，它们只能从原始视角合成说话人头，无法从新的视角渲染说话人头。<br>我们的方法解决了固定视角的限制，实现了局部自由视角合成。用户可以在原始视角的大范围邻域内自由改变说话人头的视角，如图 1(c) 所示。我们的模型通过采用新颖的3D关键点表示对视频进行建模，将人物特定信息和运动相关信息进行分解。关键点及其分解均通过无监督方式学习。利用这种分解，我们可以对人物特定表示施加 3D 变换，以模拟在输出视频中实现说话人头的旋转等姿态变化。图 2 展示了我们方法的整体流程。<br><img src="/images/2025-11-5-2.png"></p>
+<blockquote>
+<p>这篇文章的思路写的很清晰，只做局部自由视角的说话人头，究其原因还是缺乏3D，无法得到自由视角的渲染结果。</p>
+</blockquote>
+<p>我们进行了大量的实验验证，并与最新的先进方法进行了比较。我们在多个说话人头合成任务上对我们的方法进行了评估，包括视频重建、动作迁移和人脸重定向。我们还展示了如何利用我们的方法降低视频会议的带宽消耗，而视频会议已成为社交和远程协作的重要平台。通过仅发送关键点表示，并在接收端重建源视频，我们可以在不影响视觉质量的前提下，实现相较于商业 H.264 标准高达 10 倍的带宽压缩。</p>
+<ul>
+<li><p>贡献 1：一种新颖的 one-shot 神经说话人头合成方法，在基准数据集上取得了优于最新方法的视觉质量。</p>
+</li>
+<li><p>贡献 2：输出视频的局部自由视角控制，无需 3D 图形模型。我们的模型允许在合成过程中改变说话人头的视角。</p>
+</li>
+<li><p>贡献 3：视频流传输带宽的降低。我们在基准说话人头数据集上将我们的方法与商业 H.264 标准进行了对比，结果显示我们的方法能够实现高达 10 倍的带宽压缩。</p>
+</li>
 </ul>
 <h2 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h2><h3 id="GANs"><a href="#GANs" class="headerlink" title="GANs"></a>GANs</h3><p>自 Goodfellow 等人 [21] 提出 GANs（生成对抗网络）以来，GANs 在多个领域展现了令人瞩目的成果 [44]，例如：  </p>
 <ul>
@@ -298,7 +319,6 @@
 <li><strong>视频合成</strong> [2, 10, 34, 41, 46, 54, 57, 63, 75, 76, 95]</li>
 </ul>
 <p>在本研究中，我们专注于使用 GANs 合成说话人头视频。</p>
-<hr>
 <h3 id="基于-3D-模型的说话人头合成"><a href="#基于-3D-模型的说话人头合成" class="headerlink" title="基于 3D 模型的说话人头合成"></a>基于 3D 模型的说话人头合成</h3><p>关于将一个人的面部动作转移到另一个人身上的研究（即面部重演）可以分为<strong>特定主体模型</strong>和<strong>与主体无关的模型</strong>。</p>
 <h4 id="传统的基于-3D-的方法"><a href="#传统的基于-3D-的方法" class="headerlink" title="传统的基于 3D 的方法"></a>传统的基于 3D 的方法</h4><p>这些方法通常构建特定主体模型，只能合成单一主体。此外，这些方法通常仅关注表情的迁移，而不包括头部动作 [65, 69, 70, 71, 73]。<br>这类方法的流程通常如下：</p>
 <ol>
@@ -320,35 +340,66 @@
 <p>尽管这些方法在结果质量上表现出色，但它们只能合成固定视角的视频，从而导致沉浸感较差的体验。</p>
 <h3 id="视频压缩"><a href="#视频压缩" class="headerlink" title="视频压缩"></a>视频压缩</h3><p>近年来，一些研究 [3, 16, 25, 39, 47, 59, 81] 提出了使用深度网络压缩任意视频的方案。其核心思想是将视频压缩问题视为在相邻关键帧之间插值的问题。通过深度网络替代传统流水线的各个部分，以及分层插值和残差与光流的联合编码等技术，这些研究显著减少了所需的比特率。<br>其他研究 [48, 79, 85, 91] 则专注于使用深度网络恢复低比特率视频的质量。与我们的工作最相关的是 DAVD-Net [91]，它通过音频流中的信息恢复说话人头视频。</p>
 <h3 id="我们的方法"><a href="#我们的方法" class="headerlink" title="我们的方法"></a>我们的方法</h3><p>我们的方法在目标和实现压缩的方式上，与上述工作存在显著差异。我们专注于说话人脸视频。人脸具有固有的结构特性——从形状到相对排列的位置——这些特性为我们的方法提供了独特的机会。</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>设 (s) 为某个人的一张图像，称为源图像（source image）。设 ({d_1, d_2, …, d_N}) 为一个说话头像视频，称为驱动视频（driving video），其中 (d_i) 表示每一帧图像，(N) 表示总帧数。我们的目标是生成一个输出视频 ({y_1, y_2, …, y_N})，其中每帧 (y_i) 的身份信息继承自 (s)，而运动信息来源于 (d_i)。  </p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>设 $s$ 为某个人的一张图像，称为源图像（source image）。设 ${d_1, d_2, …, d_N}$ 为一个说话头像视频，称为驱动视频（driving video），其中$d_i$ 表示每一帧图像，$N$表示总帧数。我们的目标是生成一个输出视频 ${y_1, y_2, …, y_N}$，其中每帧 $y_i$ 的身份信息继承自 $s$，而运动信息来源于$d_i$。  </p>
 <p>上述设置包含了多种说话头像合成任务：</p>
 <ul>
-<li>当 (s) 是驱动视频中的某一帧（例如第一帧：(s &#x3D; d_1)）时，这是一项视频重建任务。</li>
-<li>当 (s) 不属于驱动视频时，这是一项运动迁移任务。</li>
+<li>当 $s$ 是驱动视频中的某一帧（例如第一帧：$s &#x3D; d_1$）时，这是一项视频重建任务。</li>
+<li>当 $s$ 不属于驱动视频时，这是一项运动迁移任务。</li>
 </ul>
 <p>我们提出了一种纯神经合成方法，该方法不使用任何3D图形模型（例如著名的3D可变形模型（3DMM）[6]）。我们的方法包括三个主要步骤：</p>
 <ol>
 <li>源图像特征提取；</li>
 <li>驱动视频特征提取；</li>
-<li>视频生成。<br>在图3中，我们展示了步骤1和步骤2，而图5展示了步骤3。我们的核心技术是一种无监督方法，用于学习一组3D关键点及其分解。我们将关键点分解为两部分：一部分用于建模面部表情，另一部分用于建模人物的几何特征。这两部分与目标头部姿态结合后生成图像特定的关键点。在关键点估计完成后，它们被用于学习两张图像之间的映射函数。我们通过一组网络实现了这些步骤，并对它们进行联合训练。接下来，我们将详细讨论这三个步骤。<br>人脸由眼睛、鼻子、嘴巴等不同部位组成的结构特性使我们能够利用关键点及其相关的元数据实现高效压缩，其效率比传统编解码器高出一个数量级。尽管我们的方法无法保证像素对齐的输出视频，但它能够真实地模拟面部动作和情感表达。此外，由于不使用双向帧或B帧（B-frames），我们的方法更适合用于视频流传输。<br><strong>3.1 源图像特征提取</strong><br>合成一个说话头像需要了解人物的外观特征，例如肤色和眼睛颜色。如图3(a)所示，我们首先应用一个3D外观特征提取网络 (F)，将源图像 (s) 映射到一个3D外观特征体积 (f_s)。与2D特征图不同，(f_s) 具有三个空间维度：宽度、高度和深度。将源图像映射到3D特征体积是我们方法中的一个关键步骤。这使得我们能够在3D空间中操作关键点，从而在合成过程中对说话头像进行旋转和平移操作。<br>我们从源图像 (s) 中提取了一组 (K) 个3D关键点 (\mathbf{x}_{c,k} \in \mathbb{R}^3)，该过程通过一个标准的3D关键点检测网络 (L) 完成。在本文中，除非另有说明，我们将 (K) 设置为20。需要注意的是，这些关键点是通过无监督方式学习的，与常见的人脸关键点（facial landmarks）不同。我们强调，提取的关键点旨在与人脸的姿态和表情无关，它们仅编码人物在中性姿态和表情下的几何特征。</li>
+<li>视频生成。<br>在图3中，我们展示了步骤1和步骤2，而图5展示了步骤3。我们的核心技术是一种无监督方法，用于学习一组3D关键点及其分解。我们将关键点分解为两部分：一部分用于建模面部表情，另一部分用于建模人物的几何特征。这两部分与目标头部姿态结合后生成图像特定的关键点。在关键点估计完成后，它们被用于学习两张图像之间的映射函数。我们通过一组网络实现了这些步骤，并对它们进行联合训练。接下来，我们将详细讨论这三个步骤。<br><img src="/images/2025-11-5-3.png"><br>人脸由眼睛、鼻子、嘴巴等不同部位组成的结构特性使我们能够利用关键点及其相关的元数据实现高效压缩，其效率比传统编解码器高出一个数量级。尽管我们的方法无法保证像素对齐的输出视频，但它能够真实地模拟面部动作和情感表达。此外，由于不使用双向帧或B帧（B-frames），我们的方法更适合用于视频流传输。<br><strong>3.1 源图像特征提取</strong><br>合成一个说话头像需要了解人物的外观特征，例如肤色和眼睛颜色。如图3(a)所示，我们首先应用一个3D外观特征提取网络 $F$，将源图像 $s$ 映射到一个3D外观特征体积 $f_s$。与2D特征图不同，$f_s$具有三个空间维度：宽度、高度和深度。将源图像映射到3D特征体积是我们方法中的一个关键步骤。这使得我们能够在3D空间中操作关键点，从而在合成过程中对说话头像进行旋转和平移操作。</li>
 </ol>
-<p>接下来，我们从图像中提取姿态和表情信息。我们使用一个头部姿态估计网络 (H) 来估计人物在 (s) 中的头部姿态，该姿态由一个旋转矩阵 (\mathbf{R}_s \in \mathbb{R}^{3 \times 3}) 和一个平移向量 (\mathbf{t}<em>s \in \mathbb{R}^3) 参数化。此外，我们使用一个表情变形估计网络 (\Delta) 来估计一组 (K) 个3D变形 (\delta</em>{s,k})，即关键点从中性表情的变形量。(H) 和 (\Delta) 都从图像中提取与运动相关的几何信息。</p>
+<p>我们从源图像$s$中提取了一组$K$个3D关键点 $x_{c,k}$ $\in$ $\mathbb{R}^3$)，该过程通过一个标准的3D关键点检测网络 $(L)$ 完成。在本文中，除非另有说明，我们将 $K$设置为20。需要注意的是，这些关键点是通过无监督方式学习的，与常见的人脸关键点（facial landmarks）不同。我们强调，提取的关键点旨在与人脸的姿态和表情无关，它们仅编码人物在中性姿态和表情下的几何特征。</p>
+<p>接下来，我们从图像中提取姿态和表情信息。我们使用一个头部姿态估计网络 $H$ 来估计人物在 $s$ 中的头部姿态，该姿态由一个旋转矩阵 $\mathbf{R}_s \in \mathbb{R}^{3 \times 3}$ 和一个平移向量 $\mathbf{t}<em>s \in \mathbb{R}^3$参数化。此外，我们使用一个表情变形估计网络 $\Delta$ 来估计一组 $K$ 个3D变形 (\delta</em>{s,k})，即关键点从中性表情的变形量。(H) 和 (\Delta) 都从图像中提取与运动相关的几何信息。</p>
 <p>我们将由 (L) 提取的身份特定信息与由 (H) 和 (\Delta) 提取的运动相关信息结合起来，通过一个变换 (T) 得到源图像的3D关键点 (\mathbf{x}_{s,k})：</p>
 <p>[<br>x_{s,k} &#x3D; T(x_{c,k}, R_s, t_s, \delta_{s,k}) &#x3D; R_s x_{c,k} + t_s + \delta_{s,k}<br>]</p>
 <ol>
-<li><p><strong>[x_{s,k}]</strong><br>输出点的坐标。</p>
+<li><p><strong>$[x_{s,k}]$</strong>  输出点的坐标。</p>
 </li>
-<li><p><strong>[T(x_{c,k}, R_s, t_s, \delta_{s,k})]</strong><br>表示一个变换函数，它将输入点 [x_{c,k}] 通过一系列参数 [R_s]（旋转矩阵）、[t_s]（平移向量）和 [\delta_{s,k}]（残差或偏移量）进行变换。</p>
+<li><p><strong>$T(x_{c,k}, R_s, t_s, \delta_{s,k})$</strong>  表示一个变换函数，它将输入点 $x_{c,k}$ 通过一系列参数 $R_s$（旋转矩阵）、$t_s$（平移向量）和 $\delta_{s,k}$（残差或偏移量）进行变换。</p>
 </li>
-<li><p><strong>[R_s x_{c,k}]</strong><br>这是一个线性变换，表示通过旋转矩阵 [R_s] 对输入点 [x_{c,k}] 进行旋转。</p>
+<li><p><strong>$R_s x_{c,k}$</strong> 这是一个线性变换，表示通过旋转矩阵 $R_s$ 对输入点 $x_{c,k}$进行旋转。</p>
 </li>
-<li><p><strong>[t_s]</strong><br>平移向量，表示在旋转之后对点进行的平移操作。</p>
+<li><p><strong>$t_s$</strong>  平移向量，表示在旋转之后对点进行的平移操作。</p>
 </li>
-<li><p><strong>[\delta_{s,k}]</strong><br>偏移量或残差，表示在旋转和平移之后的额外调整。</p>
+<li><p><strong>$\delta_{s,k}$</strong> 偏移量或残差，表示在旋转和平移之后的额外调整。</p>
 </li>
 </ol>
-<p>最终的关键点是图像特定的，包含人物特征、姿态和表情信息。图4展示了关键点计算流程。<br><img src="/images/2025-11-5-4.png"><br>公式 (1) 中的 3D 关键点分解对我们的方法至关重要。它预先将关键点分解为几何特征、头部姿态和表情。这种分解有助于学习可操控的表示，并使我们的方法区别于之前基于 2D 关键点的神经说话人头合成方法 [62, 75, 86]。需要注意的是，与 FOMM[62]不同，我们的模型不估计雅可比矩阵。雅可比矩阵表示如何通过仿射变换将关键点周围的局部区域转换为另一图像中的对应区域。我们的模型没有显式地估计雅可比矩阵，而是假设头部大部分是刚性的，局部区域的变换可以直接通过头部旋转从 [J_s &#x3D; R_s] 推导得出。避免估计雅可比矩阵使我们能够进一步减少视频会议应用中的传输带宽，具体细节见第 5 节。</p>
-<h3 id="3-2-驱动视频特征提取"><a href="#3-2-驱动视频特征提取" class="headerlink" title="3.2 驱动视频特征提取"></a><strong>3.2 驱动视频特征提取</strong></h3><p>我们用 (d) 表示 (d_1, d_2, …, d_N) 中的某一帧，因为每一帧都以相同的方式进行处理。为了提取与运动相关的信息，我们使用头部姿态估计器 (H) 来获得 (R_d) 和 (t_d)，并使用表情变形估计器 (\Delta) 来获取 (\delta_{d,k})，如图 3(b) 所示。</p>
+<p>最终的关键点是图像特定的，包含人物特征、姿态和表情信息。图4展示了关键点计算流程。<br><img src="/images/2025-11-5-4.png"><br>公式 (1) 中的 3D 关键点分解对我们的方法至关重要。它预先将关键点分解为几何特征、头部姿态和表情。这种分解有助于学习可操控的表示，并使我们的方法区别于之前基于 2D 关键点的神经说话人头合成方法 [62, 75, 86]。需要注意的是，与 FOMM[62]不同，我们的模型不估计雅可比矩阵。雅可比矩阵表示如何通过仿射变换将关键点周围的局部区域转换为另一图像中的对应区域。我们的模型没有显式地估计雅可比矩阵，而是假设头部大部分是刚性的，局部区域的变换可以直接通过头部旋转从 $$J_s &#x3D; R_s$$ 推导得出。避免估计雅可比矩阵使我们能够进一步减少视频会议应用中的传输带宽，具体细节见第 5 节。</p>
+<h3 id="3-2-驱动视频特征提取"><a href="#3-2-驱动视频特征提取" class="headerlink" title="3.2 驱动视频特征提取"></a><strong>3.2 驱动视频特征提取</strong></h3><p>我们用 $(d)$ 表示 $(d_1, d_2, …, d_N)$ 中的某一帧，因为每一帧都以相同的方式进行处理。为了提取与运动相关的信息，我们使用头部姿态估计器 $H$ 来获得 $(R_d)$ 和 $(t_d)$，并使用表情变形估计器 $(\Delta)$ 来获取 $(\delta_{d,k})$，如图 3(b) 所示。</p>
+<h3 id="3-3-视频生成"><a href="#3-3-视频生成" class="headerlink" title="3.3 视频生成"></a><strong>3.3 视频生成</strong></h3><p>如图5所示，我们通过对源特征体进行变形，然后将结果输入图像生成器$G$，以生成输出图像$y$。变形过程近似实现了从$s$到$d$的非线性变换，重新定位了用于合成任务的源特征。为了获得所需的变形函数$w$，我们采用自底向上的方法。首先，我们利用一阶近似[62]，计算由第$k$个关键点引导的变形流$w_k$，该方法仅在关键点邻域内具有较高可靠性。获得全部$K$个变形流后，我们分别用它们对源特征体进行变形。随后，将$K$个变形后的特征聚合，用运动场估计网络$M$估算流组合掩码 m。该掩码指示在每个空间3D位置应使用哪一个流。我们利用该掩码将K个流进行组合，得到最终的变形流 w。具体操作细节见附录 A.1。（所有附录内容请参见我们的完整技术报告 [78]。）<br><img src="/images/2025-11-5-5.png"></p>
+<p>3.4. 训练</p>
+<h3 id="3-4-训练细节"><a href="#3-4-训练细节" class="headerlink" title="3.4 训练细节"></a><strong>3.4 训练细节</strong></h3><p>我们使用包含单个人物的说话人头视频数据集来训练我们的模型。对于每个视频，我们采样两帧：一帧作为源图像 $s$，另一帧作为驱动图像 $d$。我们通过最小化以下损失来训练网络 F、∆、H、L、M 和 G：<br>$$<br>L &#x3D; L_P(p_d, y) + L_G(p_d, y) + L_E(p_t(x_{d,k})) + L_L(p_t(x_{d,k})) + L_H(R_d, \bar{R}<em>d) + L</em>\Delta(p_t(\delta_{d,k}))<br>$$</p>
+<p>这表示总损失函数 $L$ 是多个损失项的加权和，其中每一项的含义如下：  </p>
+<ul>
+<li>$L_P(p_d, y)$：感知损失，衡量输出图像与驱动图像之间的感知相似度。  </li>
+<li>$L_G(p_d, y)$：GAN 损失，确保生成图像的真实感。  </li>
+<li>$L_E(p_t(x_{d,k}))$：等变性损失，确保关键点在图像变换后的对应一致性。  </li>
+<li>$L_L(p_t(x_{d,k}))$：关键点先验损失，鼓励关键点分布合理并满足深度先验。  </li>
+<li>$L_H(R_d, \bar{R}_d)$：头部姿态损失，约束预测的头部旋转与真实值的误差。  </li>
+<li>$L_\Delta(p_t(\delta_{d,k}))$：变形先验损失，限制关键点变形量的大小。</li>
+</ul>
+<p>这是一个综合的损失函数，用于优化模型的输出质量、关键点一致性及合理性等多个方面。</p>
+<p>简而言之，前两项损失确保输出图像与真实图像（ground truth）相似。接下来的两项损失强制预测的关键点保持一致，并满足关于关键点的一些先验知识。最后两项损失约束了估计的头部姿态和关键点的扰动。我们在下面简要讨论这些损失，具体实现细节请参见附录 A.2。</p>
+<p><strong>感知损失 $L_P$</strong>：<br>我们最小化输出图像与驱动图像之间的感知损失 [30, 77]，这有助于生成看起来更清晰的输出。</p>
+<p><strong>GAN 损失 $L_G$</strong>：<br>我们使用了一种多分辨率的 Patch GAN，其中判别器在 patch（局部区域）级别进行预测。同时，我们还最小化了判别器的特征匹配损失 [75, 77]。</p>
+<p><strong>等变性损失 $L_E$</strong>：<br>此损失确保图像特定关键点 ($x_{d,k}$) 的一致性。对于一个有效的关键点，当对图像应用二维变换时，预测的关键点应该根据应用的变换相应变化。由于我们预测的是 3D 而非 2D 关键点，因此在计算损失之前，我们使用正交投影将关键点投影到图像平面上。<br><strong>关键点先验损失 ($L_L$)</strong>：<br>我们使用关键点覆盖损失，鼓励估计的图像特定关键点 ($x_{d,k}’$) 分布在整个面部区域，而不是集中在一个小范围内。我们计算每对关键点之间的距离，如果距离低于预设阈值，则对模型进行惩罚。此外，我们还使用关键点深度先验损失，鼓励关键点的平均深度接近一个预设值。</p>
+<p><strong>头部姿态损失 ($L_H$)</strong>：<br>我们对头部旋转($R_d$) 与真实值($\bar{R}_d$) 之间的预测误差进行惩罚。由于在大规模视频数据集中获取真实的头部姿态代价昂贵，我们使用一个预训练的姿态估计网络 [60] 来近似($\bar{R}_d$)。</p>
+<p><strong>变形先验损失($L_\Delta$)</strong>：<br>该损失对变形量 ($\delta_{d,k}$) 的大小进行惩罚。由于变形量建模了表情变化引起的相对于标准关键点的偏差，其大小应尽可能小。</p>
+<h2 id="4-实验"><a href="#4-实验" class="headerlink" title="4.实验"></a>4.实验</h2><p><strong>实现细节</strong>：<br>网络架构和训练超参数的详细信息请参见附录 A.3。</p>
+<blockquote class="colorquote info"><p>这里推荐一个非官方实现：<a target="_blank" rel="noopener" href="https://github.com/zhengkw18/face-vid2vid">https://github.com/zhengkw18/face-vid2vid</a></p></blockquote>
+<p><strong>数据集</strong>：<br>我们的评估基于VoxCeleb2[13]和TalkingHead-1KH，这是一个新收集的大规模说话人头视频数据集。它包含 18万个视频，通常比VoxCeleb2中的视频具有更高的质量和更大的分辨率。详细信息请参见附录B.1。</p>
+<h3 id="4-1-说话人头图像合成"><a href="#4-1-说话人头图像合成" class="headerlink" title="4.1 说话人头图像合成"></a>4.1 说话人头图像合成</h3><p><strong>基线方法</strong>：<br>我们将我们的神经说话人头模型与三种最新的先进方法进行比较：FOMM [62]、few-shot vid2vid (fs-vid2vid) [75] 和 bi-layer neural avatars (bi-layer) [86]。对于 bi-layer [86]，我们使用其在 Vox-Celeb2 上发布的预训练模型；对于其他方法，我们在相应的数据集上从头开始重新训练。由于 bi-layer 不预测背景，在进行定量分析时，我们会减去背景。</p>
+<blockquote class="colorquote info"><p>这里要提一嘴事实上vid2vid就是Google这个组做的</p></blockquote>
+<p><strong>评估指标</strong>：<br>我们通过以下指标评估合成模型：  </p>
+<ol>
+<li><strong>重建保真度</strong>：使用 L1、PSNR 和 SSIM&#x2F;MS-SSIM 进行评估；  </li>
+<li><strong>输出视觉质量</strong>：使用 FID（Fréchet Inception Distance）进行评估；  </li>
+<li><strong>语义一致性</strong>：使用平均关键点距离（AKD）进行评估。<br>有关性能指标的详细信息，请参阅附录 B.2。<br><strong>同身份重建</strong>：<br>我们首先比较源图像和驱动图像为同一人的情况下的人脸合成结果。定量评估结果如表 1 所示。从表中可以看出，我们的方法在两个数据集上的所有指标上都优于其他竞争方法。为了验证我们的优越性能并非来自更多的模型参数，我们训练了一个具有双倍滤波器大小的更大版本的 FOMM 模型（FOMM-L），其规模超过了我们的模型。结果表明，增大模型实际上会对性能产生负面影响。<br><img src="/images/2025-11-5-6.png"></li>
+</ol>
 	
 		</div>
 		
@@ -393,6 +444,78 @@
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">
+								几个深度学习计算库介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								einopseinops主要功能是张量维度的重排，功能介绍。
+MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="几个深度学习计算库介绍"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍">
+								FID指标介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								FID是衡量视频生成的一个重要指标
+参考文献
+1.https://zhouyifan.net/2024/04/04/20240221-TorchEval-FID/
+
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover13.png" alt="FID指标介绍"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题">
+								注册（registration）问题			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								注册（registration）又称作配准，通常指的是在计算机视觉和图形处理中，将不同的数据集合配准（对齐）到同一坐标系或模板的过程，以便进行分析、比较或重建。非刚体配准（Non-Rigid Registration）指的是在处理形状...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover12.png" alt="注册（registration）问题"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">
 								论文阅读：LivePortrait			
 							</a>
@@ -412,7 +535,7 @@
 						<div class="relate-post-cover">
 							<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：LivePortrait"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover11.png" alt="论文阅读：LivePortrait"/>
 							</a>
 						</div>
 					</li>												
@@ -464,94 +587,6 @@ python&#x3D;3.10
 							<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover9.png" alt="基础篇-安装PyTorch"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
-								代理错误（SSLEOFError)解决方法			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 26日, 2025				
-							</p>
-							<p class="relate-post-content">
-								最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的帖子，解决了...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover1.png" alt="代理错误（SSLEOFError)解决方法"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">
-								日剧推荐：《0.5的男人》			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 14日, 2025				
-							</p>
-							<p class="relate-post-content">
-								说回这部剧剧情很简单，努力工作的男主突然有一天就做了家里蹲，不社交、不出门，只在晚上采购饮料零食，原因给的模糊。父母是宽容的，父亲晨跑会例行问他要不要去（自然是从没去过），母亲更是温柔，会贴心的在冰箱上贴上各种纸条，关于食物、安排之类...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="日剧推荐：《0.5的男人》"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
-								pytorch3D安装经验			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 7日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">
-								Github上部署Hexoa页面的踩坑记录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 26日, 2025				
-							</p>
-							<p class="relate-post-content">
-								我在部署Hexo页面到GitHub主页时，发现在创建第一个文档后会导致样式无法加载。我一直以为是主题的问题，采取了删库重新安装的方法进行测试。当然在一切重新开始的时候是没有问题的，但是当我改变主题后又会出现这种情况，期间我尝试了一些网...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover4.png" alt="Github上部署Hexoa页面的踩坑记录"/>
 							</a>
 						</div>
 					</li>												
@@ -610,25 +645,45 @@ https://zhuanlan.zhihu.com/p/3410949248
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/09/15/article1/" title="摘抄">
-								摘抄			
+							<a class="relate-post-title" href="/2025/09/14/Moda/" title="论文阅读：MoDA">
+								论文阅读：MoDA			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								九月 15日, 2025				
+								九月 14日, 2025				
 							</p>
 							<p class="relate-post-content">
-								读小说的时候读到一句“英雄在铁铸的摇篮里长成。”觉得很有味道，上网搜索一下出处。
-这句话出自荷尔德林（Friedrich Hölderlin）。
-
-待到英雄们在铁铸的摇篮中长成，勇敢的心灵像从前一样，去造访万能的神祗。而在这之前，我却...
+								我在8月末帮助师兄的项目时，需要做近期的一些工作汇总，期间阅读了相关的一些论文，作笔记记录。
+背景介绍最新一波的人工智能生成内容（AIGC）在计算机视觉领域取得了显著的成功，扩散模型在这一成就中扮演了关键角色。由于其印象深刻的生成能力...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2025/09/15/article1/" title="摘抄">				
+							<a href="/2025/09/14/Moda/" title="论文阅读：MoDA">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="摘抄"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover6.jpg" alt="论文阅读：MoDA"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">
+								代理错误（SSLEOFError)解决方法			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 26日, 2025				
+							</p>
+							<p class="relate-post-content">
+								最近安装包的时候突然就出现错误了,在之前学会设置powershell里的代理后基本没有碰到过此类的问题，所以还是很意外的。之后的流程也是经典地先去issue找，发现没有，上网直接搜报错类型名称，最后也是找到了一篇CSDN的帖子，解决了...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover1.png" alt="代理错误（SSLEOFError)解决方法"/>
 							</a>
 						</div>
 					</li>												
@@ -675,6 +730,17 @@ https://zhuanlan.zhihu.com/p/3410949248
 </div>
 
 <!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
 
 
 
