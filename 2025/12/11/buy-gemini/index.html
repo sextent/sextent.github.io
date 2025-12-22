@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      pytorch3D安装经验 | 六分仪的主页
+      星座卡绑定Google Pay购买Gemini记录 | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -103,7 +103,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「pytorch3D安装经验」
+			「星座卡绑定Google Pay购买Gemini记录」
 		
 	</p>
 
@@ -249,8 +249,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" itemprop="url">
-		pytorch3D安装经验
+	<a href="/2025/12/11/buy-gemini/" itemprop="url">
+		星座卡绑定Google Pay购买Gemini记录
 	</a>
 
 		</div>
@@ -266,9 +266,9 @@
 
 	更新于
 
-	<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" itemprop="url">
-		<time datetime="2025-10-07T02:30:56.000Z" itemprop="dateUpdated">
-	  		2025-11-04
+	<a href="/2025/12/11/buy-gemini/" itemprop="url">
+		<time datetime="2025-12-11T07:11:29.000Z" itemprop="dateUpdated">
+	  		2025-12-11
 	  </time>
 	</a> 
 
@@ -293,94 +293,57 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<p><em>我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇到的问题和解决方案。</em></p>
-<h3 id="前置环境说明"><a href="#前置环境说明" class="headerlink" title="前置环境说明"></a>前置环境说明</h3><p>我使用cu121+pytorch2.1.0+torchvision0.16.0作为基本开发环境</p>
-<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><ol>
-<li><p>我首先尝试使用pip安装pytorch3d，但是安装过程中出现了编译错误。我尝试了多次，但是都没有成功。于是，我决定使用conda来安装pytorch3d。</p>
-</li>
-<li><p>我使用conda安装pytorch3d，但是安装过程中发现conda好像没有提供对应环境的安装包，一直会报错</p>
-</li>
-<li><p>到了这一步，该克隆源码安装了。</p>
-</li>
-</ol>
-<p>按照项目的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md">安装教程</a> ，克隆了源代码仓库然后进入源码目录，运行setup.py文件。<br>但是，在编译过程中，仍然遇到了和直接使用pip一样的错误。<br>首先是跳了一堆错误，包含中文提示，把全屏幕全刷下去了。所以需要保存报错信息，<br>保存错误信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test_m2p_core_v2_infer.py &gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p>这个命令可以把错误日志保存在log文件中翻阅。在记录下log之后，发现主要问题是<br><img src="/images/20251009-1.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.CalledProcessError: Command <span class="string">&#x27;[&#x27;</span>ninja<span class="string">&#x27;, &#x27;</span>-v<span class="string">&#x27;]&#x27;</span> returned non-zero <span class="built_in">exit</span> status 1.</span><br></pre></td></tr></table></figure>
-<p>之前配环境的时候已经遇到过这个问题了。当时以为是<code>ninja</code>的问题，实际上是cuda的位置未指定导致的。<code>ninja</code>实际上是一个构建系统，可以把它理解为一个更现代、更快速的 make 工具。PyTorch 的 C++ 扩展在编译时，如果检测到你环境里安装了ninja，会优先使用它来进行并行编译，因为速度更快。而出问题的函数是PyTorch的构建脚本（<code>cpp_extension.py</code>），所以是调用ninja进行编译时出了问题。根据之前的经验，原理大概是pytorch3d的编译同时深度依赖NVIDIA的CUDA工具链。如果CUDA的路径没有被正确地传递给构建系统，那么在生成编译指令（<code>build.ninja</code>文件）或者执行这些指令时，完全可能出现各种奇怪的底层错误。<br>而我们之前的排查都集中在C++编译器（MSVC）和构建系统（Ninja）上。所以我按照之前的做法先确认终端中的cuda路径是否正确。</p>
-<p>执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2023 NVIDIA Corporation</span><br><span class="line">Built on Wed_Feb__8_05:53:42_Coordinated_Universal_Time_2023</span><br><span class="line">Cuda compilation tools, release 12.1, V12.1.66</span><br><span class="line">Build cuda_12.1.r12.1/compiler.32415258_0</span><br></pre></td></tr></table></figure>
-<p>执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %CUDA_HOME%</span><br></pre></td></tr></table></figure>
-<p>到这里没有输出，所以就要重新设置cuda路径。一般是类似<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8</code>.<br>设置完毕之后，报错发生变化，说明ninja找到了合适的cuda来进行编译。<br>新报错为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注意: 包含文件:  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\memory    </span><br><span class="line">fatal error C1189: <span class="comment">#error:  You need C++17 to compile PyTorch</span></span><br><span class="line">    ninja: build stopped: subcommand failed.</span><br></pre></td></tr></table></figure>
-
-<p>这次问题很简单。</p>
-<ul>
-<li>第一行告诉我们： 你的编译系统正在使用的C++编译器是 Visual Studio 14.0，也就是 Visual Studio 2015。</li>
-<li>第二行告诉我们： PyTorch的源代码明确要求，必须使用支持 C++17 标准的编译器。</li>
+			<blockquote>
+<p>前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。</p>
+</blockquote>
+<p>那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。<br>首先需要明确目的：<br>工行的星座卡是学生最容易能申请到的visa信用卡。虽然它没有信用额度，但对于学生党来说本身也申请不到有额度的信用卡，而且它免年费。所以我们主要是用它来进行一些境外消费，比如海外视频会员的充值，AI产品的购买，或者海淘。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>手机号</li>
+<li>身份证</li>
+<li>学生证或学生卡</li>
 </ul>
-<p>但是我安装的是VS2022的发行版，不应该回到2015的问题。所以我又想到之前为了编译包安装了MCVS的老版本，是不是直接用它来编译了？那么就需要验证<code>where cl.exe</code>了。我先运行了vs2022的终端，我想这里面应该不会使用老版本的工具了，但是运行同样的安装代码时报错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Alan\anaconda3\envs\Emo-Avatar\lib\site-packages\torch\utils\cpp_extension.py:383: UserWarning: Error checking compiler version <span class="keyword">for</span> cl: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">    warnings.warn(f<span class="string">&#x27;Error checking compiler version for &#123;compiler&#125;: &#123;error&#125;&#x27;</span>)</span><br><span class="line">      error: [WinError 2] 系统找不到指定的文件。</span><br><span class="line">      [end of output]</span><br></pre></td></tr></table></figure>
-<p>所以还是找不到编译器。清除了旧版本，重新安装新版本之后再运行，</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvcc fatal   : nvcc cannot find a supported version of Microsoft Visual Studio. Only the versions between 2017 and 2019 (inclusive) are supported! The nvcc flag <span class="string">&#x27;-allow-unsupported-compiler&#x27;</span> can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run <span class="keyword">time</span> execution. Use at your own risk.</span><br><span class="line">error: <span class="built_in">command</span> <span class="string">&#x27;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.1\\bin\\nvcc.exe&#x27;</span> failed with <span class="built_in">exit</span> code 1</span><br></pre></td></tr></table></figure>
-<p>来看看AI怎么说：</p>
-<blockquote>
-<p>NVIDIA的CUDA编译器(nvcc.exe) 在尝试编译代码时，明确地告诉我们：<br>“我只认识 2017 到 2019 版本的 Visual Studio。你现在系统里配置的这个版本（VS 2022），我根本不认识，也无法使用它来编译代码！”<br>nvcc.exe 是编译CUDA代码（.cu 文件）的主帅，但它需要一个C++编译器（cl.exe）来当它的副将，处理代码中标准的C++部分。你的 CUDA Toolkit 12.1 版本在设计时，它的“副将名单”里只写了 VS2017 和 VS2019，没有 VS2022。<br>所以，整个编译流程在 nvcc 这一步就直接罢工了。</p>
-</blockquote>
-<p>AI让我装2019的VS。但我还想自己试试，首先在VS终端中输入<code>cl.exe</code>是有输出的，但在powershell里面就不行。<br>关注powershell里的报错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include\crt/host_config.h(153): fatal error C1189: <span class="comment">#error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2017 and 2022 (inclusive) are supported!</span></span><br></pre></td></tr></table></figure>
-<p>我们的C++ 编译器版本太新了，超出了当前 CUDA 12.1 工具包所能识别和兼容的范围。所以，虽然错误信息说支持到 2022，但它指的是 CUDA 12.1 发布时 的 VS 2022 版本。你的 Visual Studio Build Tools 自动安装了最新的版本，这个版本对于 CUDA 12.1 来说过于前卫了。然后我重新安装了一下旧版本的VS。</p>
-<blockquote>
-<p>这里要提一下，目前官网旧版本是要订阅的，自己要找一下资源。我的是在B站找到的网盘链接。<br>重新启动之后：</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: It seems that the VC environment is activated but DISTUTILS_USE_SDK is not <span class="built_in">set</span>.</span><br><span class="line">This may lead to multiple activations of the VC <span class="built_in">env</span>.</span><br><span class="line">Please <span class="built_in">set</span> `DISTUTILS_USE_SDK=1` and try again.</span><br></pre></td></tr></table></figure>
-<p>为了防止因为重复加载编译环境而产生潜在的冲突，脚本要求我们手动设置一个“确认标志”，来告诉它：“是的，我就是要用这个环境，请继续！”。那么我们按它说的做，先设置<code>set  DISTUTILS_USE_SDK=1</code></p>
-<p>当我以为全部解决时，爆了一堆从未见过的错误。看了就头疼，只能丢给AI分析：</p>
-<blockquote>
-<p>C:&#x2F;Users&#x2F;Alan&#x2F;anaconda3&#x2F;envs&#x2F;Emo-Avatar&#x2F;lib&#x2F;site-packages&#x2F;torch&#x2F;include\c10&#x2F;core&#x2F;TensorImpl.h(3187): error: static assertion failed with “Actual and Expected sizes of a field did not match!”<br>  static_assert(<br>  ^<br>      …<br>      Actual&#x3D;8U, Expected&#x3D;4U, FiledName&#x3D;c10::C10_TensorImpl_Size_Check_Dummy_Class…</p>
-</blockquote>
+<h3 id="申请"><a href="#申请" class="headerlink" title="申请"></a>申请</h3><p>首先下载工商银行APP，搜索”校园”，记得选择<strong>宇宙星座卡校园版+xx座（VISA+银联）</strong><br>然后按个人真实情况填写内容。要注意的是领卡网点<strong>一定一定要选择学校附近的这个网点</strong>，因为发卡制卡不一定是你最近的网点办，存在跑很远的风险。</p>
+<p>时间的话一般来说都比较快，如果有需求，可以打开APP里的“信用卡”，再点“查询进度”就可以看到了。</p>
+<p>领取到的应该是两张卡：银联+Visa</p>
+<h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>领取之后需要前往任意网点进行人工激活，这里主要要在机器上确保激活并绑定你的手机。同时这个时候也会要求设置支付密码。</p>
+<h3 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h3><p>领取到的两张卡内余额是互通的，一张卡里打钱另一张也能有。由于卡是0额度，所以我们想要通过星座卡消费就必须往里面先充钱。主要有两种方式：</p>
 <ul>
-<li><code>static_assert</code>是一个在编译代码时进行的强制检查。<code>Actual=8U, Expected=4U:</code> 检查发现，某个数据结构字段的实际大小是 8个字节，但代码期望的大小是 4个字节。<br>所以是我误用了84位的终端，实际应该打开64位的。这个小tip确实没注意。<br>打开<code>x64 Native Tools Command Prompt for VS 2019</code>重新运行安装代码：</li>
+<li>微信或支付宝的还款</li>
+<li>其他银行卡直接转账</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: The environment variable `CUB_HOME` was not found. NVIDIA CUB is required <span class="keyword">for</span> compilation...</span><br><span class="line">error: [WinError 2] 系统找不到指定的文件。</span><br></pre></td></tr></table></figure>
-<p>经典忘记设置CUDA_HOME，照常设置之后，就一直没有报错，等待编译了许久也是大功告成啦╰(<em>°▽°</em>)╯</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<p>这两个方式我就不多赘述了，如有不懂做些搜索也不难解决。<br>接下来是购买外汇：</p>
+<ul>
 <li><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/goodgoodstudy___/article/details/121577651">https://blog.csdn.net/goodgoodstudy___/article/details/121577651</a></li>
+<li>在<strong>中国工商银行</strong>APP中搜索<strong>结售汇</strong>。</li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/371279126">https://zhuanlan.zhihu.com/p/371279126</a></li>
+<li>选择需要的外币。</li>
 </ol>
 </li>
 <li><ol start="3">
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanmx219/article/details/100829920">https://blog.csdn.net/tanmx219/article/details/100829920</a></li>
+<li>看30秒安全教育并进入。</li>
 </ol>
 </li>
 <li><ol start="4">
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangmengmeng99/article/details/118719322">https://blog.csdn.net/wangmengmeng99/article/details/118719322</a></li>
-</ol>
-</li>
-<li><ol start="5">
-<li><a target="_blank" rel="noopener" href="https://github.com/nerfstudio-project/nerfstudio/issues/3171">https://github.com/nerfstudio-project/nerfstudio/issues/3171</a></li>
-</ol>
-</li>
-<li><ol start="6">
-<li><a target="_blank" rel="noopener" href="https://github.com/hukaixuan19970627/yolov5_obb/issues/440">https://github.com/hukaixuan19970627/yolov5_obb/issues/440</a></li>
-</ol>
-</li>
-<li><ol start="7">
-<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/1970">https://github.com/facebookresearch/pytorch3d/issues/1970</a></li>
+<li>如实填写购买金额，并选择购汇用途为<strong>其他</strong>。如果你不确定可以在明细中写专有权利使用费和特许费。同时选择人民币支付账户，这里一定要注意是Visa卡，支付账号和汇入账号都是这个。</li>
 </ol>
 </li>
 </ul>
+<blockquote class="colorquote info"><p>这样你应该能看到自己账户里多了外币了。</p></blockquote>
+<p>购汇时，外币转入账户无法选择或者选不了Visa。</p>
+<blockquote>
+<p>大抵是因为你之前有过其他的工行卡，并且此工行卡和现在办理的 Visa+银联信用卡并不属于同一地区（即异地），结售汇时只能显示默认卡所在的地区。解决方法就是在<strong>我的账户</strong>里把Visa卡设置为默认</p>
+</blockquote>
+<h3 id="绑定Google-Play"><a href="#绑定Google-Play" class="headerlink" title="绑定Google Play"></a>绑定Google Play</h3><p>其实Google Play是曲线救国的方式，因为大陆卡绑定不了Google Pay，但是通过Play绑定的卡实际上是进入你的Google账号支付中心的。</p>
+<p>首先下载Google Play，挂梯子访问。然后添加付款方式，这里如实填写卡号，地址选美国，找个地方填上（我这里询问了我Standford的同学，填了学校地址和邮编）。</p>
+<p>然后点击保存（挂美国梯子加成功率），我的一次就过了。</p>
+<h3 id="购买Gemini"><a href="#购买Gemini" class="headerlink" title="购买Gemini"></a>购买Gemini</h3><p>进入Google One，选择支付方式，这里应该会有你之前手机上保存的那张卡，直接选择即可。</p>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>1.<a target="_blank" rel="noopener" href="https://tiger.fail/archives/college-google-play-visa-guide.html/comment-page-10?replytocom=1432#respond">https://tiger.fail/archives/college-google-play-visa-guide.html/comment-page-10?replytocom=1432#respond</a></p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/images/cover5.png"></div>
+		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -395,12 +358,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" title="日剧推荐：《0.5的男人》" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2025/09/26/Github%E4%B8%8A%E9%83%A8%E7%BD%B2Hexoa%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Github上部署Hexoa页面的踩坑记录" rel="next">
+			<a href="/2025/12/02/Joker/" title="论文阅读：Joker" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -418,31 +377,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">
-								星座卡绑定Google Pay购买Gemini记录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 11日, 2025				
-							</p>
-							<p class="relate-post-content">
-								
-前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。
-
-那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。首先需要明确目的：工行...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="星座卡绑定Google Pay购买Gemini记录"/>
-							</a>
-						</div>
-					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -467,6 +401,28 @@ python&#x3D;3.10
 							<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover9.png" alt="基础篇-安装PyTorch"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">
+								pytorch3D安装经验			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 7日, 2025				
+							</p>
+							<p class="relate-post-content">
+								我在安装程序运行环境时，遇到了pytorch3d在windows系统上的编译不成功的问题，这耗费了我国庆宝贵时光中的一整天。我非常生气，所以我决定写一篇博客来记录安装过程。这篇博客将介绍如何安装pytorch3D，以及我在安装过程中遇...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover5.png" alt="pytorch3D安装经验"/>
 							</a>
 						</div>
 					</li>												

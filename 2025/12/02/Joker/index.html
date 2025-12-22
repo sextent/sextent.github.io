@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      论文阅读：LivePortrait | 六分仪的主页
+      论文阅读：Joker | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -103,7 +103,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「论文阅读：LivePortrait」
+			「论文阅读：Joker」
 		
 	</p>
 
@@ -249,8 +249,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/11/06/liveportrait/" itemprop="url">
-		论文阅读：LivePortrait
+	<a href="/2025/12/02/Joker/" itemprop="url">
+		论文阅读：Joker
 	</a>
 
 		</div>
@@ -266,9 +266,9 @@
 
 	更新于
 
-	<a href="/2025/11/06/liveportrait/" itemprop="url">
-		<time datetime="2025-11-06T02:04:42.000Z" itemprop="dateUpdated">
-	  		2025-12-11
+	<a href="/2025/12/02/Joker/" itemprop="url">
+		<time datetime="2025-12-02T09:04:41.000Z" itemprop="dateUpdated">
+	  		2025-12-02
 	  </time>
 	</a> 
 
@@ -283,6 +283,10 @@
 			笔记
 		</a>
 	
+		<a href="/tags/%E8%AE%BA%E6%96%87/" class=" ">
+			论文
+		</a>
+	
 		
 			</span>
 			
@@ -293,80 +297,114 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
-<li><strong>论文标题</strong>  Human Motion Video Generation: A Survey</li>
-<li><strong>期刊</strong> Arxiv 2024</li>
-<li><strong>论文地址</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.03168">https://arxiv.org/pdf/2407.03168</a></li>
-<li><strong>项目地址</strong> <a target="_blank" rel="noopener" href="https://github.com/KwaiVGI/LivePortrait?tab=readme-ov-file">https://github.com/KwaiVGI/LivePortrait?tab=readme-ov-file</a></li>
+			<h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3.Method"></a>3.Method</h2><h3 id="输入与输出"><a href="#输入与输出" class="headerlink" title="输入与输出"></a>输入与输出</h3><p>我们的方法以一张肖像图像作为输入,创建一个具有真实感的3D重建结果。驱动表情通过<strong>Basel Face Model[32]的参数</strong>和<strong>文本提示</strong>来指定(见图2)。<br><img src="/images/2025-12-02-2.png"><br>我们训练了一个<strong>条件2D先验模型</strong>,该模型:</p>
+<ul>
+<li>输入:参考人物的图像</li>
+<li>输出:预测具有新表情的新视角渲染结果（3.1节）</li>
 </ul>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>肖像动画旨在从单一源图像生成一个逼真的视频，将其用作外观参考，并从驱动视频、音频、文本或生成内容中获取运动信息（如面部表情和头部姿态）。不同于主流的基于扩散模型的方法，我们探索并扩展了基于隐式关键点的框架，该框架在计算效率和可控性之间实现了有效平衡。在此基础上，我们开发了一个名为LivePortrait的视频驱动肖像动画框架，重点提升其在实际应用中的泛化能力、可控性和效率。<br><img src="/images/2025-11-20-1.png"><br>为了提升生成质量和泛化能力，我们将训练数据扩展到约6900万张高质量帧，采用混合图像-视频训练策略，升级网络架构，并设计了更好的运动变换和优化目标。此外，我们发现紧凑的隐式关键点可以有效地表示一种混合形状，并精心设计了一个缝合模块和两个重定向模块，这些模块利用了一个计算开销可忽略的小型MLP，以增强可控性。实验结果表明，与基于扩散的方法相比，我们的框架具有很高的效率。在RTX 4090 GPU上使用PyTorch时，生成速度显著达到了12.8毫秒。推理代码和模型已发布在：<a target="_blank" rel="noopener" href="https://github.com/KwaiVGI/LivePortrait%E3%80%82">https://github.com/KwaiVGI/LivePortrait。</a></p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><blockquote>
-<p>一句话概括：两阶段训练，一阶段做小调整的fs-vid2vid，二阶段是引入了肩部及以下，非眼部，非唇部的区域稳定性、学习眼部、唇部的张闭程度，可参数化眼部、唇部的张闭大小</p>
-</blockquote>
-<p>如今，人们经常使用智能手机或其他录制设备来拍摄静态肖像，记录他们的珍贵时刻。iPhone上的Live Photos¹功能可以通过记录拍照前后1.5秒的瞬间来让静态肖像变得生动，这很可能是通过某种形式的视频录制实现的。然而，基于GANs [1]和扩散模型[2-4]等最新进展，各种肖像动画方法[5-13]已经使得在不依赖特定录制设备的情况下，将静态肖像动画化为动态肖像成为可能。</p>
-<p>在本文中，我们旨在对静态肖像图像进行动画化，使其逼真且富有表现力，同时追求高推理效率和精确可控性。尽管基于扩散模型的肖像动画方法[12-14]在质量方面取得了令人印象深刻的结果，但它们通常计算成本昂贵，并且缺乏精确的可控性，例如缝合控制²。相反，我们广泛探索基于隐式关键点的视频驱动框架[5, 11]，并扩展其潜力以有效平衡泛化能力、计算效率和可控性。</p>
-<p>具体而言，我们首先通过以下方式增强一个强大的基于隐式关键点的方法[5]：将训练数据扩展到约6900万张高质量肖像图像，引入混合图像-视频训练策略，升级网络架构，使用可扩展的运动变换，设计地标引导的隐式关键点优化和几个级联损失项。此外，我们发现紧凑的隐式关键点可以有效地表示一种隐式混合形状，并精心设计了一个缝合模块和两个重定向模块，它们利用小型MLP并增加可忽略的计算开销，以增强可控性，如缝合控制。</p>
-<p>我们的核心贡献可以总结如下：<br>(i) 开发了一个稳固的基于隐式关键点的视频驱动肖像动画框架，显著提升了生成质量和泛化能力；(ii) 设计了先进的缝合模块和两个重定向模块以实现更好的可控性，且计算开销可忽略不计。广泛的实验结果证明了我们框架的有效性，甚至与重型扩散模型方法相比也是如此。此外，我们的模型在使用PyTorch进行推理时，可以在RTX 4090 GPU上在12.8ms内生成肖像动画。</p>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>最新的视频驱动肖像动画方法可以分为<strong>非扩散模型方法</strong>和<strong>扩散模型方法</strong>，如表 1 所示。<br><img src="/images/2025-11-20-2.png"></p>
-<blockquote>
-<p>比较经典的方法是FOMM 和Face Vid2vid<br>它这里把自己的控制能力都写上了，属于是大优势比较。</p>
-</blockquote>
-<h3 id="2-1-非扩散模型的肖像动画"><a href="#2-1-非扩散模型的肖像动画" class="headerlink" title="2.1. 非扩散模型的肖像动画"></a>2.1. 非扩散模型的肖像动画</h3><p>对于非扩散模型，基于隐式关键点的方法采用隐式关键点作为中间运动表示，并通过光流将源肖像与驱动图像进行变形。FOMM [11]在每个关键点附近执行一阶泰勒展开，并使用局部仿射变换来近似每个关键点邻域内的运动。MRAA [15]使用基于PCA的运动估计来表示关节运动。Face vid2vid [5]通过引入3D隐式关键点表示扩展了FOMM，实现了自由视角的肖像动画。IWA [10]基于跨模态注意力改进了变形机制，可以扩展到使用多个源图像。为了更灵活地估计光流并更好地处理大尺度运动，TPSM [7]使用非线性薄板样条变换来表示更复杂的运动。与此同时，DaGAN [6]利用密集深度图来估计隐式关键点，以捕获关键的驱动运动。MCNet [8]设计了一个身份表示条件记忆补偿网络，以解决复杂驱动运动引起的模糊生成问题。</p>
-<p>一些工作[18-20]采用了预定义的运动表示，如3DMM混合形状[21]。另一类工作[22, 23]提出从头学习潜在表情表示。MegaPortrait [22]使用超出中等分辨率训练图像的高分辨率图像，将动画分辨率提升到百万像素级别。EMO-Portraits [23]采用了表情丰富的训练视频数据集和表情增强损失来表达强烈的运动。</p>
-<h3 id="2-2-基于扩散模型的肖像动画"><a href="#2-2-基于扩散模型的肖像动画" class="headerlink" title="2.2. 基于扩散模型的肖像动画"></a>2.2. 基于扩散模型的肖像动画</h3><p>扩散模型[2-4]通过迭代去除噪声从高斯噪声中合成所需的数据样本。[2]提出了潜在扩散模型(LDMs)，并将训练和推理过程转移到压缩的潜在空间中以实现高效计算。LDMs已被广泛应用于许多并行工作中，包括全身舞蹈生成[24-28]、音频驱动的肖像动画[12, 29-34]和视频驱动的肖像动画[9, 12, 13, 16]。</p>
-<p>FADM [9] 是首个基于扩散模型的肖像动画方法。它通过预训练的基于隐式关键点的模型获得初步的粗略动画结果，然后在3DMM和扩散模型的指导下生成最终动画。Face Adapter [16] 使用身份适配器来增强源肖像的身份保留能力，并通过空间条件生成器生成显式的空间条件（即关键点和前景掩码）作为中间运动表示。一些研究[12, 13, 17]采用了类似于AnimateAnyone [24] 的互注意力和时间注意力架构，以实现更好的图像质量和外观保真度。</p>
-<p>AniPortrait [12] 使用显式的空间条件（即关键点）作为中间运动表示。X-Portrait [13] 提出了直接使用原始驱动视频来动画化肖像，而不是依赖中间运动表示。为了实现这一点，它采用了基于隐式关键点的方法 [5] 进行跨身份训练。MegActor [17] 同样使用原始驱动视频来动画化源肖像。它利用现有的换脸和风格化框架生成跨身份训练样本，并对背景外观进行编码以提高动画的稳定性。</p>
-<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>本节详细介绍我们的方法。我们首先简要回顾基于视频的肖像动画框架face vid2vid[5]，并介绍我们旨在增强动画泛化能力和表现力的重大改进。然后，我们展示精心设计的缝合和重定向模块，这些模块以可忽略的计算开销提供所需的可控性。最后，我们详细说明推理流程。</p>
-<h3 id="3-1-Face-Vid2vid的基础知识"><a href="#3-1-Face-Vid2vid的基础知识" class="headerlink" title="3.1. Face Vid2vid的基础知识"></a>3.1. Face Vid2vid的基础知识</h3><p>Face vid2vid [5]是一个开创性的框架，用于使用从驱动视频序列中提取的运动特征来动画化静态肖像。原始框架由外观特征提取器F、规范隐式关键点检测器$L$、头部姿态估计网络$H$、表情变形估计网络$∆$、变形场估计器$W$和生成器$G$组成。$F$将源图像$s$映射到3D外观特征体积$fs$。源3D关键点$x_s$和驱动3D关键点$x_d$按如下方式变换：</p>
-<p>其中$x_s$和$x_d$分别是源和驱动的3D隐式关键点，$x_{c,s} ∈ RK×3$表示源图像的规范关键点。源和驱动姿态分别是Rs和Rd ∈ R3×3，表情变形分别是δs和δd ∈ RK×3，平移分别是ts和td ∈ R3。接下来，W使用隐式关键点表示xs和xd生成变形场，并使用该流场来变形源特征体积fs。随后，变形后的特征通过解码器生成器G，将其转换到图像空间并产生目标图像。</p>
-<h3 id="3-2-第一阶段：基础模型训练"><a href="#3-2-第一阶段：基础模型训练" class="headerlink" title="3.2. 第一阶段：基础模型训练"></a>3.2. 第一阶段：基础模型训练</h3><p>我们选择face vid2vid[5]作为基础模型，并引入一系列重大改进。这些改进包括高质量数据整理、混合图像和视频训练策略、升级的网络架构、可扩展的运动变换、地标引导的隐式关键点优化和级联损失项。这些改进显著增强了动画的表现力和模型的泛化能力。第一训练阶段的流程如图2所示。<br><strong>高质量数据整理</strong>。<br>我们利用了公开的视频数据集，例如Voxceleb [35]、MEAD [36] 和 RAVDESS [37]，以及风格化图像数据集 AAHQ [38]。此外，我们还收集了大量4K分辨率的肖像视频，涵盖各种姿态和表情，以及200小时的说话头部视频，并利用了私有的LightStage [39, 40] 数据集，以及若干风格化肖像视频和图像。我们将长视频分割成时长小于30秒的片段，并通过人脸跟踪和识别确保每个片段仅包含一个人。为了保持训练数据的质量，我们使用KVQ[41]筛选掉低质量的视频片段。最终，我们的训练数据由以下内容组成：约 18,900 个身份和 60,000 张静态风格肖像，共计 6900 万视频帧（过滤前为 9200 万帧）。</p>
-<p><strong>混合图片和视频训练</strong><br>模型在真实肖像视频上的表现很好，但在风格化肖像（例如动漫）上的泛化能力较差。风格化肖像视频资源稀缺，我们仅收集了约1300个片段，来自不到100个身份。相比之下，高质量的风格化肖像图像更为丰富；我们收集了约6万张图像，每张图像代表一个独特身份，提供了多样化的身份信息。为了充分利用这两种数据类型，我们将单张图像视为单帧视频片段，并在图像和视频上共同训练模型。这种混合训练策略提升了模型的泛化能力。</p>
-<p><strong>升级的网络架构</strong><br>我们将原始的规范隐式关键点检测器 $L$、头部姿态估计网络 $H$ 和表情变形估计网络 $\Delta$ 统一整合为一个单一模型 $M$，并采用 ConvNeXt-V2-Tiny [42] 作为主干网络。该模型直接预测输入图像的规范关键点、头部姿态和表情变形。此外，我们遵循 [43] 的方法，使用 SPADE 解码器 [44] 作为生成器 $G$，其性能比 face vid2vid [5] 中的原始解码器更强大。经过变形的特征体 $f_s$ 被精细地输入到 SPADE 解码器中，其中特征体的每个通道作为语义图，用于生成动画图像。为了提高效率，我们在 $G$ 的最终层插入了一个 PixelShuffle [45] 层，将分辨率从 256×256 上采样到 512×512。</p>
-<p><strong>可扩展的运动变换</strong><br>原始公式 (1) 中的关键点变换忽略了缩放因子，这往往会将缩放纳入表情变形中，从而增加了训练的难度。为了解决这个问题，我们在运动变换中引入了一个缩放因子，更新后的变换 $\tau$ 表达式如下：</p>
-<p>其中，$s_s$和$s_d$分别是源输入和驱动输入的缩放因子。需要注意的是，这种变换不同于缩放正交投影，其公式为：<br>$$<br>x &#x3D; s \cdot ((x_c + \delta)R) + t<br>$$<br>我们发现，缩放正交投影会导致学习到的表情偏移 (\delta) 过于灵活，从而在跨不同身份驱动时产生纹理闪烁。因此，这种变换可以被视为灵活性与可驱动性之间的一种权衡。</p>
-<p><strong>关键点引导的损失</strong>  </p>
-<blockquote>
-<p>既然无监督不行，我们就监督它呗</p>
-</blockquote>
-<p>原始的 face vid2vid[5, 43]似乎缺乏生动驱动面部表情（例如眨眼和眼球运动）的能力。特别是，生成肖像的眼神方向被限制为与头部姿态平行，这一局限性在我们的复现实验中也有所观察。我们将这些限制归因于以无监督方式学习微妙面部表情（如眼球运动）的困难。为了解决这一问题，我们引入了能够捕捉微表情的二维关键点，并将其作为指导来优化隐式关键点的学习。基于关键点指导的损失 $L_{guide}$的公式如下：</p>
-<p>其中，$N$是选定关键点的数量，$l_i$是第$i$个关键点，$x_{s,i,:2}$ 和 $x_{d,i,:2}$分别表示对应隐式关键点的前两个维度，并采用 [46] 中提出的 Wing 损失函数。在我们的实验中，$N$设为 10，选定的关键点来自眼睛和嘴唇区域。<br><strong>级联损失项</strong><br>隐式关键点等变损失$L_E$，关键点先验损失。</p>
-<h3 id="3-3-第二阶段：拼接与重定向"><a href="#3-3-第二阶段：拼接与重定向" class="headerlink" title="3.3 第二阶段：拼接与重定向"></a>3.3 第二阶段：拼接与重定向</h3><p>我们假设紧凑的隐式关键点可以作为一种隐式混合形状（blendshapes）。与姿态不同的是，我们无法显式控制表情，而是需要通过这些隐式混合形状的组合来实现所需的效果。令人惊讶的是，我们发现仅使用一个小型 MLP 网络就可以很好地学习这种组合，同时计算开销可以忽略不计。  </p>
-<p>考虑到实际需求，我们设计了一个拼接模块、一个眼睛重定向模块以及一个嘴唇重定向模块。拼接模块将动画肖像无缝地粘贴回原始图像空间，避免像肩膀区域的像素错位问题。这使得可以处理更大尺寸的图像，并能够同时为多个面孔生成动画。  </p>
-<p>眼睛重定向模块旨在解决跨身份驱动时眼睛闭合不完整的问题，尤其是在小眼睛的人驱动大眼睛的人时。嘴唇重定向模块的设计与眼睛重定向模块类似，它还可以通过确保嘴唇处于闭合状态来对输入进行规范化，这有助于后续处理更好的动画驱动。第二阶段的训练流程如图3所示。</p>
-<p><strong>接收输入并估计变形偏移</strong><br>模型接收源隐式关键点 (x_s) 和驱动隐式关键点 (x_d) 作为输入，并估计驱动关键点的变形偏移 (\Delta_{st} \in \mathbb{R}^{K \times 3})。根据公式 (2)，源隐式关键点的计算方式为：</p>
-<p>[<br>x_s &#x3D; s_s \cdot (x_{c,s}R_s + \delta_s) + t_s<br>]</p>
-<p>而驱动隐式关键点的计算方式为：</p>
-<p>[<br>x_d &#x3D; s_d \cdot (x_{c,s}R_d + \delta_d) + t_d<br>]</p>
-<p>需要注意的是，与第一阶段训练不同，这里对 (x_d) 的变换故意使用跨身份（cross-id）而非同一身份（same-id）的运动，以增加训练难度，从而在拼接中获得更好的泛化能力。接着，(\Delta_{st} &#x3D; S(x_s, x_d))，驱动关键点被更新为：</p>
-<p>[<br>x’<em>d,st &#x3D; x_d + \Delta</em>{st}<br>]</p>
-<p>预测图像表示为：</p>
-<p>[<br>I_{p,st} &#x3D; D_W(f_s; x_s, x’_d,st)<br>]</p>
-<p>我们将自重建图像表示为：</p>
-<p>$$<br>I_{p,recon} &#x3D; D_W(f_s; x_s, x_s)<br>$$</p>
-<p>最终，拼接目标函数 $L_{st}$被定义为：<br>$$<br>L_{st} &#x3D; (I_{p,st} - I_{p,recon}) \odot (1 - M_{st}(I_s))$$<br>其中，(L_{st,const}) 是预测图像与自重建图像在肩膀区域的像素一致性损失，(M_{st}) 是一个掩膜操作符，用于从源图像 (I_s) 中屏蔽非肩膀区域，如图 3 所示。  </p>
-<p>(|\Delta_{st}|<em>1) 是拼接变形偏移的 (L_1) 范数正则化，(w</em>{st,reg}) 是一个超参数。</p>
-<p><strong>眼睛和嘴唇重定向模块</strong><br>眼睛重定向模块 $R_{eyes}$接收源隐式关键点 (x_s)、源眼睛张开状态元组 (c_{s,eyes}) 和一个随机驱动眼睛张开标量 (c_{d,eyes} \in [0, 0.8]) 作为输入，估计驱动关键点的变形偏移 (\Delta_{eyes} \in \mathbb{R}^{K \times 3})：  </p>
-<p>[<br>\Delta_{eyes} &#x3D; R_{eyes}(x_s; c_{s,eyes}, c_{d,eyes})<br>]  </p>
-<p>眼睛张开状态表示眼睛张开的比例：值越大，眼睛越张开。同样地，<strong>嘴唇重定向模块</strong><br>嘴唇重定向模块 (R_{lip}) 同样接收源隐式关键点 (x_s)、源嘴唇张开状态标量 (c_{s,lip}) 和一个随机驱动嘴唇张开标量 (c_{d,lip}) 作为输入，估计驱动关键点的变形偏移 (\Delta_{lip} \in \mathbb{R}^{K \times 3})：  </p>
-<p>[<br>\Delta_{lip} &#x3D; R_{lip}(x_s; c_{s,lip}, c_{d,lip})<br>]  </p>
-<p>然后，驱动关键点更新为：  </p>
-<p>[<br>x’<em>d,eyes &#x3D; x_s + \Delta</em>{eyes}<br>]  </p>
-<p>[<br>x’<em>d,lip &#x3D; x_s + \Delta</em>{lip}<br>]  </p>
-<p>预测图像分别为：  </p>
-<p>[<br>I_{p,eyes} &#x3D; D_W(f_s; x_s, x’_d,eyes)<br>]  </p>
-<p>[<br>I_{p,lip} &#x3D; D_W(f_s; x_s, x’_d,lip)<br>]  </p>
-<p>最终，眼睛和嘴唇重定向模块的训练目标被定义如下：</p>
-<p>其中，(M_{eyes}) 和 (M_{lip}) 分别是用于从源图像 (I_s) 中屏蔽眼睛和嘴唇区域的掩膜操作符，(cp_{s,eyes}) 和 (cp_{s,lip}) 分别是从 (I_{p,eyes}) 和 (I_{p,lip}) 中提取的条件元组，而 (w_{eyes,cond})、(w_{eyes,reg})、(w_{lip,cond})、(w_{lip,reg}) 是超参数。</p>
-<h3 id="3-4-推理"><a href="#3-4-推理" class="headerlink" title="3.4 推理"></a>3.4 推理</h3><p>在推理阶段，我们首先从源图像 (I_s) 中提取特征体 (f_s &#x3D; F(I_s)) 和标准关键点 (x_{c,s} &#x3D; M(I_s))。对于给定的驱动视频序列 ({I_{d,i} | i &#x3D; 0, \dots, N-1})，我们从每一帧中提取运动信息 (s_{d,i}, \delta_{d,i}, t_{d,i}, R_{d,i} &#x3D; M(I_{d,i})) 以及条件 $c_{d,eyes,i}$ 和 $c_{d,lip,i}$。接下来，源隐式关键点和驱动隐式关键点根据以下方式进行转换：</p>
-<p>然后，推理过程可以如算法 1 中所描述，其中 $\alpha_{st}$、$\alpha_{eyes}$ 和 $\alpha_{lip}$ 是指示变量，取值可以是 0 或 1。最终的预测图像 $I_{p,i}$ 是通过形变网络 $W$ 和解码器 $D$ 生成的。需要注意的是，眼睛和嘴唇的变形偏移是相互解耦的，可以线性地添加到驱动关键点中。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/713539828">技术报告解读</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/4431784902">视频重建数据集</a></li>
+<p>利用这个2D先验及其预测结果,我们提出了一个<strong>新颖的3D蒸馏管线</strong>（3.2节）来优化视图一致的NeRF。</p>
+<h3 id="3-1-用于极端表情合成的2D先验模型"><a href="#3-1-用于极端表情合成的2D先验模型" class="headerlink" title="3.1 用于极端表情合成的2D先验模型"></a>3.1 用于极端表情合成的2D先验模型</h3><p>我们的先验模型基于**Stable Diffusion[53]**骨干网络。</p>
+<blockquote class="colorquote info"><p>条件合成模型的构建</p></blockquote>
+<p>为了将其转换为条件合成模型,我们遵循[7, 9, 25, 72]的做法,训练一个<strong>独立的参考网络</strong>,将参考图像的信息输入到去噪网络中。<br>具体来说,我们在参考网络的自注意力层与其去噪对应层之间<strong>共享键(keys)和值(values)</strong>[25]。<br>然后我们训练一个<strong>ControlNet[78]</strong>(我们称之为驱动网络),用于3DMM参数条件控制。与之前的方法[25, 72]相比,并类似于并行工作[9],我们使用<strong>基于网格的法线图渲染</strong>来编码驱动头部姿态和表情。我们观察到,这种条件控制方式有助于实现结果的更高视图一致性,即使没有使用视图感知噪声或多视图自注意力技术[25]。</p>
+<blockquote class="colorquote info"><p>文本条件控制的创新</p></blockquote>
+<p>与现有工作[4, 9, 72]不同,我们还<strong>保留了基础去噪模型的文本条件</strong>,并将其整合到参考网络和驱动网络中。<br>文本条件使我们的模型能够通过补充3DMM信号中缺失的线索来合成极端表情,例如:</p>
+<ul>
+<li><strong>舌头运动</strong></li>
+<li><strong>与情感相关的外观细节</strong></li>
+</ul>
+<p>此外,与之前基于扩散的重演方法相反，我们发现微调去噪网络的解码部分有助于改善身份保持。</p>
+<p>为了训练这个模型,我们实施了一个迭代训练管线:</p>
+<ol>
+<li>使用野外CelebV-Text数据集[74]的子集进行训练</li>
+<li>随后在NeRSemble数据集[37]上进行短期微调</li>
 </ol>
+<p>我们为这些数据集补充了新的元数据,包括:</p>
+<ul>
+<li>表情的<strong>文本标注</strong></li>
+<li><strong>3DMM拟合参数</strong>(详见附录A)</li>
+</ul>
+<h3 id="3-2-3D蒸馏"><a href="#3-2-3D蒸馏" class="headerlink" title="3.2 3D蒸馏"></a>3.2 3D蒸馏</h3><p>遵循[56, 65]的做法,我们使用<strong>NeRF[49]公式</strong>来表示我们的3D重建。<br>在蒸馏过程中,NeRF在多个目标视角下进行渲染,并被编码到扩散模型的<strong>潜在空间</strong>中。<br><em>优化步骤</em></p>
+<ol>
+<li>向这些渲染结果<strong>添加噪声</strong></li>
+<li>2D扩散先验对潜在表示进行<strong>去噪</strong></li>
+<li>将去噪后的潜在表示<strong>解码</strong>为目标图像 ˆx₀</li>
+<li>NeRF针对这些目标图像进行<strong>优化</strong></li>
+</ol>
+<p><em>蒸馏损失函数</em></p>
+<p>遵循之前的工作[56, 65, 70],我们在<strong>图像域</strong>而非潜在空间中直接应用蒸馏损失。<br>优化目标遵循[70],由渲染图像x和目标图像ˆx₀之间的<strong>L1距离</strong>和**感知损失Lp[79]**组合而成:</p>
+<p>$$ L_{recon} &#x3D; E_c|x - \hat{x}_0|_1 + L_p(x, \hat{x}_0)  (1)$$</p>
+<p>其中,期望值是对不同<strong>视角c</strong>计算的。</p>
+<h4 id="两阶段蒸馏程序"><a href="#两阶段蒸馏程序" class="headerlink" title="两阶段蒸馏程序"></a>两阶段蒸馏程序</h4><p>我们的蒸馏程序包含<strong>两个阶段</strong>,它们在目标图像更新方式上有所不同:</p>
+<ul>
+<li><strong>阶段1</strong>: 目标图像基于NeRF渲染结果<strong>反复更新</strong>,以提高多视图一致性</li>
+<li><strong>阶段2</strong>: 目标图像<strong>仅预测一次</strong>,然后NeRF针对这些目标图像优化直至收敛</li>
+</ul>
+<h4 id="阶段1-动态目标优化"><a href="#阶段1-动态目标优化" class="headerlink" title="阶段1:动态目标优化"></a>阶段1:动态目标优化</h4><p>在第一阶段,我们使用噪声化的NeRF渲染结果作为蒸馏先验的输入,<strong>频繁更新</strong>目标图像。</p>
+<ol>
+<li>在多个目标视角下<strong>渲染NeRF</strong></li>
+<li>对渲染结果<strong>添加噪声</strong></li>
+<li>使用2D先验通过<strong>一步去噪</strong>生成新的目标图像</li>
+<li>NeRF针对目标视图优化<strong>N次迭代</strong>,之后我们<strong>重新计算目标</strong>并重复该过程。我们使用<strong>3D一致的NeRF渲染</strong>来更新目标图像,以提高其视图一致性。</li>
+</ol>
+<p>与之前的方法[56, 65, 70]相比,主要区别在于:</p>
+<ol>
+<li><strong>确定性噪声采样</strong>: 我们遵循标准的DDIM去噪调度器,<strong>确定性地采样噪声级别</strong>(100步),而不是随机采样</li>
+<li><strong>更新频率</strong>: NeRF在更新目标图像之前针对目标图像优化<strong>N次迭代</strong>,而大多数现有方法在每次NeRF更新时都更新目标</li>
+</ol>
+<p>我们发现这<strong>显著提高了重建结果的视觉质量和一致性</strong>(见图6)。</p>
+<h4 id="阶段2-固定目标优化"><a href="#阶段2-固定目标优化" class="headerlink" title="阶段2:固定目标优化"></a>阶段2:固定目标优化</h4><p>仅执行阶段1蒸馏往往会导致<strong>模糊的结果</strong>。<br>原因在于NeRF针对目标图像的优化过程:</p>
+<ol>
+<li>在优化过程中,NeRF实际上对目标图像中的不一致性进行<strong>平均</strong>,引入了<strong>低频偏差</strong></li>
+<li>这对蒸馏程序产生重大影响</li>
+<li>NeRF优化后,其渲染结果会比目标图像<strong>更模糊</strong></li>
+<li>NeRF渲染中<strong>缺乏高频细节</strong>被2D先验捕获,并传播到更新的目标图像中</li>
+<li>针对这些目标优化NeRF会导致<strong>更加模糊</strong>的重建结果,并引入…</li>
+</ol>
+<h3 id="3-3-实现细节"><a href="#3-3-实现细节" class="headerlink" title="3.3 实现细节"></a>3.3 实现细节</h3><blockquote>
+<p>2D先验模型训练</p>
+</blockquote>
+<h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><ul>
+<li><strong>起始权重</strong>: Stable Diffusion v1.5¹的预训练权重</li>
+<li><strong>优化器</strong>: AdamW[47]<ul>
+<li>学习率 lr &#x3D; 10⁻⁵</li>
+<li>β₁ &#x3D; 0.9, β₂ &#x3D; 0.999</li>
+<li>ϵ &#x3D; 10⁻⁸, λ &#x3D; 10⁻²</li>
+</ul>
+</li>
+</ul>
+<h4 id="训练环境"><a href="#训练环境" class="headerlink" title="训练环境"></a>训练环境</h4><ul>
+<li><strong>硬件</strong>: 8块NVIDIA A100 SXM4-80GB</li>
+<li><strong>批量大小</strong>: 每GPU 10个样本</li>
+<li><strong>训练迭代</strong>:<ul>
+<li>在CelebV-Text[74]上训练200,000次迭代</li>
+<li>在CelebV-Text和NerSemble[37]的均匀混合数据上额外训练30,000次迭代</li>
+</ul>
+</li>
+</ul>
+<p>数据集和预处理详情请参见附录A。</p>
+<blockquote>
+<p>3D蒸馏配置</p>
+</blockquote>
+<h3 id="框架与参数"><a href="#框架与参数" class="headerlink" title="框架与参数"></a>框架与参数</h3><ul>
+<li><strong>框架</strong>: threestudio[27]</li>
+<li><strong>配置</strong>: 主要遵循ImageDream[65]的配置</li>
+</ul>
+<h3 id="目标图像生成"><a href="#目标图像生成" class="headerlink" title="目标图像生成"></a>目标图像生成</h3><ul>
+<li>在正面半球的<strong>20×20规则网格</strong>上渲染BFM[32]法线图</li>
+<li><strong>方位角范围</strong>: ∈ [−22.5°, 22.5°]</li>
+<li><strong>仰角范围</strong>: ∈ [−10°, 10°]</li>
+<li><strong>无分类器引导尺度</strong>: 19.0</li>
+</ul>
+<h3 id="NeRF优化"><a href="#NeRF优化" class="headerlink" title="NeRF优化"></a>NeRF优化</h3><ul>
+<li>每次目标图像更新之间优化<strong>N &#x3D; 130次迭代</strong></li>
+<li>优化过程中随机采样<strong>64个64×64大小的图像块</strong></li>
+<li>目标图像分辨率<strong>从64逐渐增加到512</strong></li>
+<li><strong>优化时间</strong>: 在单块NVIDIA A100 SXM4-80GB GPU上约需<strong>3小时</strong></li>
+</ul>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/images/cover11.png"></div>
+		<div id="current-post-cover" data-scr="/images/2025-12-02-1.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -381,12 +419,12 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题" rel="prev">
+			<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing" rel="next">
+			<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -404,30 +442,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/12/02/Joker/" title="论文阅读：Joker">
-								论文阅读：Joker			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 2日, 2025				
-							</p>
-							<p class="relate-post-content">
-								3.Method输入与输出我们的方法以一张肖像图像作为输入,创建一个具有真实感的3D重建结果。驱动表情通过Basel Face Model[32]的参数和文本提示来指定(见图2)。我们训练了一个条件2D先验模型,该模型:
-
-输入:参考...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/12/02/Joker/" title="论文阅读：Joker">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/2025-12-02-1.png" alt="论文阅读：Joker"/>
-							</a>
-						</div>
-					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -497,6 +511,32 @@ MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
 							<a href="/2025/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E6%B3%A8%E5%86%8C%E9%97%AE%E9%A2%98/" title="注册（registration）问题">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover12.png" alt="注册（registration）问题"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">
+								论文阅读：LivePortrait			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 6日, 2025				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  Human Motion Video Generation: A Survey
+期刊 Arxiv 2024
+论文地址 https://arxiv.org/pdf/2407.03168
+项目地址 https://git...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover11.png" alt="论文阅读：LivePortrait"/>
 							</a>
 						</div>
 					</li>												
