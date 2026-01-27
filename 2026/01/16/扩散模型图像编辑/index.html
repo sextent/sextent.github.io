@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      日剧推荐：《0.5的男人》 | 六分仪的主页
+      扩散模型图像编辑 | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -103,7 +103,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「日剧推荐：《0.5的男人》」
+			「扩散模型图像编辑」
 		
 	</p>
 
@@ -249,8 +249,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" itemprop="url">
-		日剧推荐：《0.5的男人》
+	<a href="/2026/01/16/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91/" itemprop="url">
+		扩散模型图像编辑
 	</a>
 
 		</div>
@@ -266,9 +266,9 @@
 
 	更新于
 
-	<a href="/2025/10/14/%E6%97%A5%E5%89%A7%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A0-5%E7%9A%84%E7%94%B7%E4%BA%BA%E3%80%8B/" itemprop="url">
-		<time datetime="2025-10-14T08:38:15.000Z" itemprop="dateUpdated">
-	  		2025-11-06
+	<a href="/2026/01/16/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91/" itemprop="url">
+		<time datetime="2026-01-16T05:28:12.000Z" itemprop="dateUpdated">
+	  		2026-01-24
 	  </time>
 	</a> 
 
@@ -279,8 +279,8 @@
 				
 	<i class="icon-price-tags"></i>
 	
-		<a href="/tags/JGN/" class=" ">
-			JGN
+		<a href="/tags/%E7%AC%94%E8%AE%B0/" class=" ">
+			笔记
 		</a>
 	
 		
@@ -293,15 +293,43 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<p>说回这部剧剧情很简单，努力工作的男主突然有一天就做了家里蹲，不社交、不出门，只在晚上采购饮料零食，原因给的模糊。父母是宽容的，父亲晨跑会例行问他要不要去（自然是从没去过），母亲更是温柔，会贴心的在冰箱上贴上各种纸条，关于食物、安排之类的。长话短说故事就是家里房屋改造，男主妹妹一家要从租房处回来住，家里就变成两个家庭加一个男主，2.5的家庭生活开始。妹妹家有一个叛逆期的女儿，作为舅舅的男主生活开始被搅乱…故事结尾男主依然在家做0.5的男人，但是一切已然不一样了。</p>
-<p>就我而言，</p>
+			<blockquote>
+<p>最近在做2D图像生成的工作，学习Diffusion-based 图像编辑并做些小结。</p>
+</blockquote>
+<p>图像编辑，简单来说就是给定一张原始图像I，对图像做一定的改变。经典论文应该是：<br><img src="https://arxiv.org/abs/2211.09800" alt="InstructPix2Pix: Learning to Follow Image Editing Instructions"><br>随着基于扩散的方法的快速发展，使用扩散模型对图像进行编辑具有广泛的前景。一些在大规模文本图像数据上训练得到的扩散模型如 Stable Diffusion，具有丰富的先验知识，使得自由的真实图像编辑成为可能。</p>
+<h2 id="主流的基于扩散的图像编辑技术"><a href="#主流的基于扩散的图像编辑技术" class="headerlink" title="主流的基于扩散的图像编辑技术"></a>主流的基于扩散的图像编辑技术</h2><p>根据编辑方式的不同，目前主流的技术基本分为两类：</p>
+<ul>
+<li><ol>
+<li>Dragging方式。<br>这种编辑技术受到DragGAN的启发，给定若干组点对，通过优化的方式对每个像素点进行仿射变换，以达到整体图像的编辑效果。<br>这种方式的优点是直观，另一个方面也可以进行手动操控变形，非常细粒度。<br>缺点就是无法进行粗粒度的编辑，比如背景更换。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Text-Driven 方式<br>这种编辑技术需要用户提供一个原始图像i，对I的文本描述<br> ，以及目标描述<br> ，编辑结果需要符合<br> 的语义，并且需要保持和<br> 的一致性，通俗来说就是想要改变的地方改变，不想要改变的地方保持一致，比如给定<br>一<br>张<br>站<br>立<br>的<br>狗<br>的<br>图<br>像<br> ，<br> ，<br> ，那么编辑结果<br> 需要保持 dog 的外观是一致的，并且由原来的站立姿势变为坐姿势，同时尽可能保持其他区域如背景保持一致。</li>
+</ol>
+</li>
+</ul>
+<h2 id="SD的前置知识"><a href="#SD的前置知识" class="headerlink" title="SD的前置知识"></a>SD的前置知识</h2><p>SD是扩散模型，而且是基于latent的扩散模型。Diffusion简单来讲就是将图像的生成过程分多步进行，逐步完善图像内容，经过20-50次的“扩散”循环，最终输出精致的图像。<br>那latent又是什么呢？基于latent的扩散模型可以在低维度的隐空间上进行“扩散”过程而不是在实际pixel空间，这样一来大大降低了内存占用和计算复杂性，这是常规扩散模型和latent扩散模型之间的主要区别。同样的，在训练中，latent扩散模型也将训练过程聚焦在latent空间中。<br>举个例子，如果SD模型中将数据矩阵缩小的倍数设为，那么原本尺寸为的数据矩阵就会进入的latent隐空间中，内存和计算量直接缩小倍，整体效率大大提升。<br>到这里，大家应该对SD模型的基本概念有一个清晰的认识了，这里再帮大家总结一下：</p>
+<blockquote>
+<p>Stable Diffusion是一个文本到图像的潜在扩散模型，由CompVis、Stability AI和LAION的研究人员和工程师创建。它使用来自LAION-5B数据库子集的512x512图像进行训练。使用这个模型，可以生成包括人脸在内的任何图像，因为有开源的预训练模型，所以我们也可以在自己的机器上运行它。</p>
+</blockquote>
+<p>问题二：Stable Diffusion和novelAI有什么差异？</p>
+<p>Stable Diffusion 的训练数据集是 LAION-5B，这个数据库拥有从互联网上抓取的 58 亿「图像-文本」数据；NovelAI 训练数据大量来自 Danbooru，”Danbooru”是一个图片搜索和分享网站，它主要提供了许多来自日本动画、漫画和游戏的图片，NovelAI 就是用 Danbooru 的图片在 Stable Diffusion 的基础上做了模型的优化训练（fine-tune）</p>
+<p>简而言之，NovelAI 几乎只能生成动漫、手绘、素描、CG 风格的图片，但在这些风格的人像上出图率更高，是专精型选手；Stable Diffusion 相比之下不擅长生成动漫图片，但对于摄影、油画、水彩、概念艺术等风格都能全面掌握，更像一个全能选手。</p>
+<p>SD模型是生成式模型，与GAN模型有很多相似的地方，输入可以是图片，也可以是文字，输出是图片。<br>SD模型属于扩散模型，扩散模型的整理逻辑是生成过程分步化与迭代化，这给整个生成过程引入更多约束与优化提供了可能。<br>SD模型是基于latent的，将生成空间压缩到latent空间中，比起常规扩散模型，大大提高计算效率的同时，降低了内存占用，成为了SD模型爆发的关键一招。<br>站在CTO视角，将维度拉到最高维，认为SD模型的整体流程是一个优化噪声的艺术。<br>SD模型主要由自动编码器（VAE），U-Net以及文本编码器三个核心组件构成。</p>
+<p>在编辑整个流程的过程中，自动编码器（VAE）：VAE的编码器能够将输入图像转换为低维特征，作为U-Net的输入。VAE的解码器将隐特征升维解码成完整图像。不同的VAE结构能够为生成图片带来不同的细节与整体颜色。<br>为什么VAE可以将图像压缩到一个非常小的潜空间后能再次对图像还原呢？虽然整个过程可以看作是一个有损压缩，但自然图像并不是随机的，它们具有很高的规律性：比如说一张脸上的眼睛、鼻子、脸颊和嘴巴之间遵循特定的空间关系，又比如说一只猫有四条腿，并且是一个特定的生物结构。所以如果我们生成的图像尺寸在之上时，其实特征损失带来的影响非常小。</p>
+<p>U-Net：预测噪声残差，结合调度算法（PNDM，DDIM，K-LMS等）进行噪声重构，逐步将随机高斯噪声转化成图片的隐特征。U-Net整体结构一般由ResNet模块构成，并在ResNet模块之间添加CrossAttention模块用于接收文本信息。</p>
+<p>文本编码器：将输入prompt进行编码，输出token embeddings向量（语意信息），通过CrossAttention方式送入扩散模型的U-Net中作为condition，对生成图像内容进行一定程度上的控制，目前SD默认的是CLIP text encoder。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>进行类似GAN的对抗式训练，学习加噪、去噪过程。通过文本编码器将prompt转化为embedding注入Unet中作为condition。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li>1.<img src="https://www.zhihu.com/question/608232369" alt="知乎相关话题"></li>
+<li>1.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/700364587">https://zhuanlan.zhihu.com/p/700364587</a></li>
+<li>2.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/684387479">https://zhuanlan.zhihu.com/p/684387479</a></li>
+<li>3.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/695710373">https://zhuanlan.zhihu.com/p/695710373</a></li>
+<li>4.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20431005369">文生图原理</a></li>
 </ul>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+		<div id="current-post-cover" data-scr="/images/cover13.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -316,12 +344,12 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/10/26/%E4%BB%A3%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%88SSLEOFError%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="代理错误（SSLEOFError)解决方法" rel="prev">
+			<a href="/2026/01/19/%E6%89%BE%E8%AE%BA%E6%96%87%E4%BA%8C%E4%B8%89%E4%BA%8B/" title="找论文二三事" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2025/10/07/pytorch3D%E5%AE%89%E8%A3%85%E7%BB%8F%E9%AA%8C/" title="pytorch3D安装经验" rel="next">
+			<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -342,53 +370,6 @@
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2026/01/27/Instructpix2pix/" title="Instructpix2pix">
-								Instructpix2pix			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								一月 27日, 2026				
-							</p>
-							<p class="relate-post-content">
-								背景
-论文标题  Instructpix2pix: Learning to Follow Image Editing Instructions
-期刊 CVPR，2023
-论文地址 https://arxiv.org/pdf/2211....
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2026/01/27/Instructpix2pix/" title="Instructpix2pix">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="Instructpix2pix"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2026/01/24/2025%E6%80%BB%E7%BB%93/" title="2025总结">
-								2025总结			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								一月 24日, 2026				
-							</p>
-							<p class="relate-post-content">
-								其实这一年发生了许多事情。最大的变化当然是我毕业了。但是继续在同一个学校读研，继续在同一个课题组工作，我并没有感觉到非常生硬的转折。就像知道之后仍然会在这里，过着不变的生活。唯一有变化的就是毕业那段时间，吃饭，喝酒。一如既往。等到新学...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2026/01/24/2025%E6%80%BB%E7%BB%93/" title="2025总结">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="2025总结"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2026/01/19/%E6%89%BE%E8%AE%BA%E6%96%87%E4%BA%8C%E4%B8%89%E4%BA%8B/" title="找论文二三事">
 								找论文二三事			
 							</a>
@@ -406,56 +387,6 @@
 							<a href="/2026/01/19/%E6%89%BE%E8%AE%BA%E6%96%87%E4%BA%8C%E4%B8%89%E4%BA%8B/" title="找论文二三事">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="找论文二三事"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2026/01/16/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91/" title="扩散模型图像编辑">
-								扩散模型图像编辑			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								一月 16日, 2026				
-							</p>
-							<p class="relate-post-content">
-								
-最近在做2D图像生成的工作，学习Diffusion-based 图像编辑并做些小结。
-
-图像编辑，简单来说就是给定一张原始图像I，对图像做一定的改变。经典论文应该是：随着基于扩散的方法的快速发展，使用扩散模型对图像进行编辑具有广泛的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2026/01/16/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91/" title="扩散模型图像编辑">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover13.png" alt="扩散模型图像编辑"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">
-								星座卡绑定Google Pay购买Gemini记录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 11日, 2025				
-							</p>
-							<p class="relate-post-content">
-								
-前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。
-
-那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。首先需要明确目的：工行...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="星座卡绑定Google Pay购买Gemini记录"/>
 							</a>
 						</div>
 					</li>												
@@ -582,6 +513,106 @@ MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
 						</div>
 					</li>												
 			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
+								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 5日, 2025				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
+期刊 CVPR，2021
+论文地址 https://arxiv.org/...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="论文阅读："Human Motion Video Generation:A Survey"">
+								论文阅读："Human Motion Video Generation:A Survey"			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 2日, 2025				
+							</p>
+							<p class="relate-post-content">
+								本文主要解读发表在IEEE TPAMI（模式识别与机器智能汇刊）上的综述：《Human Motion Video Generation: A Survey》。
+背景
+论文标题  Human Motion Video Generatio...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="论文阅读："Human Motion Video Generation:A Survey"">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover8.jpg" alt="论文阅读：&#34;Human Motion Video Generation:A Survey&#34;"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">
+								基础篇-安装PyTorch			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 29日, 2025				
+							</p>
+							<p class="relate-post-content">
+								今晚情绪较低，稍微看了会论文就不想工作了。由于安装Cuda和PyTorch是不得不品的一环，于是整理了一下之前的资料，写个笔记。
+环境配置
+包管理器：miniconda
+python&#x3D;3.10
+
+安装cuda理论上来说只要买...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover9.png" alt="基础篇-安装PyTorch"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">
+								论文阅读：混元Avatar			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 15日, 2025				
+							</p>
+							<p class="relate-post-content">
+								混元Avatar摘要混元Avatar是一个基于大型语言模型的多模态智能体，它能够理解和执行用户的自然语言指令，并与用户进行多轮对话。混元Avatar的核心技术包括：
+
+多模态理解：能够理解用户的自然语言指令，并将其转换为可执行的动作。...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/09/15/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E6%B7%B7%E5%85%83Avatar/" title="论文阅读：混元Avatar">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="论文阅读：混元Avatar"/>
+							</a>
+						</div>
+					</li>												
+			
 		</ul>
 	
 </div>	
@@ -624,6 +655,17 @@ MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
 </div>
 
 <!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
 
 
 
