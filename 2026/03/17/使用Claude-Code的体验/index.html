@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      几个深度学习计算库介绍 | 六分仪的主页
+      使用Claude Code的体验 | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -103,7 +103,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「几个深度学习计算库介绍」
+			「使用Claude Code的体验」
 		
 	</p>
 
@@ -249,8 +249,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" itemprop="url">
-		几个深度学习计算库介绍
+	<a href="/2026/03/17/%E4%BD%BF%E7%94%A8Claude-Code%E7%9A%84%E4%BD%93%E9%AA%8C/" itemprop="url">
+		使用Claude Code的体验
 	</a>
 
 		</div>
@@ -266,9 +266,9 @@
 
 	更新于
 
-	<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" itemprop="url">
-		<time datetime="2025-11-10T09:08:48.000Z" itemprop="dateUpdated">
-	  		2025-11-10
+	<a href="/2026/03/17/%E4%BD%BF%E7%94%A8Claude-Code%E7%9A%84%E4%BD%93%E9%AA%8C/" itemprop="url">
+		<time datetime="2026-03-17T04:00:00.000Z" itemprop="dateUpdated">
+	  		2026-03-17
 	  </time>
 	</a> 
 
@@ -279,8 +279,12 @@
 				
 	<i class="icon-price-tags"></i>
 	
-		<a href="/tags/%E7%AC%94%E8%AE%B0/" class=" ">
-			笔记
+		<a href="/tags/%E5%B7%A5%E5%85%B7/" class=" ">
+			工具
+		</a>
+	
+		<a href="/tags/AI/" class=" ">
+			AI
 		</a>
 	
 		
@@ -293,12 +297,25 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<h3 id="einops"><a href="#einops" class="headerlink" title="einops"></a>einops</h3><p>einops主要功能是张量维度的重排，<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37586991/article/details/148335798">功能介绍</a>。</p>
-<h3 id="MXNet"><a href="#MXNet" class="headerlink" title="MXNet"></a>MXNet</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanmx219/article/details/106790686">https://blog.csdn.net/tanmx219/article/details/106790686</a></p>
+			<p>最近在折腾这个博客的时候，顺手试了一下Anthropic出的Claude Code。简单来说就是一个跑在终端里的AI编程助手，可以直接读写你本地的文件、执行命令、搜索代码库。和那种只能在网页对话框里粘贴代码的体验完全不一样。</p>
+<h2 id="它能干什么"><a href="#它能干什么" class="headerlink" title="它能干什么"></a>它能干什么</h2><p>装起来很简单，npm装一个包，然后在项目目录下直接<code>claude</code>就能启动。启动之后它会读取你的项目结构，你可以直接用自然语言告诉它你想做什么。</p>
+<p>我用它做的第一件事是让它分析这个Hexo博客仓库，然后自动生成了一份<code>CLAUDE.md</code>，把常用命令、配置文件的作用、部署流程都整理好了。这种事情自己写要花不少时间，它几分钟就搞定了，而且内容还挺准确的。</p>
+<p>它比较厉害的地方在于它不只是”建议你怎么改”，而是真的会去读文件、改文件、跑命令，然后把结果反馈给你。感觉更像是一个真的在帮你干活的人，而不是一个只会说话的助手。</p>
+<h2 id="实际使用感受"><a href="#实际使用感受" class="headerlink" title="实际使用感受"></a>实际使用感受</h2><p>用起来整体还是比较顺畅的。对于”帮我看看这个报错是什么原因”、”帮我在这个文件里加一个功能”这类任务，它的完成质量挺高的。</p>
+<p>不过也有一些地方需要注意：</p>
+<ul>
+<li>它会主动执行命令，所以在它要做一些比较危险的操作（比如删文件、推代码）之前，它会先问你确认，这个设计还是比较合理的</li>
+<li>对于比较复杂的多文件重构，有时候需要多轮对话才能把意图说清楚</li>
+<li>上下文窗口有限制，项目太大的话它对整个代码库的理解会有些片面</li>
+</ul>
+<h2 id="和其他工具比"><a href="#和其他工具比" class="headerlink" title="和其他工具比"></a>和其他工具比</h2><p>之前也用过Copilot和一些网页版的AI对话工具。Copilot更适合写代码时的实时补全，Claude Code更适合做”任务”——你有一个明确的目标，让它去完成。两者其实不太冲突。</p>
+<p>网页版对话的问题是每次都要手动粘贴代码，来回很麻烦。Claude Code直接在项目里跑，省去了这个摩擦。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果你经常需要处理代码相关的任务，Claude Code值得试一试。它不会替代你思考，但确实能帮你省掉很多机械性的工作。对我来说，最大的价值就是把”我知道要做什么但懒得动手”的那部分事情给解决掉了。</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://claude.ai/code">https://claude.ai/code</a></p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+		<div id="current-post-cover" data-scr="/images/cover5.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -313,12 +330,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2025/12/02/Joker/" title="论文阅读：Joker" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2025/11/10/FID%E6%8C%87%E6%A0%87%E4%BB%8B%E7%BB%8D/" title="FID指标介绍" rel="next">
+			<a href="/2026/02/02/GAN-and-VAE/" title="GAN and VAE" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -360,6 +373,53 @@
 							<a href="/2026/02/02/GAN-and-VAE/" title="GAN and VAE">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="GAN and VAE"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2026/01/27/Instructpix2pix/" title="Instructpix2pix">
+								Instructpix2pix			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								一月 27日, 2026				
+							</p>
+							<p class="relate-post-content">
+								背景
+论文标题  Instructpix2pix: Learning to Follow Image Editing Instructions
+期刊 CVPR，2023
+论文地址 https://arxiv.org/pdf/2211....
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2026/01/27/Instructpix2pix/" title="Instructpix2pix">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="Instructpix2pix"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2026/01/24/2025%E6%80%BB%E7%BB%93/" title="2025总结">
+								2025总结			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								一月 24日, 2026				
+							</p>
+							<p class="relate-post-content">
+								其实这一年发生了许多事情。最大的变化当然是我毕业了。但是继续在同一个学校读研，继续在同一个课题组工作，我并没有感觉到非常生硬的转折。就像知道之后仍然会在这里，过着不变的生活。唯一有变化的就是毕业那段时间，吃饭，喝酒。一如既往。等到新学...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2026/01/24/2025%E6%80%BB%E7%BB%93/" title="2025总结">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="2025总结"/>
 							</a>
 						</div>
 					</li>												
@@ -414,6 +474,31 @@
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">
+								星座卡绑定Google Pay购买Gemini记录			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 11日, 2025				
+							</p>
+							<p class="relate-post-content">
+								
+前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。
+
+那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。首先需要明确目的：工行...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="星座卡绑定Google Pay购买Gemini记录"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2025/12/02/Joker/" title="论文阅读：Joker">
 								论文阅读：Joker			
 							</a>
@@ -432,6 +517,30 @@
 							<a href="/2025/12/02/Joker/" title="论文阅读：Joker">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/images/2025-12-02-1.png" alt="论文阅读：Joker"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">
+								几个深度学习计算库介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 10日, 2025				
+							</p>
+							<p class="relate-post-content">
+								einopseinops主要功能是张量维度的重排，功能介绍。
+MXNethttps://blog.csdn.net/tanmx219/article/details/106790686
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2025/11/10/%E5%87%A0%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="几个深度学习计算库介绍">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="几个深度学习计算库介绍"/>
 							</a>
 						</div>
 					</li>												
@@ -484,108 +593,6 @@
 						</div>
 					</li>												
 			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">
-								论文阅读：LivePortrait			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 6日, 2025				
-							</p>
-							<p class="relate-post-content">
-								背景
-论文标题  Human Motion Video Generation: A Survey
-期刊 Arxiv 2024
-论文地址 https://arxiv.org/pdf/2407.03168
-项目地址 https://git...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/06/liveportrait/" title="论文阅读：LivePortrait">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover11.png" alt="论文阅读：LivePortrait"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">
-								论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 5日, 2025				
-							</p>
-							<p class="relate-post-content">
-								背景
-论文标题  One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing
-期刊 CVPR，2021
-论文地址 https://arxiv.org/...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/05/fsvid2vid/" title="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover10.png" alt="论文阅读：One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="论文阅读："Human Motion Video Generation:A Survey"">
-								论文阅读："Human Motion Video Generation:A Survey"			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 2日, 2025				
-							</p>
-							<p class="relate-post-content">
-								本文主要解读发表在IEEE TPAMI（模式识别与机器智能汇刊）上的综述：《Human Motion Video Generation: A Survey》。
-背景
-论文标题  Human Motion Video Generatio...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/11/02/%E7%BB%BC%E8%BF%B0%EF%BC%9A%E5%8A%A8%E4%BD%9C%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" title="论文阅读："Human Motion Video Generation:A Survey"">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover8.jpg" alt="论文阅读：&#34;Human Motion Video Generation:A Survey&#34;"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">
-								基础篇-安装PyTorch			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 29日, 2025				
-							</p>
-							<p class="relate-post-content">
-								今晚情绪较低，稍微看了会论文就不想工作了。由于安装Cuda和PyTorch是不得不品的一环，于是整理了一下之前的资料，写个笔记。
-环境配置
-包管理器：miniconda
-python&#x3D;3.10
-
-安装cuda理论上来说只要买...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2025/10/29/%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%AE%89%E8%A3%85PyTorch/" title="基础篇-安装PyTorch">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover9.png" alt="基础篇-安装PyTorch"/>
-							</a>
-						</div>
-					</li>												
-			
 		</ul>
 	
 </div>	
@@ -628,17 +635,6 @@ python&#x3D;3.10
 </div>
 
 <!-- show math formula -->
-
-	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-	<script type="text/x-mathjax-config">
-		MathJax.Hub.Config(
-			{ 
-				tex2jax: {
-					inlineMath: [['$','$'], ['\\(','\\)']]
-				} 
-			}
-		);
-	</script>
 
 
 
