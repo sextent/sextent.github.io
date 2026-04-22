@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      星座卡绑定Google Pay购买Gemini记录 | 六分仪的主页
+      WSL2使用教程：在Windows上打造Linux开发环境 | 六分仪的主页
     
   </title>
   <meta name="author" content="Zehao Jiang">
@@ -103,7 +103,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「星座卡绑定Google Pay购买Gemini记录」
+			「WSL2使用教程：在Windows上打造Linux开发环境」
 		
 	</p>
 
@@ -249,8 +249,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2025/12/11/buy-gemini/" itemprop="url">
-		星座卡绑定Google Pay购买Gemini记录
+	<a href="/2026/04/21/WSL2%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" itemprop="url">
+		WSL2使用教程：在Windows上打造Linux开发环境
 	</a>
 
 		</div>
@@ -266,9 +266,9 @@
 
 	更新于
 
-	<a href="/2025/12/11/buy-gemini/" itemprop="url">
-		<time datetime="2025-12-11T07:11:29.000Z" itemprop="dateUpdated">
-	  		2025-12-30
+	<a href="/2026/04/21/WSL2%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" itemprop="url">
+		<time datetime="2026-04-21T02:00:00.000Z" itemprop="dateUpdated">
+	  		2026-04-21
 	  </time>
 	</a> 
 
@@ -283,6 +283,10 @@
 			教程
 		</a>
 	
+		<a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class=" ">
+			开发环境
+		</a>
+	
 		
 			</span>
 			
@@ -293,58 +297,130 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<blockquote>
-<p>前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。</p>
-</blockquote>
-<p>那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。<br>首先需要明确目的：<br>工行的星座卡是学生最容易能申请到的visa信用卡。虽然它没有信用额度，但对于学生党来说本身也申请不到有额度的信用卡，而且它免年费。所以我们主要是用它来进行一些境外消费，比如海外视频会员的充值，AI产品的购买，或者海淘。</p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
-<li>手机号</li>
-<li>身份证</li>
-<li>学生证或学生卡</li>
+			<p>在用 Windows 做开发这件事上，我折腾过不少方案。装双系统嫌麻烦，用虚拟机又觉得太重，Git Bash 凑合能用但总有些命令跑不起来。直到开始用 WSL2，才觉得这个问题算是真正解决了——在 Windows 里开一个终端，就是完整的 Linux 环境，文件可以互通，VS Code 可以直接接进去，几乎感觉不到边界。</p>
+<p>这篇文章记录我从安装到配好开发环境的完整过程，适合有一定 Linux 基础、想在 Windows 上用 WSL2 做日常开发的同学。</p>
+<h2 id="1-什么是-WSL2"><a href="#1-什么是-WSL2" class="headerlink" title="1. 什么是 WSL2"></a>1. 什么是 WSL2</h2><p>WSL（Windows Subsystem for Linux）是微软官方提供的在 Windows 上运行 Linux 的方案。WSL2 是第二代，底层基于 Hyper-V 轻量虚拟机，运行的是完整的 Linux 内核，而不是像 WSL1 那样做系统调用翻译。</p>
+<p>简单对比一下两代的区别：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>WSL1</th>
+<th>WSL2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linux 内核</td>
+<td>模拟（系统调用翻译）</td>
+<td>完整真实内核</td>
+</tr>
+<tr>
+<td>文件系统性能（Linux 文件）</td>
+<td>较慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>Windows 文件访问性能</td>
+<td>快</td>
+<td>较慢</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>与 Windows 共享</td>
+<td>独立虚拟网卡（新版 Windows 支持 localhost 自动转发）</td>
+</tr>
+<tr>
+<td>兼容性</td>
+<td>部分系统调用不支持</td>
+<td>接近原生 Linux</td>
+</tr>
+</tbody></table>
+<p>对于日常开发来说，WSL2 的兼容性和性能都更好，推荐直接用 WSL2。</p>
+<h2 id="2-安装与基础配置"><a href="#2-安装与基础配置" class="headerlink" title="2. 安装与基础配置"></a>2. 安装与基础配置</h2><h3 id="2-1-前置条件"><a href="#2-1-前置条件" class="headerlink" title="2.1 前置条件"></a>2.1 前置条件</h3><ul>
+<li>Windows 10 版本 2004（Build 19041）及以上，或 Windows 11</li>
+<li>BIOS&#x2F;UEFI 中开启虚拟化（Intel VT-x 或 AMD-V），大多数现代电脑默认已开启</li>
+<li>以管理员身份运行 PowerShell 或命令提示符</li>
 </ul>
-<h3 id="申请"><a href="#申请" class="headerlink" title="申请"></a>申请</h3><p>首先下载工商银行APP，搜索”校园”，记得选择<strong>宇宙星座卡校园版+xx座（VISA+银联）</strong><br>然后按个人真实情况填写内容。要注意的是领卡网点<strong>一定一定要选择学校附近的这个网点</strong>，因为发卡制卡不一定是你最近的网点办，存在跑很远的风险。</p>
-<p>时间的话一般来说都比较快，如果有需求，可以打开APP里的“信用卡”，再点“查询进度”就可以看到了。</p>
-<p>领取到的应该是两张卡：银联+Visa</p>
-<h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>领取之后需要前往任意网点进行人工激活，这里主要要在机器上确保激活并绑定你的手机。同时这个时候也会要求设置支付密码。</p>
-<h3 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h3><p>领取到的两张卡内余额是互通的，一张卡里打钱另一张也能有。由于卡是0额度，所以我们想要通过星座卡消费就必须往里面先充钱。主要有两种方式：</p>
-<ul>
-<li>微信或支付宝的还款</li>
-<li>其他银行卡直接转账</li>
-</ul>
-<p>这两个方式我就不多赘述了，如有不懂做些搜索也不难解决。<br>接下来是购买外汇：</p>
-<ul>
-<li><ol>
-<li>在<strong>中国工商银行</strong>APP中搜索<strong>结售汇</strong>。</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>选择需要的外币。</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>看30秒安全教育并进入。</li>
-</ol>
-</li>
-<li><ol start="4">
-<li>如实填写购买金额，并选择购汇用途为<strong>其他</strong>。如果你不确定可以在明细中写专有权利使用费和特许费。同时选择人民币支付账户，这里一定要注意是Visa卡，支付账号和汇入账号都是这个。</li>
-</ol>
-</li>
-</ul>
-<blockquote class="colorquote info"><p>这样你应该能看到自己账户里多了外币了。</p></blockquote>
-<p>购汇时，外币转入账户无法选择或者选不了Visa。</p>
-<blockquote>
-<p>大抵是因为你之前有过其他的工行卡，并且此工行卡和现在办理的 Visa+银联信用卡并不属于同一地区（即异地），结售汇时只能显示默认卡所在的地区。解决方法就是在<strong>我的账户</strong>里把Visa卡设置为默认</p>
-</blockquote>
-<h3 id="绑定Google-Play"><a href="#绑定Google-Play" class="headerlink" title="绑定Google Play"></a>绑定Google Play</h3><p>其实Google Play是曲线救国的方式，因为大陆卡绑定不了Google Pay，但是通过Play绑定的卡实际上是进入你的Google账号支付中心的。</p>
-<p>首先下载Google Play，挂梯子访问。然后添加付款方式，这里如实填写卡号，地址选美国，找个地方填上（我这里询问了我Standford的同学，填了学校地址和邮编）。</p>
-<p>然后点击保存（挂美国梯子加成功率），我的一次就过了。</p>
-<h3 id="购买Gemini"><a href="#购买Gemini" class="headerlink" title="购买Gemini"></a>购买Gemini</h3><p>进入Google One，选择支付方式，这里应该会有你之前手机上保存的那张卡，直接选择即可。</p>
-<h2 id="12-30更新：购买Google-Cloud"><a href="#12-30更新：购买Google-Cloud" class="headerlink" title="12-30更新：购买Google Cloud"></a>12-30更新：购买Google Cloud</h2><p>免费计划：<a target="_blank" rel="noopener" href="https://docs.cloud.google.com/free/docs/free-cloud-features?_gl=1*1oxrxvm*_ga*NDAyNTY3Njg5LjE3NDQ2MzYwMTQ.*_ga_WH2QY8WWF5*czE3NjU3MjIyMjAkbzEyJGcxJHQxNzY1NzIyMjM4JGo0MiRsMCRoMA..&hl=zh-cn">https://docs.cloud.google.com/free/docs/free-cloud-features?_gl=1*1oxrxvm*_ga*NDAyNTY3Njg5LjE3NDQ2MzYwMTQ.*_ga_WH2QY8WWF5*czE3NjU3MjIyMjAkbzEyJGcxJHQxNzY1NzIyMjM4JGo0MiRsMCRoMA..&amp;hl=zh-cn</a></p>
-<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>1.<a target="_blank" rel="noopener" href="https://tiger.fail/archives/college-google-play-visa-guide.html/comment-page-10?replytocom=1432#respond">https://tiger.fail/archives/college-google-play-visa-guide.html/comment-page-10?replytocom=1432#respond</a></p>
+<p>可以在任务管理器 → 性能 → CPU 中确认”虚拟化”是否显示”已启用”。</p>
+<h3 id="2-2-一键安装"><a href="#2-2-一键安装" class="headerlink" title="2.2 一键安装"></a>2.2 一键安装</h3><p>打开 PowerShell（管理员），运行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--install</span></span><br></pre></td></tr></table></figure>
+
+<p>这条命令会自动启用所需的 Windows 功能、下载 Linux 内核更新包，并默认安装 Ubuntu。安装完成后需要重启电脑。</p>
+<p>如果想安装其他发行版，可以先查看可用列表：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--list</span> <span class="literal">--online</span></span><br></pre></td></tr></table></figure>
+
+<p>然后指定安装：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--install</span> <span class="literal">-d</span> Debian</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-首次启动与用户设置"><a href="#2-3-首次启动与用户设置" class="headerlink" title="2.3 首次启动与用户设置"></a>2.3 首次启动与用户设置</h3><p>重启后，从开始菜单打开 Ubuntu（或你安装的发行版），会提示创建用户名和密码。这个用户是 Linux 内部的用户，和 Windows 账户无关，密码也可以设得简单一点，因为只是本地使用。</p>
+<p>设置完成后，先更新一下软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-常用管理命令"><a href="#2-4-常用管理命令" class="headerlink" title="2.4 常用管理命令"></a>2.4 常用管理命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">-l</span> <span class="literal">-v</span>                    <span class="comment"># 查看已安装的发行版及版本</span></span><br><span class="line">wsl <span class="literal">--set-default</span> Ubuntu     <span class="comment"># 设置默认发行版</span></span><br><span class="line">wsl <span class="literal">--shutdown</span>               <span class="comment"># 关闭所有运行中的 WSL 实例</span></span><br><span class="line">wsl <span class="literal">--set-version</span> Ubuntu <span class="number">2</span>   <span class="comment"># 将某个发行版升级到 WSL2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Windows-与-Linux-互操作"><a href="#3-Windows-与-Linux-互操作" class="headerlink" title="3. Windows 与 Linux 互操作"></a>3. Windows 与 Linux 互操作</h2><p>这是 WSL2 最实用的部分，也是和传统虚拟机最大的区别所在。</p>
+<h3 id="3-1-文件系统互访"><a href="#3-1-文件系统互访" class="headerlink" title="3.1 文件系统互访"></a>3.1 文件系统互访</h3><p><strong>从 WSL 访问 Windows 文件：</strong></p>
+<p>Windows 的各个盘符挂载在 <code>/mnt/</code> 下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /mnt/c/Users/        <span class="comment"># 访问 C 盘用户目录</span></span><br><span class="line"><span class="built_in">cd</span> /mnt/d/projects      <span class="comment"># 进入 D 盘的 projects 文件夹</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>从 Windows 访问 WSL 文件：</strong></p>
+<p>在文件资源管理器地址栏输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\wsl$\Ubuntu\home\你的用户名</span><br></pre></td></tr></table></figure>
+
+<p>或者在 WSL 终端里直接用命令打开当前目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explorer.exe .</span><br></pre></td></tr></table></figure>
+
+<p><strong>重要提示：</strong> 跨文件系统操作（比如在 WSL 里读写 <code>/mnt/c/</code> 下的文件）性能会明显下降。如果你的项目需要频繁读写文件（比如 Node.js 项目的 <code>node_modules</code>），强烈建议把项目放在 Linux 文件系统内（<code>~/projects/</code>），而不是 Windows 盘符下。这一点我之前踩过坑，同样的项目放在 <code>/mnt/c/</code> 下跑起来明显比放在 <code>~/</code> 下慢。</p>
+<h3 id="3-2-在-WSL-中调用-Windows-程序"><a href="#3-2-在-WSL-中调用-Windows-程序" class="headerlink" title="3.2 在 WSL 中调用 Windows 程序"></a>3.2 在 WSL 中调用 Windows 程序</h3><p>WSL2 可以直接调用 Windows 的可执行文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">explorer.exe .          <span class="comment"># 用文件资源管理器打开当前目录</span></span><br><span class="line">notepad.exe file.txt    <span class="comment"># 用记事本打开文件</span></span><br><span class="line">clip.exe &lt; file.txt     <span class="comment"># 把文件内容复制到 Windows 剪贴板</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-网络与端口"><a href="#3-3-网络与端口" class="headerlink" title="3.3 网络与端口"></a>3.3 网络与端口</h3><p>WSL2 和 Windows 共享 <code>localhost</code>，在 WSL 里启动的服务可以直接在 Windows 浏览器里通过 <code>localhost:端口号</code> 访问，反过来也一样。比如在 WSL 里跑一个 Flask 应用监听 5000 端口，Windows 浏览器直接访问 <code>http://localhost:5000</code> 就能看到。</p>
+<p>如果遇到访问不通的情况，检查一下 WSL 的防火墙规则，或者确认服务监听的是 <code>0.0.0.0</code> 而不是 <code>127.0.0.1</code>。</p>
+<h2 id="4-配置开发环境"><a href="#4-配置开发环境" class="headerlink" title="4. 配置开发环境"></a>4. 配置开发环境</h2><h3 id="4-1-VS-Code-Remote-WSL"><a href="#4-1-VS-Code-Remote-WSL" class="headerlink" title="4.1 VS Code Remote-WSL"></a>4.1 VS Code Remote-WSL</h3><p>这是我用 WSL2 做开发的核心工具。安装 VS Code 的 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a> 扩展后，在 WSL 终端里进入项目目录，运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code .</span><br></pre></td></tr></table></figure>
+
+<p>VS Code 会自动以 Remote-WSL 模式打开，终端、文件系统、扩展都运行在 Linux 环境里，体验和在原生 Linux 上几乎一样。第一次连接时会自动安装 VS Code Server，稍等片刻即可。</p>
+<h3 id="4-2-Python-环境"><a href="#4-2-Python-环境" class="headerlink" title="4.2 Python 环境"></a>4.2 Python 环境</h3><p>推荐用 <code>pyenv</code> 管理 Python 版本，避免系统 Python 被污染：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 pyenv 依赖</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y make build-essential libssl-dev zlib1g-dev \</span><br><span class="line">  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \</span><br><span class="line">  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 pyenv</span></span><br><span class="line">curl https://pyenv.run | bash</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，把以下内容加到 <code>~/.bashrc</code>（或 <code>~/.zshrc</code>）末尾：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYENV_ROOT=<span class="string">&quot;<span class="variable">$HOME</span>/.pyenv&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;<span class="variable">$PYENV_ROOT</span>/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(pyenv init -)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后重新加载配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>安装并使用指定版本的 Python：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.11.9</span><br><span class="line">pyenv global 3.11.9</span><br><span class="line">python --version   <span class="comment"># 确认版本</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你更习惯 conda，也可以直接安装 Miniconda：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-Node-js-环境"><a href="#4-3-Node-js-环境" class="headerlink" title="4.3 Node.js 环境"></a>4.3 Node.js 环境</h3><p>推荐用 <code>nvm</code> 管理 Node.js 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">nvm install --lts       <span class="comment"># 安装最新 LTS 版本</span></span><br><span class="line">nvm use --lts</span><br><span class="line">node --version          <span class="comment"># 确认版本</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-实用技巧与常见问题"><a href="#5-实用技巧与常见问题" class="headerlink" title="5. 实用技巧与常见问题"></a>5. 实用技巧与常见问题</h2><h3 id="5-1-限制-WSL2-的内存和-CPU-占用"><a href="#5-1-限制-WSL2-的内存和-CPU-占用" class="headerlink" title="5.1 限制 WSL2 的内存和 CPU 占用"></a>5.1 限制 WSL2 的内存和 CPU 占用</h3><p>WSL2 默认会占用大量内存（最多到物理内存的 50%），在内存不多的机器上可能会有感知。可以通过 <code>.wslconfig</code> 文件限制资源：</p>
+<p>在 Windows 用户目录下创建或编辑 <code>C:\Users\你的用户名\.wslconfig</code>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[wsl2]</span></span><br><span class="line"><span class="attr">memory</span>=<span class="number">4</span>GB        <span class="comment"># 最多使用 4GB 内存</span></span><br><span class="line"><span class="attr">processors</span>=<span class="number">4</span>      <span class="comment"># 最多使用 4 个 CPU 核心</span></span><br><span class="line"><span class="attr">swap</span>=<span class="number">2</span>GB          <span class="comment"># 交换空间大小</span></span><br></pre></td></tr></table></figure>
+
+<p>修改后运行 <code>wsl --shutdown</code> 重启 WSL2 生效。</p>
+<h3 id="5-2-网络代理配置"><a href="#5-2-网络代理配置" class="headerlink" title="5.2 网络代理配置"></a>5.2 网络代理配置</h3><p>如果你在 Windows 上使用代理软件，WSL2 里默认无法直接使用。可以在 <code>~/.bashrc</code> 里加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;http://<span class="subst">$(cat /etc/resolv.conf | grep nameserver | awk &#x27;&#123;print $2&#125;&#x27;)</span>:7890&quot;</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="variable">$http_proxy</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>7890</code> 替换为你的代理端口。<code>/etc/resolv.conf</code> 里的 nameserver 地址就是 Windows 宿主机的 IP。</p>
+<p>Windows 11 和较新版本的 WSL2 支持在 <code>.wslconfig</code> 里设置 <code>networkingMode=mirrored</code>，开启后网络配置更简单，localhost 行为也更符合直觉。</p>
+<h3 id="5-3-备份与迁移-WSL-实例"><a href="#5-3-备份与迁移-WSL-实例" class="headerlink" title="5.3 备份与迁移 WSL 实例"></a>5.3 备份与迁移 WSL 实例</h3><p>把当前 WSL 实例导出为 tar 文件：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--export</span> Ubuntu D:\backup\ubuntu<span class="literal">-backup</span>.tar</span><br></pre></td></tr></table></figure>
+
+<p>在新机器上导入：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--import</span> Ubuntu C:\WSL\Ubuntu D:\backup\ubuntu<span class="literal">-backup</span>.tar</span><br></pre></td></tr></table></figure>
+
+<p>这个方法也可以用来把 WSL 实例迁移到非系统盘，避免 C 盘空间不足。</p>
+<hr>
+<p>用了一段时间 WSL2 之后，我基本上已经不再需要在 Windows 上单独维护一套开发环境了。Python、Node、各种命令行工具都在 WSL2 里管理，VS Code 通过 Remote-WSL 接进去，体验和 macOS 或原生 Linux 差别不大。如果你也在 Windows 上做开发，值得试试。</p>
 	
 		</div>
 		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+		<div id="current-post-cover" data-scr="/images/cover2.png"></div>
 
 		<!-- relate post, comment...-->
 		<div class="investment-container">
@@ -359,12 +435,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2026/01/16/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%9B%BE%E5%83%8F%E7%BC%96%E8%BE%91/" title="扩散模型图像编辑" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2025/12/02/Joker/" title="论文阅读：Joker" rel="next">
+			<a href="/2026/03/17/%E4%BD%BF%E7%94%A8Claude-Code%E7%9A%84%E4%BD%93%E9%AA%8C/" title="使用Claude Code的体验" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -385,22 +457,25 @@
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2026/04/21/WSL2%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="WSL2使用教程：在Windows上打造Linux开发环境">
-								WSL2使用教程：在Windows上打造Linux开发环境			
+							<a class="relate-post-title" href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">
+								星座卡绑定Google Pay购买Gemini记录			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								四月 21日, 2026				
+								十二月 11日, 2025				
 							</p>
 							<p class="relate-post-content">
-								在用 Windows 做开发这件事上，我折腾过不少方案。装双系统嫌麻烦，用虚拟机又觉得太重，Git Bash 凑合能用但总有些命令跑不起来。直到开始用 WSL2，才觉得这个问题算是真正解决了——在 Windows 里开一个终端，就是完...
+								
+前年充值Monica时候用了别人的星座卡支付，感觉很实用。然后去年到上海时好友laobao也推荐了这款visa卡，并教我怎么去办理。在此特别感谢她。
+
+那么前言说完，本文记录一下申请星座卡和使用的一些流程步骤。首先需要明确目的：工行...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2026/04/21/WSL2%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="WSL2使用教程：在Windows上打造Linux开发环境">				
+							<a href="/2025/12/11/buy-gemini/" title="星座卡绑定Google Pay购买Gemini记录">				
 								
-								<img class="lazy" src="/img/lazy.gif" data-src="/images/cover2.png" alt="WSL2使用教程：在Windows上打造Linux开发环境"/>
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="星座卡绑定Google Pay购买Gemini记录"/>
 							</a>
 						</div>
 					</li>												
